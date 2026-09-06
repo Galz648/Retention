@@ -60,13 +60,15 @@ flowchart LR
     style L fill:#00000000
 ```
 
-Three layers, each useful without the others:
+Underneath, a stack where each piece is useful without the ones above it:
 
-| | what it knows | what it refuses to know |
+| | what it knows | what it refuses to do |
 |---|---|---|
-| **store** | cards, outcomes, due dates | why any card exists |
-| **tree** *(later)* | concepts, prerequisites, depth | anything about scheduling |
-| **agent** | how to talk to you | nothing — it holds no state |
+| **store** | opaque events, in order | interpret any of them |
+| **scheduler** | how history folds into due dates | any I/O, ever |
+| **core** | how to wire those two together | have logic of its own |
+| **CLI / agent** | how to talk to you | hold state |
+| **tree** *(later)* | concepts, prerequisites, depth | touch an interval |
 
 And a rule the whole thing hangs on: **capture is cheap, curation is strict.** Dump anything in ten seconds mid-task. Once a week, throw most of it away.
 
@@ -79,25 +81,18 @@ And a rule the whole thing hangs on: **capture is cheap, curation is strict.** D
 
 <br>
 
-Everything meets at one narrow surface. Above it, clients. Below it, an append-only log and nothing else.
+Everything meets at two narrow surfaces: an event vocabulary at the bottom, and a handful of operations in the middle. Below them, purity. Above them, clients.
 
 ```mermaid
 flowchart TB
-    subgraph AGENT ["agent · holds no state"]
+    subgraph CLIENTS ["clients · peers, none privileged"]
         direction LR
-        A1["present"]
-        A2["grade"]
-        A3["curate"]
+        C1["CLI<br/><sub>proves the model is optional</sub>"]
+        C2["agent<br/><sub>holds no state</sub>"]
+        C3["tree<br/><sub>separate project, later</sub>"]
     end
 
-    subgraph TREE ["knowledge tree · separate project, later"]
-        direction LR
-        T1["concepts"]
-        T2["prerequisite edges"]
-        T3["depth of grasp"]
-    end
-
-    subgraph IFACE ["the interface"]
+    subgraph OPS ["operations"]
         direction LR
         V1["due"]
         V2["record"]
@@ -106,24 +101,28 @@ flowchart TB
         V5["history"]
     end
 
-    subgraph STORE ["store · depends on nothing"]
-        direction LR
-        S1[("event log")]
-        S2["scheduler<br/><sub>pure function over history</sub>"]
-        S1 --> S2
+    CORE["core<br/><sub>thin plumbing, no logic of its own</sub>"]
+
+    subgraph PURE ["scheduler · pure"]
+        S2["fold history → state<br/><sub>no I/O, ever</sub>"]
     end
 
-    AGENT --> IFACE
-    TREE -->|"emits cards"| IFACE
-    IFACE --> STORE
-    STORE -.->|"outcomes, read on wake"| TREE
+    STORE[("store<br/><sub>append-only, opaque events</sub>")]
 
-    style TREE stroke-dasharray: 5 4
+    CLIENTS --> OPS --> CORE
+    CORE --> PURE
+    CORE --> STORE
+    STORE -.->|"events"| PURE
+    STORE -.->|"outcomes, read on wake"| C3
+
+    style C3 stroke-dasharray: 5 4
 ```
 
-Read the arrows as dependencies. The store depends on nothing. The tree depends on the interface. The agent depends on both. **Nothing depends on the agent** — which is the property that makes it swappable, and the one most likely to get quietly violated the first time something feels convenient to stash in the front end.
+Read the arrows as dependencies. The store depends on nothing. The scheduler depends only on the event vocabulary. Clients depend on the operations. **Nothing depends on a client** — which is what makes the agent swappable, and the property most likely to get quietly violated the first time something feels convenient to stash in the front end.
 
-The dotted return path is deliberately passive. No daemon, no notification, nothing polling. A teaching session's first act is to read the log; between sessions, nothing happens at all.
+The CLI sitting as a peer of the agent is deliberate. The success criterion is that everything works from a bare shell; that's only meaningful if the CLI is a first-class consumer rather than a debug affordance.
+
+The dotted return path is passive. No daemon, no notification, nothing polling. A teaching session's first act is to read the log; between sessions, nothing happens at all.
 
 </details>
 

@@ -16,23 +16,35 @@ A system for retaining what I learn across university courses and self-directed 
 
 ---
 
-# Part I — The three layers
+# Part I — The components
 
-The system is three separate things with a defined interface between them. They are not phases of one program; they are independently useful pieces that compose.
+The system is a stack of independently useful pieces with defined interfaces between them. They are not phases of one program.
 
-## 1. The SRS backend
+Below the line: **store**, **scheduler**, **core**. Above it: **clients** — a CLI, an agent, and later the knowledge tree.
 
-**What it is:** the card store and the scheduler. It holds cards, knows which are due, records outcomes, and computes the next interval.
+## 1. The store
 
-**What it knows:** cards, their type, their tags, their review history, their due dates.
+**What it is:** an append-only event log and nothing else.
 
-**What it does not know:** what a course is, what a concept is, what depends on what, or why any particular card exists. Cards arrive from outside and it asks no questions about their provenance.
+**What it does:** append an event; read events back. That is the entire surface.
 
-**Why it's separable:** it is the only layer that must work with no model involved at all. Given a card store and a shell, review has to be possible. Everything else is elaboration.
+**What it knows:** nothing about cards, intervals, decks, or meaning. It holds opaque events in order.
+
+**Why it's separable:** it is the only component that touches the outside world. Isolating I/O here is what allows everything above it to be pure.
+
+## 2. The scheduler
+
+**What it is:** a pure function over history. Events in, state out.
+
+**What it does:** folds an event log into current state — which cards exist, which are due, what the next interval is after a given outcome.
+
+**What it does not do:** any I/O whatsoever. It does not read the clock beyond what it is handed, does not read files, does not call anything.
+
+**Why it matters:** purity is what makes replay real. If the scheduler ever needs input that isn't in the log, the ability to swap algorithms and recompute history is gone. This is the load-bearing constraint of the whole design, and it is easy to violate by accident.
 
 ### Card types
 
-One store, two card types, distinguished by a type attribute. The scheduler treats them identically; only presentation and grading differ.
+Two card types, distinguished structurally rather than by an optional field. The scheduler treats them identically for timing; only presentation and grading differ.
 
 **Recall card**
 - A prompt and its answer, plus tags.
@@ -40,8 +52,10 @@ One store, two card types, distinguished by a type attribute. The scheduler trea
 
 **Derivation card**
 - A prompt asking for an explanation built from scratch, plus tags.
-- Carries **must-hits**: three or four points a good explanation has to touch.
+- Carries **must-hits**: three or four claims a correct explanation has to assert.
 - Must-hits accrete. When a review exposes a step that wasn't listed, it gets added, so the list grows into the shape of my actual blind spots.
+
+These are a sum type, not one shape with nullable must-hits. Otherwise every consumer branches on an absence, and the distinction the whole system rests on gets encoded as a missing field.
 
 ### Queueing
 
@@ -49,15 +63,45 @@ One store, two card types, distinguished by a type attribute. The scheduler trea
 - Card types are never interleaved card-by-card.
 - Grading of derivation cards checks **coverage against the must-hits**, not quality in the abstract. This keeps it mechanical rather than a judgement call — and keeps the grading contract narrow enough that a model can be trusted with it.
 
-### Inbox
+## 3. The core
 
-The backend also holds the capture inbox: an unstructured list of raw entries awaiting curation. It stores them and hands them back on request. It does not interpret them.
+**What it is:** the thin composition of store and scheduler.
+
+**What it does:** pulls events from the store, folds them through the scheduler, returns a queue; takes an outcome, turns it into an event, appends it.
+
+**What it must stay:** thin. It is plumbing. If logic accumulates here, it belongs in the scheduler; if I/O accumulates here, it belongs in the store.
+
+**The inbox** lives at this level too: raw captured entries awaiting curation, stored as events like everything else, handed back uninterpreted.
 
 ---
 
-## 2. The knowledge tree
+## 4. The CLI
 
-**A separate project.** It is a client of the SRS backend, not a part of it.
+**A first-class client, not a debug tool.**
+
+**What it is:** a direct, non-conversational front end to the core.
+
+**Why it's not an afterthought:** the success criterion is that review works with no model involved. That criterion only means anything if the CLI can do everything — capture, review, record, inspect. If it can, the agent is proven optional. If it can't, the agent has quietly absorbed logic that belongs below the line.
+
+It is a peer of the agent, not a layer beneath it.
+
+---
+
+## 5. The agent
+
+**What it is:** the conversational front end.
+
+**What it does:** presents cards, grades explanations against must-hits, runs curation as a conversation, drafts card wording and must-hits, and answers *what should I do right now*.
+
+**What it holds:** nothing. No state, no dates, no bookkeeping. Every fact it reports it has just read; every change it makes it has just written.
+
+**Why it's separable:** it's replaceable. A terminal agent today, a phone client later, anything that can speak the core's interface. The intelligence lives in the conversation; the state lives below.
+
+---
+
+## 6. The knowledge tree
+
+**A separate project.** A client of the core, not a part of it.
 
 **What it is:** a map of concepts and their dependencies, with a record of how deeply I hold each one.
 
@@ -65,53 +109,51 @@ The backend also holds the capture inbox: an unstructured list of raw entries aw
 
 **What it does not know:** intervals, due dates, or anything about scheduling. It never computes when something should be reviewed.
 
-**Why it's separable:** it answers a different question. The SRS answers *what should I review today*; the tree answers *what should I learn next, and what am I missing to learn it*. Either question is worth answering without the other.
+**Why it's separable:** it answers a different question. The SRS answers *what should I review today*; the tree answers *what should I learn next, and what am I missing to learn it*. Either is worth answering without the other.
 
-**Scoping note:** deriving edges is the hard part. The cheap first version takes a course's table of contents as a linear ordering and treats everything earlier as prerequisite. Cross-course edges — where one subject needs a concept from another — are the genuinely hard case and are deliberately deferred.
+**Scoping note:** deriving edges is the hard part. The cheap first version takes a course's table of contents as a linear ordering and treats everything earlier as prerequisite. Cross-course edges are the genuinely hard case and are deliberately deferred.
 
 **Not in scope for v1.**
 
 ---
 
-## 3. The agent
-
-**What it is:** the front end. The thing I actually talk to.
-
-**What it does:** presents cards, grades explanations against must-hits, runs curation as a conversation, drafts card wording and must-hits, and answers the question *what should I do right now*.
-
-**What it holds:** nothing. No state, no dates, no bookkeeping. Every fact it reports it has just read; every change it makes it has just written.
-
-**Why it's separable:** it's replaceable. A terminal agent today, a phone client later, anything that can speak the backend's interface. The intelligence lives in the conversation; the state lives behind the backend.
-
----
-
 # Part II — Composition
 
-## The interface
+## The two interfaces
 
-All three layers meet at one narrow surface: the backend's interface. Everything above it is a client.
+There are two boundaries that matter, and they harden at different rates.
 
-The backend exposes a small set of operations — roughly: *what's due*, *record an outcome*, *add a card*, *read the inbox*, *append to the inbox*, *read recent outcomes*. Nothing in that list mentions concepts, courses, or conversations.
+**The event vocabulary** — between the store and everything above it. This is the expensive one. The premise of the log is that old events stay readable forever, so adding an event type is cheap and changing the meaning of an existing one is not. This is the real schema; everything else is derived from it.
 
-This is the load-bearing constraint. If a new operation is needed that only makes sense for one particular client, it belongs in that client, not the backend.
+**The core's operations** — between the core and its clients. Roughly: *what's due*, *record an outcome*, *add a card*, *capture*, *read the inbox*, *read history*. Nothing in that list mentions concepts, courses, or conversations.
+
+The load-bearing constraint: if a new operation is needed that only makes sense for one particular client, it belongs in that client, not the core.
 
 ## How they compose
 
-**Agent → backend.** The ordinary path. The agent asks what's due, presents it, takes my response, and records the outcome. The backend decides the next interval; the agent never proposes one.
+**Store → scheduler → core.** Events are read, folded into state, and returned. State is never stored; it is always the result of a fold.
 
-**Tree → backend.** The tree **emits**: a node that reaches "I should hold this" produces cards, which are added to the store like any others. The tree decides *what* enters; the scheduler decides *when* it returns. Once a card exists, its origin is irrelevant.
+**Client → core.** A client asks what's due, presents it however it likes, takes my response, and records the outcome. The core decides the next interval; no client ever proposes one.
 
-**Backend → tree.** Review outcomes accumulate in a log. The tree reads it and updates node status — repeated failures on a concept's cards lower its grasp level, marking it for re-teaching.
+**CLI and agent are peers.** Both speak the same operations. Neither can do something the other structurally cannot.
 
-**The loop closes by pull, not push.** Nothing runs in the background, nothing notifies. Whichever client wakes up next reads the current state. A teaching session's first act is to read the outcome log; a review session's first act is to ask what's due.
+**Tree → core.** The tree **emits**: a node that reaches "I should hold this" produces cards, added like any others. The tree decides *what* enters; the scheduler decides *when* it returns. Once a card exists, its origin is irrelevant.
 
-**Agent → tree.** The agent fronts the tree the same way it fronts the SRS — same conversation, different questions. From my side there is one thing to talk to, even though there are two backends behind it.
+**Core → tree.** Review outcomes are already in the log. The tree reads them and updates node status — repeated failures on a concept's cards lower its grasp level, marking it for re-teaching.
+
+**Agent → tree.** The agent fronts the tree the same way it fronts the SRS — same conversation, different questions. From my side there is one thing to talk to, even though there are two systems behind it.
+
+**The loop closes by pull, not push.** Nothing runs in the background, nothing notifies. Whichever client wakes up next reads the current state.
 
 ## Dependency direction
 
-The backend depends on nothing. The tree depends on the backend's interface. The agent depends on both interfaces. Nothing depends on the agent.
+```
+store  ←  scheduler  ←  core  ←  { CLI, agent, tree }
+```
 
-This means the tree can be built, abandoned, or replaced without touching the SRS, and the SRS keeps working if the tree never exists.
+The store depends on nothing. The scheduler depends on the event vocabulary alone. The core depends on both. Clients depend on the core's operations. **Nothing depends on a client.**
+
+This means the tree can be built, abandoned, or replaced without touching the SRS; the agent can be swapped entirely; and the SRS keeps working if neither ever exists.
 
 ---
 
@@ -145,7 +187,7 @@ Events are **immutable**. Corrections are new events, not edits. When I override
 
 **Replay under a different algorithm.** This is the strongest argument. Because outcomes are recorded rather than intervals, the scheduling algorithm is a pure function over the log. I can change it and recompute every due date from scratch, then compare the counterfactual against what actually happened. A system that stored due dates directly could never do this.
 
-**A cleaner loop between layers.** The separate outcome log described earlier is subsumed — the tree simply reads the card store's event log and derives what it needs. There is one source of truth, not two things that can disagree.
+**A cleaner loop between layers.** There is no separate outcome log — the tree reads the same event log everything else reads and derives what it needs. There is one source of truth, not two things that can disagree.
 
 **Debuggability.** When the scheduler does something surprising, the answer is always in the log. There is no hidden mutable state to reason about.
 
@@ -158,7 +200,7 @@ Events are **immutable**. Corrections are new events, not edits. When I override
 
 ## Scope
 
-The card store and inbox are event-sourced in v1. The tree adopts the same model when it is built, and its events live in its own log — the layers share a pattern, not a log.
+The store is the event log; the card deck and inbox are both projections of it in v1. The tree adopts the same model when it is built, and its events live in its own store — the components share a pattern, not a log.
 
 ---
 
@@ -222,7 +264,7 @@ Nothing notifies me of this between sessions. It surfaces when I next show up.
 
 # Part VI — Scope
 
-**In scope for v1:** the SRS backend, capture, curation, and an agent that fronts them.
+**In scope for v1:** the store, the scheduler, the core, a CLI over them, capture, curation, and an agent as a second client.
 
 **Out of scope for v1:**
 
@@ -233,4 +275,4 @@ Nothing notifies me of this between sessions. It surfaces when I next show up.
 
 ## Success criterion
 
-The review path is usable with no model involved. If the backend can't be driven from a bare shell, the boundary between it and the agent is in the wrong place, and everything layered on top is decoration.
+The review path is usable with no model involved — every operation reachable from the CLI alone. If the core can't be driven from a bare shell, the agent has absorbed logic that belongs below the line, and everything layered on top is decoration.
