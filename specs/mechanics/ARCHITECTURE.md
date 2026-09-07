@@ -1,3 +1,5 @@
+Still to spec: session, CLI, forester. Open question: rename "brightness" (candidates: retention, strength).
+
 # Components
 [Engine](./components/ENGINE.md) (mastery, graph, scheduler) - Pure logic, no I/O, pure functional components, each component is standalone and naive of other's existance.
 [Scheduler](./components/SCHEDULER.md) — **pure**. Decides what's due for review.

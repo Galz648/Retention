@@ -8,3 +8,5 @@
 - Must-hits: the three or four claims a good explanation has to make. Checked semantically, not by keyword: naming a concept without using it correctly doesn't count. They accumulate over time as reviews expose blind spots.
 
 - Knowledge Tree: a directed graph that describes dependencies between cards
+
+- Grader — model-driven. Reads what you actually said and checks it against the card's must-hits semantically. Maps coverage onto four grades — all covered cleanly → easy; covered slowly or with a nudge → good; one or two missed → hard; didn't get there → again. Writes a plain grade to the event log; nothing downstream knows a model was involved.
