@@ -41,14 +41,17 @@
 ##### [Data Layer](./specs/mechanics/ARCHITECTURE.md#data-layer)
 
 <details open>
-<summary><a href="./specs/mechanics/ARCHITECTURE.md#engine">Engine</a></summary>
+<summary><a href="./specs/mechanics/components/ENGINE.md">Engine</a></summary>
 
-* [Mastery](./specs/mechanics/ARCHITECTURE.md#mastery)
-* [Scheduler](./specs/mechanics/ARCHITECTURE.md#scheduler)
-* [Session](./specs/mechanics/ARCHITECTURE.md#session)
-* [Forester](./specs/mechanics/ARCHITECTURE.md#forester)
+* [Mastery](./specs/mechanics/components/MASTERY.md)
+* [Graph](./specs/mechanics/components/GRAPH.md)
+* [Scheduler](./specs/mechanics/components/SCHEDULER.md)
 
 </details>
+
+* [Session](./specs/mechanics/components/SESSION.md)
+* [Session CLI](./specs/mechanics/components/SESSION_CLI.md)
+* [Forester](./specs/mechanics/components/FORESTER.md)
 
 </details>
 
