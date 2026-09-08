@@ -29,7 +29,12 @@ const writeTree = async (
   root: string,
   id: string,
   files: {
-    readonly meta: { readonly title: string; readonly archived: boolean }
+    readonly meta: {
+      readonly title: string
+      readonly archived: boolean
+      readonly kind: "knowledge" | "terms"
+      readonly summary: string
+    }
     readonly nodes: ReadonlyArray<unknown>
     readonly edges: ReadonlyArray<unknown>
     readonly cards: ReadonlyArray<unknown>
@@ -53,7 +58,12 @@ const writeTree = async (
 }
 
 const tinyTree = {
-  meta: { title: "Lexer then parser", archived: false as const },
+  meta: {
+    title: "Lexer then parser",
+    kind: "knowledge" as const,
+    summary: "Tokens, then the parse.",
+    archived: false as const,
+  },
   nodes: [
     { id: "lex", title: "Tokens", cardIds: ["rec-token"] },
     { id: "parse", title: "Concrete syntax tree", cardIds: ["der-shift-reduce"] },
@@ -81,6 +91,9 @@ const tinyTree = {
 
 const expectedTiny = new Corpus({
   treeId: treeId("tiny"),
+  title: "Lexer then parser",
+  kind: "knowledge",
+  summary: "Tokens, then the parse.",
   archived: false,
   nodes: [
     new Node({
@@ -168,6 +181,7 @@ describe("CorpusStore.Live", () => {
     )
     expect(corpus.archived).toBe(true)
     expect(corpus.treeId).toBe(treeId("tiny"))
+    expect(corpus.title).toBe("Lexer then parser")
     expect(corpus.nodes).toEqual(expectedTiny.nodes)
     expect(await Bun.file(join(root, "tiny", "meta.json")).exists()).toBe(false)
     expect(
@@ -225,6 +239,30 @@ describe("CorpusStore.Live", () => {
       ),
     ).resolves.toMatchObject({ _tag: "CorpusNotFound", treeId: "nope" })
   })
+
+  test("list returns titles and counts, not only folder names", async () => {
+    const root = await mkdtemp(join(tmpdir(), "nth-corpus-"))
+    await writeTree(root, "tiny", tinyTree)
+    const listings = await withStore(
+      root,
+      Effect.gen(function* () {
+        const store = yield* CorpusStore
+        return yield* store.list()
+      }),
+    )
+    expect(listings).toEqual([
+      {
+        treeId: treeId("tiny"),
+        title: "Lexer then parser",
+        kind: "knowledge",
+        summary: "Tokens, then the parse.",
+        archived: false,
+        nodeCount: 2,
+        cardCount: 2,
+        edgeCount: 1,
+      },
+    ])
+  })
 })
 
 describe("authored trees", () => {
@@ -248,5 +286,26 @@ describe("authored trees", () => {
         expect(ids.has(edge.to)).toBe(true)
       }
     }
+  })
+
+  test("imported titles are human names with kind and summary", async () => {
+    const listings = await withStore(
+      authoredRoot,
+      Effect.gen(function* () {
+        const store = yield* CorpusStore
+        return yield* store.list()
+      }),
+    )
+    expect(listings.length).toBeGreaterThan(0)
+    for (const tree of listings) {
+      expect(tree.title).not.toMatch(/seed tree/i)
+      expect(tree.title).not.toMatch(/Term Drill State/i)
+      expect(tree.summary.length).toBeGreaterThan(0)
+      expect(tree.kind === "knowledge" || tree.kind === "terms").toBe(true)
+    }
+    expect(listings.some((tree) => tree.title === "Biology II")).toBe(true)
+    expect(listings.some((tree) => tree.title === "Biology II ecology terms")).toBe(
+      true,
+    )
   })
 })

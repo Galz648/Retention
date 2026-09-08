@@ -26,6 +26,9 @@ const corpusOf = (
 ): Corpus =>
   new Corpus({
     treeId,
+    title: "Fixture",
+    kind: "knowledge",
+    summary: "Test fixture.",
     archived,
     nodes,
     edges,

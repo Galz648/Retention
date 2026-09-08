@@ -1,4 +1,6 @@
 {
-  "title": "Biochemistry I — seed tree",
+  "title": "Biochemistry I",
+  "kind": "knowledge",
+  "summary": "Chemistry of life for the course map.",
   "archived": false
 }

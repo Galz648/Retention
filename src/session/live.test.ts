@@ -51,6 +51,9 @@ const childCard = new RecallCard({
 
 const fixture = new Corpus({
   treeId,
+  title: "Fixture",
+  kind: "knowledge",
+  summary: "Test fixture.",
   archived: false,
   nodes: [
     new Node({ id: rootId, title: "root", cardIds: [rootCardId] }),
@@ -67,11 +70,24 @@ const CorpusFixed = Layer.succeed(
       id === treeId
         ? Effect.succeed(fixture)
         : Effect.fail(new CorpusNotFound({ treeId: id })),
+    list: () =>
+      Effect.succeed([
+        {
+          treeId,
+          title: fixture.title,
+          kind: fixture.kind,
+          summary: fixture.summary,
+          archived: false,
+          nodeCount: fixture.nodes.length,
+          cardCount: fixture.cards.length,
+          edgeCount: fixture.edges.length,
+        },
+      ]),
     archive: () => Effect.fail(new AlreadyArchived({ treeId })),
   }),
 )
 
-const sessionLayer = Live(treeId).pipe(
+const sessionLayer = Live().pipe(
   Layer.provideMerge(Memory),
   Layer.provideMerge(CodecLive),
   Layer.provide(MasteryLive),
@@ -96,7 +112,7 @@ describe("Session.Live", () => {
     const cards = await run(
       Effect.gen(function* () {
         const session = yield* Session
-        return yield* session.queue()
+        return yield* session.queue(treeId)
       }),
     )
     expect(cards.map((card) => card.id)).toEqual([rootCardId])
@@ -108,13 +124,13 @@ describe("Session.Live", () => {
         const session = yield* Session
         const store = yield* Store
         const codec = yield* Codec
-        yield* session.grade(rootCardId, "Easy")
+        yield* session.grade(treeId, rootCardId, "Easy")
         const snapshot = yield* store.read()
         const decoded: Array<Event> = []
         for (const record of snapshot.records) {
           decoded.push(yield* codec.decode(record))
         }
-        const queue = yield* session.queue()
+        const queue = yield* session.queue(treeId)
         return { events: decoded, cards: queue }
       }),
     )
@@ -134,7 +150,7 @@ describe("Session.Live", () => {
         const session = yield* Session
         const store = yield* Store
         const flipped = yield* Effect.flip(
-          session.grade(asCardId("ghost"), "Good"),
+          session.grade(treeId, asCardId("ghost"), "Good"),
         )
         const snapshot = yield* store.read()
         return { flipped, records: snapshot.records }

@@ -15,6 +15,7 @@
   "scripts": {
     "test": "bun test",
     "typecheck": "tsc --noEmit",
-    "review": "bun src/cli/main.ts"
+    "review": "bun src/cli/main.ts",
+    "compile": "bun build --compile --outfile retention src/cli/main.ts"
   }
 }

@@ -1,4 +1,6 @@
 {
-  "title": "Biology I — seed tree",
+  "title": "Biology I",
+  "kind": "knowledge",
+  "summary": "First-year biology map: cells, genetics, evolution.",
   "archived": false
 }

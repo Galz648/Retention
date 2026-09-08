@@ -1,30 +1,56 @@
-Resolved: TypeScript does not generate a binary; this version uses Bun compile. Environment-variable UX is rejected. User-facing language is titles + glossary, not folder names or card ids. The program is named **`retention`**.
+Resolved: TypeScript does not generate a binary; this version uses Bun compile. Environment-variable UX is rejected. User-facing language is titles + glossary, not folder names or card ids. The program is named **`retention`**. Feel (color, banner, completions, select) is specified; the client language (TypeScript vs Rust) is **not** decided.
 
 ## Experience this version must feel like
 
 You only talk to `retention`. You never set hidden settings, and you never open data files to see a tree or a card.
 
-**You can see every tree.** `retention trees` lists them by title. You pick a tree by that title (or a unique prefix), or the program lists titles and asks. Folder names are not how you refer to trees.
+**You can see every tree — and tell them apart.** `retention trees` groups **knowledge trees** (concepts and dependencies) vs **term decks** (names to recall). Each row is a human title and one sentence. Not a dump of node/card/edge counts. Not importer labels (`seed tree`, `Term Drill State — …`).
 
-**Each time you run a command, you choose the tree.** Nothing is stuck from a previous run. `retention queue "Biology II — seed tree"` and then `retention queue` with a different title (or a picker) are both normal. One invocation, one tree.
+**Each time you run a command, you choose the tree.** Title argument, unique prefix, or a select. Nothing stuck from a previous run.
 
-**Nothing is written unless you say yes.** `grade` states what it will append (and that it will create the log if needed), then `Proceed? [y/N]`. Default is no. If the program cannot ask (piped input), it refuses rather than writing. `queue` / `trees` / `show` never create files.
+**Nothing is written unless you say yes.** `grade` states what it will append, then `Proceed? [y/N]`. Default no. Piped input refuses. Pure commands never create files.
 
-Still parked, not this version: interactive one-card loop, capture, curation, `--yes`. Install location (binary in this repo vs your shell's command path) can wait until the commands exist.
+**Each command says what it is.** Help lists a one-line description. Running a command repeats that line in context, then the payload.
 
-## Goal to paste into `/goal`
+**TTY may be cool; pipes stay boring.** Banner on help only. Color on terminals, none when piped (`NO_COLOR` too). Completions for commands and titles. Arrow-key select when arguments are omitted.
+
+Still parked: interactive one-card review loop, capture, curation, `--yes`.
+
+## Why `trees` felt the same
+
+Two different things were imported with similar, ugly titles:
+
+| What it actually is | Example human title | What you saw |
+|---|---|---|
+| Knowledge tree | Biology II | Biology II — seed tree |
+| Term deck | Biology II ecology terms | Term Drill State — biology-ii-ecology |
+
+Counts (42 nodes, 99 cards) do not say that. Kind + a sentence does.
+
+## Titles to use (data cleanup, with the feel pass)
+
+Knowledge trees: drop “seed tree” / “tree” suffixes. `Component A — Estimation method` → **Cell biology by the numbers**. `derivatives-integrals-drill` → **Derivatives and integrals drill**.
+
+Term decks: **{subject} terms** (ecology, animal systems, Cooper cell biology, German frequency, …) — never `Term Drill State`.
+
+## Open: TypeScript client vs Rust client
+
+Not a product question about commands. A later implementation question:
+
+Stay on Bun if completions, color, and select can ship without pain.
+Move the **client only** to Rust if they cannot. Engine (mastery, graph, scheduler, session) stays TypeScript.
+
+## Next `/goal` (feel pass) — paste when ready
 
 ```
-Implement the retention command-line client so it matches specs/mechanics/components/SESSION_CLI.md and the experience in specs/mechanics/GAPS.md.
+Make the retention client match the feel and trees listing in specs/mechanics/components/SESSION_CLI.md and specs/mechanics/GAPS.md.
 
-The program is named retention. All interaction goes through it: no environment variables, no opening corpus or log files, no folder names or card ids in what I see.
+trees: group knowledge trees vs term decks; human titles; one-sentence descriptions; no counts on the list. Rename importer titles as in GAPS (data + listing).
+help: description per command; banner on TTY help only.
+Each command: one context line, then payload.
+TTY: color (honor NO_COLOR; none when piped), arrow-key select when args omitted, shell completions for commands and titles.
+Do not rewrite the client in Rust this pass. Do not add capture, curation, or an interactive review loop.
+Keep consent: grade still asks; piped input still refuses; queue still must not create the log.
 
-Experience to verify:
-1. I can list every tree by title (retention trees) and inspect one tree's nodes/edges by title.
-2. Each invocation chooses a tree by title or by an interactive picker. A run is not glued to one tree from startup.
-3. queue is numbered (type, node title, prompt). show prints the answer or must-hits. grade asks Proceed? [y/N] before appending; default no; piped input refuses. queue on a missing log does not create the log.
-
-Also: help labels every command [pure] or [impure]; Bun-compile a retention binary (bun src/cli/main.ts is only a developer stand-in with the same arguments). Do not build parked features (review loop, capture, curation, --yes).
-
-Evidence: tests for listing, title resolution, numbered queue/show, consent (yes writes, no/non-interactive does not), and a real run of retention help / trees / queue against the imported corpus.
+Evidence: tests for grouped listing and title copy; a TTY-off run with no ANSI; help contains descriptions; real run of retention trees / help / queue.
 ```

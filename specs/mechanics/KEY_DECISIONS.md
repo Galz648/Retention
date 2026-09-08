@@ -8,3 +8,5 @@ Locked for this version.
 - Threshold, the spaced-repetition library's internal scales, and the name Brightness stay placeholders until evidence. Parked features stay parked.
 - **The program is named `retention`.** That is the binary, the package, and the word you type.
 - **Experience, not wiring:** list trees by title; each command chooses a tree; grade asks before it writes. Those are how the program must feel, not leftover internals.
+- **Feel must stay useful.** Banner, color, completions, and select are in scope for the client. They must not appear on piped output and must not bury the queue.
+- **Rust for the client is allowed, not chosen.** Engine stays TypeScript. Revisit if a TypeScript client cannot do completions + TTY select + color + one binary without pain.

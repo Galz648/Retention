@@ -14,6 +14,6 @@ User-facing text (the program's help and output, Getting Started, examples in sp
 
 It does not use folder names, card ids, file formats, or library names.
 
-If an example needs a tree, write the title (`Biology II — seed tree`). If it needs a card, write the prompt (`Explain Diffusion from scratch.`), never a card id.
+If an example needs a tree, write the title (`Biology II`). If it needs a card, write the prompt (`Explain Diffusion from scratch.`), never a card id.
 
 Folder names and card ids are for the computer. They may stay in code and on disk. They are not how we talk to you.

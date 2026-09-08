@@ -19,8 +19,16 @@ The append-only log of records. It does not know about cards, intervals, or mean
 _Avoid_: Database, event store (implies it understands events)
 
 **Tree**:
-A named graph of concepts and the dependencies between them, studied as one subject.
-_Avoid_: deck, corpus, slug, folder name
+A named body of cards you study as one subject. Two kinds: knowledge tree and term deck.
+_Avoid_: deck (alone), corpus, slug, folder name
+
+**Knowledge tree**:
+A map of concepts and the dependencies between them. You rebuild explanations (derivation), and name facts when they sit on those concepts.
+_Avoid_: course dump, seed tree (importer leftover)
+
+**Term deck**:
+A list of names and conventions to recall. Little or no dependency map. Biology ecology terms, German frequency, and so on.
+_Avoid_: Term Drill State, slug titles (`biology-ii-ecology`)
 
 **Title**:
 The tree's human name. This is how a person refers to a tree.

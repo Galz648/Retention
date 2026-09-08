@@ -1,7 +1,7 @@
 import { Effect, Layer, Schema } from "effect"
 import { Card } from "../domain/cards.ts"
-import { Corpus, Edge, Node } from "../domain/corpus.ts"
-import type { TreeId } from "../domain/ids.ts"
+import { Corpus, Edge, Node, type TreeListing } from "../domain/corpus.ts"
+import { TreeId } from "../domain/ids.ts"
 import {
   AlreadyArchived,
   CorpusCorrupt,
@@ -13,6 +13,8 @@ import {
 const Meta = Schema.Struct({
   title: Schema.String,
   archived: Schema.Boolean,
+  kind: Schema.Literal("knowledge", "terms"),
+  summary: Schema.String,
 })
 
 type BunRuntime = {
@@ -25,6 +27,12 @@ type BunRuntime = {
     command: ReadonlyArray<string>,
     options: { readonly stdout: "ignore"; readonly stderr: "ignore" },
   ) => { readonly exited: Promise<number> }
+  readonly Glob: new (pattern: string) => {
+    scan: (input: {
+      readonly cwd: string
+      readonly onlyFiles?: boolean
+    }) => AsyncIterable<string>
+  }
 }
 
 const bun: BunRuntime = (
@@ -154,6 +162,9 @@ const readFrom = (
     const cards = yield* readJsonl(Card, `${dir}/cards.jsonl`, treeId)
     return new Corpus({
       treeId,
+      title: meta.title,
+      kind: meta.kind,
+      summary: meta.summary,
       archived: archived || meta.archived,
       nodes,
       edges,
@@ -177,6 +188,69 @@ const readTree = (
     )
   })
 
+const listingOf = (corpus: Corpus): TreeListing => ({
+  treeId: corpus.treeId,
+  title: corpus.title,
+  kind: corpus.kind,
+  summary: corpus.summary,
+  archived: corpus.archived,
+  nodeCount: corpus.nodes.length,
+  cardCount: corpus.cards.length,
+  edgeCount: corpus.edges.length,
+})
+
+const listingId = Schema.decodeUnknownSync(TreeId)("corpus")
+
+const globRelative = (
+  root: string,
+  pattern: string,
+): Effect.Effect<ReadonlyArray<string>, CorpusCorrupt> =>
+  io(listingId, async () => {
+    const glob = new bun.Glob(pattern)
+    const out: Array<string> = []
+    for await (const relative of glob.scan({ cwd: root, onlyFiles: true })) {
+      out.push(relative)
+    }
+    return out
+  })
+
+const treeIdFromMetaPath = (
+  relative: string,
+): Effect.Effect<TreeId, CorpusCorrupt> => {
+  const parts = relative.split("/")
+  const folder =
+    parts[0] === "archived" && parts.length >= 2 ? parts[1] : parts[0]
+  if (folder === undefined || folder.length === 0) {
+    return Effect.fail(
+      new CorpusCorrupt({ treeId: listingId, cause: relative }),
+    )
+  }
+  return Effect.succeed(Schema.decodeUnknownSync(TreeId)(folder))
+}
+
+const listTrees = (
+  root: string,
+): Effect.Effect<ReadonlyArray<TreeListing>, CorpusError> =>
+  Effect.gen(function* () {
+    const live = yield* globRelative(root, "*/meta.json")
+    const archived = yield* globRelative(root, "archived/*/meta.json")
+    const seen = new Set<string>()
+    const listings: Array<TreeListing> = []
+    for (const relative of [...live, ...archived]) {
+      const id = yield* treeIdFromMetaPath(relative)
+      if (seen.has(id)) continue
+      seen.add(id)
+      const corpus = yield* readTree(root, id)
+      listings.push(listingOf(corpus))
+    }
+    listings.sort((left, right) => {
+      if (left.title < right.title) return -1
+      if (left.title > right.title) return 1
+      return 0
+    })
+    return listings
+  })
+
 const archiveTree = (
   root: string,
   treeId: TreeId,
@@ -194,7 +268,7 @@ const archiveTree = (
     const meta = yield* readMeta(metaPath(from), treeId)
     yield* writeText(
       metaPath(from),
-      `${JSON.stringify({ title: meta.title, archived: true }, null, 2)}\n`,
+      `${JSON.stringify({ title: meta.title, kind: meta.kind, summary: meta.summary, archived: true }, null, 2)}\n`,
       treeId,
     )
     yield* run(["mkdir", "-p", `${root}/archived`], treeId)
@@ -207,6 +281,7 @@ export const Live = (corpusDir: string): Layer.Layer<CorpusStore> =>
     CorpusStore,
     CorpusStore.of({
       read: (id) => readTree(corpusDir, id),
+      list: () => listTrees(corpusDir),
       archive: (id) => archiveTree(corpusDir, id),
     }),
   )

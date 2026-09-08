@@ -1,4 +1,6 @@
 {
-  "title": "derivatives-integrals-drill",
+  "title": "Derivatives and integrals drill",
+  "kind": "knowledge",
+  "summary": "Rebuild standard derivatives and integrals from scratch.",
   "archived": false
 }

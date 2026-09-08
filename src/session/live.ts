@@ -5,7 +5,7 @@ import { Brightness } from "../domain/brightness.ts"
 import type { Card, Outcome } from "../domain/cards.ts"
 import type { Corpus } from "../domain/corpus.ts"
 import { CardReviewed, type Event } from "../domain/events.ts"
-import type { CardId, NodeId, TreeId } from "../domain/ids.ts"
+import type { CardId, NodeId } from "../domain/ids.ts"
 import { Graph } from "../engine/graph/interface.ts"
 import { Mastery } from "../engine/mastery/interface.ts"
 import { Scheduler } from "../engine/scheduler/interface.ts"
@@ -50,9 +50,7 @@ const fail = (reason: string): SessionError => new SessionError({ reason })
 const tagged = (error: { readonly _tag: string }): SessionError =>
   fail(error._tag)
 
-export const Live = (
-  treeId: TreeId,
-): Layer.Layer<
+export const Live = (): Layer.Layer<
   Session,
   never,
   Store | Codec | CorpusStore | Mastery | Graph | Scheduler
@@ -81,7 +79,7 @@ export const Live = (
       })
 
       return Session.of({
-        queue: () =>
+        queue: (treeId) =>
           Effect.gen(function* () {
             const corpus = yield* corpora.read(treeId).pipe(Effect.mapError(tagged))
             const events = yield* loadEvents
@@ -100,7 +98,7 @@ export const Live = (
               .slice()
               .sort(byPresentation)
           }),
-        grade: (cardId, rating: Outcome) =>
+        grade: (treeId, cardId, rating: Outcome) =>
           Effect.gen(function* () {
             const corpus = yield* corpora.read(treeId).pipe(Effect.mapError(tagged))
             const known = corpus.cards.some((card) => card.id === cardId)

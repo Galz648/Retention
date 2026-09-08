@@ -1,5 +1,5 @@
 import { Context, Data, type Effect } from "effect"
-import type { Corpus } from "../domain/corpus.ts"
+import type { Corpus, TreeListing } from "../domain/corpus.ts"
 import type { TreeId } from "../domain/ids.ts"
 
 export class CorpusNotFound extends Data.TaggedError("CorpusNotFound")<{
@@ -29,6 +29,7 @@ export class CorpusStore extends Context.Tag("nth/CorpusStore")<
     readonly read: (
       treeId: TreeId,
     ) => Effect.Effect<Corpus, CorpusError>
+    readonly list: () => Effect.Effect<ReadonlyArray<TreeListing>, CorpusError>
     readonly archive: (treeId: TreeId) => Effect.Effect<void, CorpusError>
   }
 >() {}

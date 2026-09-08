@@ -1,4 +1,6 @@
 {
-  "title": "Term Drill State — german-sentence-mine",
+  "title": "German sentence-mine terms",
+  "kind": "terms",
+  "summary": "Words taken from mined sentences.",
   "archived": false
 }

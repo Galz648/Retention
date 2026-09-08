@@ -12,7 +12,8 @@ The command-line program is the only user-facing client in this version. All int
 - Paths (corpus directory, event log) are owned by the program. The user never has to know them. Inspect commands print what they need in glossary language.
 - **You can see every tree** by title. Folder names are not how you refer to trees.
 - **Each invocation chooses a tree** (title argument or picker). A run is not glued to one tree from startup.
-- **Writes wait for a yes.** Impure commands ask; default no. Help (and the program with no args) lists every command, each marked `[pure]` or `[impure]`.
+- **Writes wait for a yes.** Impure commands ask; default no. Help (and the program with no args) lists every command, each marked `[pure]` or `[impure]`, each with a one-line description of what it does.
+- **Cool must not hide the job.** Color, a banner, completions, and arrow-key select are allowed only when they make the next action clearer. Piped output stays plain text, no color, no banner.
 
 ## Pure vs impure
 
@@ -27,22 +28,26 @@ Creating the log (or its directory) counts as a side effect. `queue` on a missin
 ## Commands (this version)
 
 ```
-[pure]    help
-[pure]    status
-[pure]    trees
-[pure]    tree  [title]
-[pure]    show  <number>  [title]
-[pure]    queue [title]
-[impure]  grade <number> <Again|Hard|Good|Easy> [title]
+[pure]    help     what you can do
+[pure]    status   whether a log exists; which tree if you named one
+[pure]    trees    every tree, by kind, with a one-line what-it-is
+[pure]    tree     one tree's nodes and edges
+[pure]    show     one due card including the answer / must-hits
+[pure]    queue    due and unblocked cards, numbered
+[impure]  grade    append one review — asks first
 ```
 
 Unknown command: print help, exit non-zero.
 
 Numbers refer to the current queue for that tree (see `queue`), not to internal card ids.
 
+When a command runs, the first line restates that description in context (`queue — due cards for Biology II`). Then the payload.
+
 ### `help`
 
-Print the list above. Each line carries `[pure]` or `[impure]`. Impure entries note that they ask first. Use glossary words, not folder names.
+Print the banner (TTY only), then the list above. Each line carries `[pure]` or `[impure]` and the description. Impure entries note that they ask first. Use glossary words, not folder names.
+
+Interactive terminal, no args: same help, then a **select** of commands (arrow keys / number). Choosing one runs it (and may ask for a tree next). Piped input: help text only, no select.
 
 ### `status`
 
@@ -50,7 +55,25 @@ Orient without opening files: whether a log exists, which tree is in play if one
 
 ### `trees`
 
-List every tree by **title**, plus how many nodes, cards, and edges, and whether it is archived. Folder names are omitted.
+A **short** list you can scan. Not node/card/edge counts — those belong on `tree`.
+
+Group by kind, each row: **title** and one sentence of what it is.
+
+```
+Knowledge trees — concepts and what depends on what
+  Biology II          animal systems and ecology, from the course map
+  Cell Biology        Cooper-scale cell biology map
+
+Term decks — names and conventions to recall
+  Biology II ecology terms
+  German frequency    core words, first slice
+```
+
+Archived trees in a third group, or omitted until we have any.
+
+Folder names never appear. Importer leftovers (`seed tree`, `Term Drill State — …`) are not the titles the person sees — the listing uses the human title (see GAPS for the rename table).
+
+Interactive `trees`: the list is a **select**. Entering a row prints that one-liner again and the title you can pass to `queue` / `tree`. It does not dump every node.
 
 ### `tree [title]`
 
@@ -77,11 +100,26 @@ Then `Proceed? [y/N]`. Only `y` / `yes` (case-insensitive) continue. Anything el
 
 ## Choosing a tree
 
-`[title]` is the tree's **title** (`Biology II — seed tree`, …), or a unique prefix of that title.
+`[title]` is the tree's **title** (`Biology II`, `Biology II ecology terms`, …), or a unique prefix of that title.
 
-If omitted in an interactive terminal: list titles, ask which one. That prompt is not a write.
-If omitted and the program cannot ask: error, print the title list, exit non-zero.
-If the prefix matches more than one title: list the matches, ask or error the same way.
+If omitted in an interactive terminal: a **select** of titles (grouped as in `trees`), not a wall of counts. That prompt is not a write.
+If omitted and the program cannot ask: error, print the compact title list, exit non-zero.
+If the prefix matches more than one title: select among the matches, or error the same way when not interactive.
+
+## Feel (TTY)
+
+Useful first. Decoration second.
+
+- **Banner:** the existing Retention wordmark, **only** on `help` (and the no-args select). Never on `queue` / `show` / `grade`.
+- **Color:** when stdout is a terminal. None when piped. Honor `NO_COLOR`. Impure / “this will write” uses a distinct color from pure lists. Do not rainbow every line.
+- **Completions:** generate shell completions for commands, ratings, and tree **titles** (`retention completions zsh` or equivalent). Typing `retention queue <tab>` offers titles, not folder names.
+- **Select:** arrow keys (and numbers) for command, tree, queue index, and rating when those arguments are omitted on a TTY. Typing the argument still works and is the non-interactive path.
+
+## Client language (open)
+
+The engine stays TypeScript / Effect. The **client** may stay a Bun-compiled TypeScript binary, or move to Rust, if the TypeScript ecosystem cannot deliver this feel without fighting the compiler (completions, color, select, one artifact).
+
+That is **not decided**. Decide after a first pass at the feel in the current client, not before. A Rust client would still speak the same commands and consent rules; it would not reimplement mastery / graph / scheduler.
 
 ## Binary
 

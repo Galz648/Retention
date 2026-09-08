@@ -1,4 +1,6 @@
 {
-  "title": "Vet Entrance Exam — seed tree",
+  "title": "Vet entrance exam",
+  "kind": "knowledge",
+  "summary": "Entrance-exam map of what the papers assume.",
   "archived": false
 }
