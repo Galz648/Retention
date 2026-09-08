@@ -1,6 +1,4 @@
-import { mkdtemp, mkdir, writeFile } from "node:fs/promises"
-import { tmpdir } from "node:os"
-import { join } from "node:path"
+import { $ } from "bun"
 import { Effect, Schema } from "effect"
 import { describe, expect, test } from "bun:test"
 import { Record, Store } from "./interface.ts"
@@ -14,10 +12,16 @@ const withJsonl = <A, E>(path: string, effect: Effect.Effect<A, E, Store>) =>
 const failJsonl = <E>(path: string, effect: Effect.Effect<unknown, E, Store>) =>
   withJsonl(path, Effect.flip(effect))
 
+const tempDir = async (): Promise<string> => {
+  const dir = `${Bun.env.TMPDIR ?? "/tmp"}/nth-store-${crypto.randomUUID()}`
+  await $`mkdir -p ${dir}`.quiet()
+  return dir
+}
+
 describe("Store.Live JSONL", () => {
   test("missing file is empty history", async () => {
-    const dir = await mkdtemp(join(tmpdir(), "nth-store-"))
-    const path = join(dir, "log.jsonl")
+    const dir = await tempDir()
+    const path = `${dir}/log.jsonl`
     const state = await withJsonl(
       path,
       Effect.gen(function* () {
@@ -30,8 +34,8 @@ describe("Store.Live JSONL", () => {
   })
 
   test("append writes payload plus newline; read returns opaque lines", async () => {
-    const dir = await mkdtemp(join(tmpdir(), "nth-store-"))
-    const path = join(dir, "log.jsonl")
+    const dir = await tempDir()
+    const path = `${dir}/log.jsonl`
     const a = record("{not json")
     const b = record(`{"ok":true}`)
     const state = await withJsonl(
@@ -50,9 +54,9 @@ describe("Store.Live JSONL", () => {
   })
 
   test("torn tail is unterminated on success; earlier lines stay history", async () => {
-    const dir = await mkdtemp(join(tmpdir(), "nth-store-"))
-    const path = join(dir, "log.jsonl")
-    await writeFile(path, "complete\n{\"torn\":", "utf8")
+    const dir = await tempDir()
+    const path = `${dir}/log.jsonl`
+    await Bun.write(path, "complete\n{\"torn\":")
     const state = await withJsonl(
       path,
       Effect.gen(function* () {
@@ -65,9 +69,9 @@ describe("Store.Live JSONL", () => {
   })
 
   test("legal last value without a trailing newline is unterminated, not a failed read", async () => {
-    const dir = await mkdtemp(join(tmpdir(), "nth-store-"))
-    const path = join(dir, "log.jsonl")
-    await writeFile(path, `{"a":1}`, "utf8")
+    const dir = await tempDir()
+    const path = `${dir}/log.jsonl`
+    await Bun.write(path, `{"a":1}`)
     const state = await withJsonl(
       path,
       Effect.gen(function* () {
@@ -80,9 +84,9 @@ describe("Store.Live JSONL", () => {
   })
 
   test("BOM is InvalidUtf8", async () => {
-    const dir = await mkdtemp(join(tmpdir(), "nth-store-"))
-    const path = join(dir, "log.jsonl")
-    await writeFile(path, Buffer.from([0xef, 0xbb, 0xbf, 0x7b, 0x7d, 0x0a]))
+    const dir = await tempDir()
+    const path = `${dir}/log.jsonl`
+    await Bun.write(path, new Uint8Array([0xef, 0xbb, 0xbf, 0x7b, 0x7d, 0x0a]))
     await expect(
       failJsonl(
         path,
@@ -95,9 +99,9 @@ describe("Store.Live JSONL", () => {
   })
 
   test("invalid UTF-8 is InvalidUtf8", async () => {
-    const dir = await mkdtemp(join(tmpdir(), "nth-store-"))
-    const path = join(dir, "log.jsonl")
-    await writeFile(path, Buffer.from([0xff, 0xfe, 0x00]))
+    const dir = await tempDir()
+    const path = `${dir}/log.jsonl`
+    await Bun.write(path, new Uint8Array([0xff, 0xfe, 0x00]))
     await expect(
       failJsonl(
         path,
@@ -110,7 +114,7 @@ describe("Store.Live JSONL", () => {
   })
 
   test("reading a directory is IsDirectory", async () => {
-    const dir = await mkdtemp(join(tmpdir(), "nth-store-"))
+    const dir = await tempDir()
     await expect(
       failJsonl(
         dir,
@@ -123,7 +127,7 @@ describe("Store.Live JSONL", () => {
   })
 
   test("append into a missing parent is NotFound", async () => {
-    const path = join(tmpdir(), "nth-missing-parent", "nope", "log.jsonl")
+    const path = `${Bun.env.TMPDIR ?? "/tmp"}/nth-missing-parent-${crypto.randomUUID()}/nope/log.jsonl`
     await expect(
       failJsonl(
         path,
@@ -136,10 +140,9 @@ describe("Store.Live JSONL", () => {
   })
 
   test("empty existing file is empty history", async () => {
-    const dir = await mkdtemp(join(tmpdir(), "nth-store-"))
-    const path = join(dir, "log.jsonl")
-    await mkdir(dir, { recursive: true })
-    await writeFile(path, "")
+    const dir = await tempDir()
+    const path = `${dir}/log.jsonl`
+    await Bun.write(path, "")
     const state = await withJsonl(
       path,
       Effect.gen(function* () {
