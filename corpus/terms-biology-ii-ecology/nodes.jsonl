@@ -1,0 +1,99 @@
+{"id":"population","title":"population","cardIds":["rec-terms-biology-ii-ecology-population"]}
+{"id":"population-density","title":"population density","cardIds":["rec-terms-biology-ii-ecology-population-density"]}
+{"id":"distribution","title":"distribution","cardIds":["rec-terms-biology-ii-ecology-distribution"]}
+{"id":"clumped-dispersion","title":"clumped dispersion","cardIds":["rec-terms-biology-ii-ecology-clumped-dispersion"]}
+{"id":"uniform-dispersion","title":"uniform dispersion","cardIds":["rec-terms-biology-ii-ecology-uniform-dispersion"]}
+{"id":"random-dispersion","title":"random dispersion","cardIds":["rec-terms-biology-ii-ecology-random-dispersion"]}
+{"id":"birth-rate","title":"birth rate","cardIds":["rec-terms-biology-ii-ecology-birth-rate"]}
+{"id":"death-rate","title":"death rate","cardIds":["rec-terms-biology-ii-ecology-death-rate"]}
+{"id":"immigration-emigration","title":"immigration / emigration","cardIds":["rec-terms-biology-ii-ecology-immigration-emigration"]}
+{"id":"biotic-potential","title":"biotic potential","cardIds":["rec-terms-biology-ii-ecology-biotic-potential"]}
+{"id":"intrinsic-rate-of-increase","title":"intrinsic rate of increase","cardIds":["rec-terms-biology-ii-ecology-intrinsic-rate-of-increase"]}
+{"id":"exponential-growth","title":"exponential growth","cardIds":["rec-terms-biology-ii-ecology-exponential-growth"]}
+{"id":"logistic-growth","title":"logistic growth","cardIds":["rec-terms-biology-ii-ecology-logistic-growth"]}
+{"id":"carrying-capacity","title":"carrying capacity","cardIds":["rec-terms-biology-ii-ecology-carrying-capacity"]}
+{"id":"lag-phase","title":"lag phase","cardIds":["rec-terms-biology-ii-ecology-lag-phase"]}
+{"id":"density-dependent-factors","title":"density-dependent factors","cardIds":["rec-terms-biology-ii-ecology-density-dependent-factors"]}
+{"id":"density-independent-factors","title":"density-independent factors","cardIds":["rec-terms-biology-ii-ecology-density-independent-factors"]}
+{"id":"life-table","title":"life table","cardIds":["rec-terms-biology-ii-ecology-life-table"]}
+{"id":"cohort","title":"cohort","cardIds":["rec-terms-biology-ii-ecology-cohort"]}
+{"id":"survivorship-curve","title":"survivorship curve","cardIds":["rec-terms-biology-ii-ecology-survivorship-curve"]}
+{"id":"life-history-strategy","title":"life history strategy","cardIds":["rec-terms-biology-ii-ecology-life-history-strategy"]}
+{"id":"semelparity","title":"semelparity","cardIds":["rec-terms-biology-ii-ecology-semelparity"]}
+{"id":"iteroparity","title":"iteroparity","cardIds":["rec-terms-biology-ii-ecology-iteroparity"]}
+{"id":"r-selection-k-selection","title":"r-selection / K-selection","cardIds":["rec-terms-biology-ii-ecology-r-selection-k-selection"]}
+{"id":"community","title":"community","cardIds":["rec-terms-biology-ii-ecology-community"]}
+{"id":"habitat","title":"habitat","cardIds":["rec-terms-biology-ii-ecology-habitat"]}
+{"id":"ecological-niche","title":"ecological niche","cardIds":["rec-terms-biology-ii-ecology-ecological-niche"]}
+{"id":"fundamental-niche","title":"fundamental niche","cardIds":["rec-terms-biology-ii-ecology-fundamental-niche"]}
+{"id":"realized-niche","title":"realized niche","cardIds":["rec-terms-biology-ii-ecology-realized-niche"]}
+{"id":"interspecific-competition","title":"interspecific competition","cardIds":["rec-terms-biology-ii-ecology-interspecific-competition"]}
+{"id":"intraspecific-competition","title":"intraspecific competition","cardIds":["rec-terms-biology-ii-ecology-intraspecific-competition"]}
+{"id":"competitive-exclusion-principle","title":"competitive exclusion principle","cardIds":["rec-terms-biology-ii-ecology-competitive-exclusion-principle"]}
+{"id":"resource-partitioning","title":"resource partitioning","cardIds":["rec-terms-biology-ii-ecology-resource-partitioning"]}
+{"id":"character-displacement","title":"character displacement","cardIds":["rec-terms-biology-ii-ecology-character-displacement"]}
+{"id":"predation","title":"predation","cardIds":["rec-terms-biology-ii-ecology-predation"]}
+{"id":"predator-prey","title":"predator / prey","cardIds":["rec-terms-biology-ii-ecology-predator-prey"]}
+{"id":"camouflage","title":"camouflage","cardIds":["rec-terms-biology-ii-ecology-camouflage"]}
+{"id":"aposematic-coloration","title":"aposematic coloration","cardIds":["rec-terms-biology-ii-ecology-aposematic-coloration"]}
+{"id":"batesian-mimicry","title":"Batesian mimicry","cardIds":["rec-terms-biology-ii-ecology-batesian-mimicry"]}
+{"id":"mullerian-mimicry","title":"Müllerian mimicry","cardIds":["rec-terms-biology-ii-ecology-mullerian-mimicry"]}
+{"id":"coevolutionary-arms-race","title":"coevolutionary arms race","cardIds":["rec-terms-biology-ii-ecology-coevolutionary-arms-race"]}
+{"id":"symbiosis","title":"symbiosis","cardIds":["rec-terms-biology-ii-ecology-symbiosis"]}
+{"id":"mutualism","title":"mutualism","cardIds":["rec-terms-biology-ii-ecology-mutualism"]}
+{"id":"commensalism","title":"commensalism","cardIds":["rec-terms-biology-ii-ecology-commensalism"]}
+{"id":"parasitism","title":"parasitism","cardIds":["rec-terms-biology-ii-ecology-parasitism"]}
+{"id":"keystone-species","title":"keystone species","cardIds":["rec-terms-biology-ii-ecology-keystone-species"]}
+{"id":"ecological-succession","title":"ecological succession","cardIds":["rec-terms-biology-ii-ecology-ecological-succession"]}
+{"id":"primary-succession","title":"primary succession","cardIds":["rec-terms-biology-ii-ecology-primary-succession"]}
+{"id":"secondary-succession","title":"secondary succession","cardIds":["rec-terms-biology-ii-ecology-secondary-succession"]}
+{"id":"pioneer-species","title":"pioneer species","cardIds":["rec-terms-biology-ii-ecology-pioneer-species"]}
+{"id":"climax-community","title":"climax community","cardIds":["rec-terms-biology-ii-ecology-climax-community"]}
+{"id":"species-richness","title":"species richness","cardIds":["rec-terms-biology-ii-ecology-species-richness"]}
+{"id":"species-diversity","title":"species diversity","cardIds":["rec-terms-biology-ii-ecology-species-diversity"]}
+{"id":"ecosystem","title":"ecosystem","cardIds":["rec-terms-biology-ii-ecology-ecosystem"]}
+{"id":"producers-autotrophs","title":"producers / autotrophs","cardIds":["rec-terms-biology-ii-ecology-producers-autotrophs"]}
+{"id":"consumers-heterotrophs","title":"consumers / heterotrophs","cardIds":["rec-terms-biology-ii-ecology-consumers-heterotrophs"]}
+{"id":"decomposers","title":"decomposers","cardIds":["rec-terms-biology-ii-ecology-decomposers"]}
+{"id":"detritivores","title":"detritivores","cardIds":["rec-terms-biology-ii-ecology-detritivores"]}
+{"id":"trophic-level","title":"trophic level","cardIds":["rec-terms-biology-ii-ecology-trophic-level"]}
+{"id":"food-chain","title":"food chain","cardIds":["rec-terms-biology-ii-ecology-food-chain"]}
+{"id":"food-web","title":"food web","cardIds":["rec-terms-biology-ii-ecology-food-web"]}
+{"id":"ecological-pyramid","title":"ecological pyramid","cardIds":["rec-terms-biology-ii-ecology-ecological-pyramid"]}
+{"id":"gross-primary-production-gpp","title":"gross primary production (GPP)","cardIds":["rec-terms-biology-ii-ecology-gross-primary-production-gpp"]}
+{"id":"net-primary-production-npp","title":"net primary production (NPP)","cardIds":["rec-terms-biology-ii-ecology-net-primary-production-npp"]}
+{"id":"biomass","title":"biomass","cardIds":["rec-terms-biology-ii-ecology-biomass"]}
+{"id":"energy-transfer-efficiency","title":"energy transfer efficiency","cardIds":["rec-terms-biology-ii-ecology-energy-transfer-efficiency"]}
+{"id":"energy-flow","title":"energy flow","cardIds":["rec-terms-biology-ii-ecology-energy-flow"]}
+{"id":"nutrient-cycling","title":"nutrient cycling","cardIds":["rec-terms-biology-ii-ecology-nutrient-cycling"]}
+{"id":"biogeochemical-cycle","title":"biogeochemical cycle","cardIds":["rec-terms-biology-ii-ecology-biogeochemical-cycle"]}
+{"id":"water-cycle","title":"water cycle","cardIds":["rec-terms-biology-ii-ecology-water-cycle"]}
+{"id":"carbon-cycle","title":"carbon cycle","cardIds":["rec-terms-biology-ii-ecology-carbon-cycle"]}
+{"id":"nitrogen-cycle","title":"nitrogen cycle","cardIds":["rec-terms-biology-ii-ecology-nitrogen-cycle"]}
+{"id":"nitrogen-fixation","title":"nitrogen fixation","cardIds":["rec-terms-biology-ii-ecology-nitrogen-fixation"]}
+{"id":"ammonification","title":"ammonification","cardIds":["rec-terms-biology-ii-ecology-ammonification"]}
+{"id":"nitrification","title":"nitrification","cardIds":["rec-terms-biology-ii-ecology-nitrification"]}
+{"id":"denitrification","title":"denitrification","cardIds":["rec-terms-biology-ii-ecology-denitrification"]}
+{"id":"phosphorus-cycle","title":"phosphorus cycle","cardIds":["rec-terms-biology-ii-ecology-phosphorus-cycle"]}
+{"id":"bioaccumulation","title":"bioaccumulation","cardIds":["rec-terms-biology-ii-ecology-bioaccumulation"]}
+{"id":"biomagnification","title":"biomagnification","cardIds":["rec-terms-biology-ii-ecology-biomagnification"]}
+{"id":"biosphere","title":"biosphere","cardIds":["rec-terms-biology-ii-ecology-biosphere"]}
+{"id":"climate","title":"climate","cardIds":["rec-terms-biology-ii-ecology-climate"]}
+{"id":"weather","title":"weather","cardIds":["rec-terms-biology-ii-ecology-weather"]}
+{"id":"insolation","title":"insolation","cardIds":["rec-terms-biology-ii-ecology-insolation"]}
+{"id":"hadley-cells","title":"Hadley cells","cardIds":["rec-terms-biology-ii-ecology-hadley-cells"]}
+{"id":"pressure-belts","title":"pressure belts","cardIds":["rec-terms-biology-ii-ecology-pressure-belts"]}
+{"id":"trade-winds","title":"trade winds","cardIds":["rec-terms-biology-ii-ecology-trade-winds"]}
+{"id":"ocean-currents","title":"ocean currents","cardIds":["rec-terms-biology-ii-ecology-ocean-currents"]}
+{"id":"rain-shadow","title":"rain shadow","cardIds":["rec-terms-biology-ii-ecology-rain-shadow"]}
+{"id":"microclimate","title":"microclimate","cardIds":["rec-terms-biology-ii-ecology-microclimate"]}
+{"id":"biome","title":"biome","cardIds":["rec-terms-biology-ii-ecology-biome"]}
+{"id":"desert","title":"desert","cardIds":["rec-terms-biology-ii-ecology-desert"]}
+{"id":"grassland","title":"grassland","cardIds":["rec-terms-biology-ii-ecology-grassland"]}
+{"id":"savanna","title":"savanna","cardIds":["rec-terms-biology-ii-ecology-savanna"]}
+{"id":"tropical-rainforest","title":"tropical rainforest","cardIds":["rec-terms-biology-ii-ecology-tropical-rainforest"]}
+{"id":"temperate-deciduous-forest","title":"temperate deciduous forest","cardIds":["rec-terms-biology-ii-ecology-temperate-deciduous-forest"]}
+{"id":"thermal-stratification","title":"thermal stratification","cardIds":["rec-terms-biology-ii-ecology-thermal-stratification"]}
+{"id":"thermocline","title":"thermocline","cardIds":["rec-terms-biology-ii-ecology-thermocline"]}
+{"id":"oligotrophic","title":"oligotrophic","cardIds":["rec-terms-biology-ii-ecology-oligotrophic"]}
+{"id":"eutrophic","title":"eutrophic","cardIds":["rec-terms-biology-ii-ecology-eutrophic"]}

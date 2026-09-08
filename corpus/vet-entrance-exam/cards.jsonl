@@ -1,0 +1,28 @@
+{"_tag":"derivation","id":"der-cell-structure","nodeId":"cell-structure","prompt":"Explain Cell structure and organelles from scratch.","tags":["vet-entrance-exam"],"mustHits":["Košice 1, Brno (cytology)"]}
+{"_tag":"derivation","id":"der-energy-metabolism","nodeId":"energy-metabolism","prompt":"Explain Energy metabolism from scratch.","tags":["vet-entrance-exam"],"mustHits":["Košice 3, Brno (cytology — energy transformation)"]}
+{"_tag":"derivation","id":"der-photosynthesis","nodeId":"photosynthesis","prompt":"Explain Photosynthesis from scratch.","tags":["vet-entrance-exam"],"mustHits":["Košice 3, Brno (implied in plant systems, but secondary)"]}
+{"_tag":"derivation","id":"der-genetic-processes","nodeId":"genetic-processes","prompt":"Explain Genetic processes from scratch.","tags":["vet-entrance-exam"],"mustHits":["Košice 2, Brno (general genetics)"]}
+{"_tag":"derivation","id":"der-gene-expression","nodeId":"gene-expression","prompt":"Explain Gene expression from scratch.","tags":["vet-entrance-exam"],"mustHits":["Košice 2"]}
+{"_tag":"derivation","id":"der-inheritance-patterns","nodeId":"inheritance-patterns","prompt":"Explain Inheritance patterns from scratch.","tags":["vet-entrance-exam"],"mustHits":["Košice 5, Brno (genetics crosses — mono/dihybrid, F1/F2/B1)"]}
+{"_tag":"derivation","id":"der-evolution","nodeId":"evolution","prompt":"Explain Evolution from scratch.","tags":["vet-entrance-exam"],"mustHits":["Košice 6, Brno (zoology — phylogenesis)"]}
+{"_tag":"derivation","id":"der-classification","nodeId":"classification","prompt":"Explain Classification & Zoology from scratch.","tags":["vet-entrance-exam"],"mustHits":["Košice 7, Brno (zoology)"]}
+{"_tag":"derivation","id":"der-circulatory-system","nodeId":"circulatory-system","prompt":"Explain Circulatory system from scratch.","tags":["vet-entrance-exam"],"mustHits":["Košice 4 (circulatory), Brno ch.36"]}
+{"_tag":"derivation","id":"der-nervous-system","nodeId":"nervous-system","prompt":"Explain Nervous system from scratch.","tags":["vet-entrance-exam"],"mustHits":["Košice 4 (nervous), Brno ch.32–34"]}
+{"_tag":"derivation","id":"der-sensory-systems","nodeId":"sensory-systems","prompt":"Explain Sensory systems from scratch.","tags":["vet-entrance-exam"],"mustHits":["Brno ch.33"]}
+{"_tag":"derivation","id":"der-digestive-system","nodeId":"digestive-system","prompt":"Explain Digestive system from scratch.","tags":["vet-entrance-exam"],"mustHits":["Košice 4 (digestive), Brno ch.39"]}
+{"_tag":"derivation","id":"der-respiratory-system","nodeId":"respiratory-system","prompt":"Explain Respiratory system from scratch.","tags":["vet-entrance-exam"],"mustHits":["Košice 4 (respiratory), Brno ch.38"]}
+{"_tag":"derivation","id":"der-reproductive-system","nodeId":"reproductive-system","prompt":"Explain Reproductive system from scratch.","tags":["vet-entrance-exam"],"mustHits":["Košice 4 (reproductive), Brno ch.41"]}
+{"_tag":"derivation","id":"der-endocrine-system","nodeId":"endocrine-system","prompt":"Explain Endocrine system from scratch.","tags":["vet-entrance-exam"],"mustHits":["Brno ch.34 (implied)"]}
+{"_tag":"derivation","id":"der-ecology","nodeId":"ecology","prompt":"Explain Ecology from scratch.","tags":["vet-entrance-exam"],"mustHits":["Košice 6 (ecology), Brno ch.44–47"]}
+{"_tag":"derivation","id":"der-atomic-structure","nodeId":"atomic-structure","prompt":"Explain Atomic structure from scratch.","tags":["vet-entrance-exam"],"mustHits":["Košice 1, Brno (basic elements)"]}
+{"_tag":"derivation","id":"der-periodic-table","nodeId":"periodic-table","prompt":"Explain Periodic table and trends from scratch.","tags":["vet-entrance-exam"],"mustHits":["Košice 1"]}
+{"_tag":"derivation","id":"der-chemical-bonding","nodeId":"chemical-bonding","prompt":"Explain Chemical bonding from scratch.","tags":["vet-entrance-exam"],"mustHits":["Košice 2"]}
+{"_tag":"derivation","id":"der-chemical-reactions","nodeId":"chemical-reactions","prompt":"Explain Chemical reactions from scratch.","tags":["vet-entrance-exam"],"mustHits":["Košice 2"]}
+{"_tag":"derivation","id":"der-solution-composition","nodeId":"solution-composition","prompt":"Explain Solution composition from scratch.","tags":["vet-entrance-exam"],"mustHits":["Košice 3"]}
+{"_tag":"derivation","id":"der-pH-acid-base","nodeId":"pH-acid-base","prompt":"Explain pH and acid-base equilibrium from scratch.","tags":["vet-entrance-exam"],"mustHits":["Košice 3"]}
+{"_tag":"derivation","id":"der-organic-nomenclature","nodeId":"organic-nomenclature","prompt":"Explain Organic nomenclature from scratch.","tags":["vet-entrance-exam"],"mustHits":["Košice 4"]}
+{"_tag":"derivation","id":"der-organic-reactions","nodeId":"organic-reactions","prompt":"Explain Organic reactions from scratch.","tags":["vet-entrance-exam"],"mustHits":["Košice 4"]}
+{"_tag":"derivation","id":"der-heterocyclic-compounds","nodeId":"heterocyclic-compounds","prompt":"Explain Heterocyclic compounds from scratch.","tags":["vet-entrance-exam"],"mustHits":["Košice 6"]}
+{"_tag":"derivation","id":"der-carbohydrates","nodeId":"carbohydrates","prompt":"Explain Carbohydrates from scratch.","tags":["vet-entrance-exam"],"mustHits":["Košice 5"]}
+{"_tag":"derivation","id":"der-lipids","nodeId":"lipids","prompt":"Explain Lipids from scratch.","tags":["vet-entrance-exam"],"mustHits":["Košice 5"]}
+{"_tag":"derivation","id":"der-proteins","nodeId":"proteins","prompt":"Explain Proteins from scratch.","tags":["vet-entrance-exam"],"mustHits":["Košice 5"]}

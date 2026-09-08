@@ -227,43 +227,26 @@ describe("CorpusStore.Live", () => {
   })
 })
 
-describe("authored STLC tree", () => {
-  test("round-trips through read", async () => {
-    const corpus = await withStore(
-      authoredRoot,
-      Effect.gen(function* () {
-        const store = yield* CorpusStore
-        return yield* store.read(treeId("stlc"))
-      }),
-    )
-    expect(corpus.treeId).toBe(treeId("stlc"))
-    expect(corpus.archived).toBe(false)
-    expect(corpus.nodes.map((node) => node.id)).toEqual([
-      "terms",
-      "types",
-      "typing",
-      "substitution",
-      "safety",
-    ])
-    expect(corpus.edges).toHaveLength(5)
-    expect(corpus.cards.some((card) => card._tag === "recall")).toBe(true)
-    expect(corpus.cards.some((card) => card._tag === "derivation")).toBe(true)
-    const terms = corpus.nodes.find((node) => node.id === "terms")
-    expect(terms?.title).toBe("Terms: variables, abstraction, and application")
-  })
-
-  test("every edge endpoint exists as a node", async () => {
-    const corpus = await withStore(
-      authoredRoot,
-      Effect.gen(function* () {
-        const store = yield* CorpusStore
-        return yield* store.read(treeId("stlc"))
-      }),
-    )
-    const ids = new Set(corpus.nodes.map((node) => node.id))
-    for (const edge of corpus.edges) {
-      expect(ids.has(edge.from)).toBe(true)
-      expect(ids.has(edge.to)).toBe(true)
+describe("authored trees", () => {
+  test("every imported tree's edges point at real nodes", async () => {
+    const glob = new Bun.Glob("*/meta.json")
+    for await (const relative of glob.scan(authoredRoot)) {
+      const id = relative.split("/")[0]
+      if (id === undefined) continue
+      const corpus = await withStore(
+        authoredRoot,
+        Effect.gen(function* () {
+          const store = yield* CorpusStore
+          return yield* store.read(treeId(id))
+        }),
+      )
+      const ids = new Set(corpus.nodes.map((node) => node.id))
+      expect(corpus.nodes.length).toBeGreaterThan(0)
+      expect(corpus.cards.length).toBeGreaterThan(0)
+      for (const edge of corpus.edges) {
+        expect(ids.has(edge.from)).toBe(true)
+        expect(ids.has(edge.to)).toBe(true)
+      }
     }
   })
 })

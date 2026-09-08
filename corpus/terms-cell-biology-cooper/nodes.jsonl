@@ -1,0 +1,185 @@
+{"id":"prokaryote","title":"prokaryote","cardIds":["rec-terms-cell-biology-cooper-prokaryote"]}
+{"id":"eukaryote","title":"eukaryote","cardIds":["rec-terms-cell-biology-cooper-eukaryote"]}
+{"id":"rna-world","title":"RNA world","cardIds":["rec-terms-cell-biology-cooper-rna-world"]}
+{"id":"ribozyme","title":"ribozyme","cardIds":["rec-terms-cell-biology-cooper-ribozyme"]}
+{"id":"metabolic-evolution","title":"metabolic evolution","cardIds":["rec-terms-cell-biology-cooper-metabolic-evolution"]}
+{"id":"endosymbiosis","title":"endosymbiosis","cardIds":["rec-terms-cell-biology-cooper-endosymbiosis"]}
+{"id":"last-universal-common-ancestor","title":"last universal common ancestor","cardIds":["rec-terms-cell-biology-cooper-last-universal-common-ancestor"]}
+{"id":"model-system","title":"model system","cardIds":["rec-terms-cell-biology-cooper-model-system"]}
+{"id":"e-coli","title":"E. coli","cardIds":["rec-terms-cell-biology-cooper-e-coli"]}
+{"id":"s-cerevisiae-budding-yeast","title":"S. cerevisiae (budding yeast)","cardIds":["rec-terms-cell-biology-cooper-s-cerevisiae-budding-yeast"]}
+{"id":"c-elegans","title":"C. elegans","cardIds":["rec-terms-cell-biology-cooper-c-elegans"]}
+{"id":"drosophila","title":"Drosophila","cardIds":["rec-terms-cell-biology-cooper-drosophila"]}
+{"id":"arabidopsis","title":"Arabidopsis","cardIds":["rec-terms-cell-biology-cooper-arabidopsis"]}
+{"id":"primary-culture","title":"primary culture","cardIds":["rec-terms-cell-biology-cooper-primary-culture"]}
+{"id":"cell-line","title":"cell line","cardIds":["rec-terms-cell-biology-cooper-cell-line"]}
+{"id":"embryonic-stem-es-cells","title":"embryonic stem (ES) cells","cardIds":["rec-terms-cell-biology-cooper-embryonic-stem-es-cells"]}
+{"id":"resolution","title":"resolution","cardIds":["rec-terms-cell-biology-cooper-resolution"]}
+{"id":"light-microscopy","title":"light microscopy","cardIds":["rec-terms-cell-biology-cooper-light-microscopy"]}
+{"id":"phase-contrast","title":"phase contrast","cardIds":["rec-terms-cell-biology-cooper-phase-contrast"]}
+{"id":"differential-interference-contrast","title":"differential interference contrast","cardIds":["rec-terms-cell-biology-cooper-differential-interference-contrast"]}
+{"id":"fluorescence-microscopy","title":"fluorescence microscopy","cardIds":["rec-terms-cell-biology-cooper-fluorescence-microscopy"]}
+{"id":"green-fluorescent-protein","title":"green fluorescent protein","cardIds":["rec-terms-cell-biology-cooper-green-fluorescent-protein"]}
+{"id":"confocal-microscopy","title":"confocal microscopy","cardIds":["rec-terms-cell-biology-cooper-confocal-microscopy"]}
+{"id":"transmission-em","title":"transmission EM","cardIds":["rec-terms-cell-biology-cooper-transmission-em"]}
+{"id":"scanning-em","title":"scanning EM","cardIds":["rec-terms-cell-biology-cooper-scanning-em"]}
+{"id":"cryo-electron-microscopy","title":"cryo-electron microscopy","cardIds":["rec-terms-cell-biology-cooper-cryo-electron-microscopy"]}
+{"id":"homogenization","title":"homogenization","cardIds":["rec-terms-cell-biology-cooper-homogenization"]}
+{"id":"differential-centrifugation","title":"differential centrifugation","cardIds":["rec-terms-cell-biology-cooper-differential-centrifugation"]}
+{"id":"density-gradient-centrifugation","title":"density gradient centrifugation","cardIds":["rec-terms-cell-biology-cooper-density-gradient-centrifugation"]}
+{"id":"marker-enzyme","title":"marker enzyme","cardIds":["rec-terms-cell-biology-cooper-marker-enzyme"]}
+{"id":"double-helix","title":"double helix","cardIds":["rec-terms-cell-biology-cooper-double-helix"]}
+{"id":"base-pair","title":"base pair","cardIds":["rec-terms-cell-biology-cooper-base-pair"]}
+{"id":"antiparallel","title":"antiparallel","cardIds":["rec-terms-cell-biology-cooper-antiparallel"]}
+{"id":"major-minor-groove","title":"major / minor groove","cardIds":["rec-terms-cell-biology-cooper-major-minor-groove"]}
+{"id":"chargaff-s-rules","title":"Chargaff's rules","cardIds":["rec-terms-cell-biology-cooper-chargaff-s-rules"]}
+{"id":"hershey-chase","title":"Hershey–Chase","cardIds":["rec-terms-cell-biology-cooper-hershey-chase"]}
+{"id":"semiconservative-replication","title":"semiconservative replication","cardIds":["rec-terms-cell-biology-cooper-semiconservative-replication"]}
+{"id":"meselson-stahl","title":"Meselson–Stahl","cardIds":["rec-terms-cell-biology-cooper-meselson-stahl"]}
+{"id":"origin-of-replication","title":"origin of replication","cardIds":["rec-terms-cell-biology-cooper-origin-of-replication"]}
+{"id":"replication-fork","title":"replication fork","cardIds":["rec-terms-cell-biology-cooper-replication-fork"]}
+{"id":"leading-strand","title":"leading strand","cardIds":["rec-terms-cell-biology-cooper-leading-strand"]}
+{"id":"lagging-strand","title":"lagging strand","cardIds":["rec-terms-cell-biology-cooper-lagging-strand"]}
+{"id":"okazaki-fragment","title":"Okazaki fragment","cardIds":["rec-terms-cell-biology-cooper-okazaki-fragment"]}
+{"id":"primase","title":"primase","cardIds":["rec-terms-cell-biology-cooper-primase"]}
+{"id":"helicase","title":"helicase","cardIds":["rec-terms-cell-biology-cooper-helicase"]}
+{"id":"single-strand-binding-proteins","title":"single-strand binding proteins","cardIds":["rec-terms-cell-biology-cooper-single-strand-binding-proteins"]}
+{"id":"topoisomerase","title":"topoisomerase","cardIds":["rec-terms-cell-biology-cooper-topoisomerase"]}
+{"id":"dna-ligase","title":"DNA ligase","cardIds":["rec-terms-cell-biology-cooper-dna-ligase"]}
+{"id":"sliding-clamp","title":"sliding clamp","cardIds":["rec-terms-cell-biology-cooper-sliding-clamp"]}
+{"id":"processivity","title":"processivity","cardIds":["rec-terms-cell-biology-cooper-processivity"]}
+{"id":"proofreading","title":"proofreading","cardIds":["rec-terms-cell-biology-cooper-proofreading"]}
+{"id":"telomere","title":"telomere","cardIds":["rec-terms-cell-biology-cooper-telomere"]}
+{"id":"telomerase","title":"telomerase","cardIds":["rec-terms-cell-biology-cooper-telomerase"]}
+{"id":"replication-licensing","title":"replication licensing","cardIds":["rec-terms-cell-biology-cooper-replication-licensing"]}
+{"id":"nucleosome","title":"nucleosome","cardIds":["rec-terms-cell-biology-cooper-nucleosome"]}
+{"id":"histone-h1","title":"histone H1","cardIds":["rec-terms-cell-biology-cooper-histone-h1"]}
+{"id":"chromatin","title":"chromatin","cardIds":["rec-terms-cell-biology-cooper-chromatin"]}
+{"id":"euchromatin-heterochromatin","title":"euchromatin / heterochromatin","cardIds":["rec-terms-cell-biology-cooper-euchromatin-heterochromatin"]}
+{"id":"centromere","title":"centromere","cardIds":["rec-terms-cell-biology-cooper-centromere"]}
+{"id":"the-three-chromosomal-elements","title":"the three chromosomal elements","cardIds":["rec-terms-cell-biology-cooper-the-three-chromosomal-elements"]}
+{"id":"c-value-paradox","title":"C-value paradox","cardIds":["rec-terms-cell-biology-cooper-c-value-paradox"]}
+{"id":"repetitive-dna","title":"repetitive DNA","cardIds":["rec-terms-cell-biology-cooper-repetitive-dna"]}
+{"id":"transposon","title":"transposon","cardIds":["rec-terms-cell-biology-cooper-transposon"]}
+{"id":"retrotransposon","title":"retrotransposon","cardIds":["rec-terms-cell-biology-cooper-retrotransposon"]}
+{"id":"gene-amplification","title":"gene amplification","cardIds":["rec-terms-cell-biology-cooper-gene-amplification"]}
+{"id":"v-d-j-recombination","title":"V(D)J recombination","cardIds":["rec-terms-cell-biology-cooper-v-d-j-recombination"]}
+{"id":"thymine-dimer","title":"thymine dimer","cardIds":["rec-terms-cell-biology-cooper-thymine-dimer"]}
+{"id":"depurination-deamination","title":"depurination / deamination","cardIds":["rec-terms-cell-biology-cooper-depurination-deamination"]}
+{"id":"direct-reversal","title":"direct reversal","cardIds":["rec-terms-cell-biology-cooper-direct-reversal"]}
+{"id":"base-excision-repair","title":"base excision repair","cardIds":["rec-terms-cell-biology-cooper-base-excision-repair"]}
+{"id":"nucleotide-excision-repair","title":"nucleotide excision repair","cardIds":["rec-terms-cell-biology-cooper-nucleotide-excision-repair"]}
+{"id":"mismatch-repair","title":"mismatch repair","cardIds":["rec-terms-cell-biology-cooper-mismatch-repair"]}
+{"id":"homologous-recombination","title":"homologous recombination","cardIds":["rec-terms-cell-biology-cooper-homologous-recombination"]}
+{"id":"non-homologous-end-joining","title":"non-homologous end joining","cardIds":["rec-terms-cell-biology-cooper-non-homologous-end-joining"]}
+{"id":"translesion-synthesis","title":"translesion synthesis","cardIds":["rec-terms-cell-biology-cooper-translesion-synthesis"]}
+{"id":"gene","title":"gene","cardIds":["rec-terms-cell-biology-cooper-gene"]}
+{"id":"allele","title":"allele","cardIds":["rec-terms-cell-biology-cooper-allele"]}
+{"id":"genotype-phenotype","title":"genotype / phenotype","cardIds":["rec-terms-cell-biology-cooper-genotype-phenotype"]}
+{"id":"mutation","title":"mutation","cardIds":["rec-terms-cell-biology-cooper-mutation"]}
+{"id":"one-gene-one-enzyme","title":"one gene–one enzyme","cardIds":["rec-terms-cell-biology-cooper-one-gene-one-enzyme"]}
+{"id":"genetic-code","title":"genetic code","cardIds":["rec-terms-cell-biology-cooper-genetic-code"]}
+{"id":"genome","title":"genome","cardIds":["rec-terms-cell-biology-cooper-genome"]}
+{"id":"genome-size","title":"genome size","cardIds":["rec-terms-cell-biology-cooper-genome-size"]}
+{"id":"noncoding-dna","title":"noncoding DNA","cardIds":["rec-terms-cell-biology-cooper-noncoding-dna"]}
+{"id":"open-reading-frame","title":"open reading frame","cardIds":["rec-terms-cell-biology-cooper-open-reading-frame"]}
+{"id":"pseudogene","title":"pseudogene","cardIds":["rec-terms-cell-biology-cooper-pseudogene"]}
+{"id":"gene-family","title":"gene family","cardIds":["rec-terms-cell-biology-cooper-gene-family"]}
+{"id":"gene-duplication","title":"gene duplication","cardIds":["rec-terms-cell-biology-cooper-gene-duplication"]}
+{"id":"satellite-dna","title":"satellite DNA","cardIds":["rec-terms-cell-biology-cooper-satellite-dna"]}
+{"id":"sines-lines","title":"SINEs / LINEs","cardIds":["rec-terms-cell-biology-cooper-sines-lines"]}
+{"id":"copy-number","title":"copy number","cardIds":["rec-terms-cell-biology-cooper-copy-number"]}
+{"id":"genome-sequencing","title":"genome sequencing","cardIds":["rec-terms-cell-biology-cooper-genome-sequencing"]}
+{"id":"bioinformatics","title":"bioinformatics","cardIds":["rec-terms-cell-biology-cooper-bioinformatics"]}
+{"id":"comparative-genomics","title":"comparative genomics","cardIds":["rec-terms-cell-biology-cooper-comparative-genomics"]}
+{"id":"transcriptome","title":"transcriptome","cardIds":["rec-terms-cell-biology-cooper-transcriptome"]}
+{"id":"noncoding-rna","title":"noncoding RNA","cardIds":["rec-terms-cell-biology-cooper-noncoding-rna"]}
+{"id":"transcription","title":"transcription","cardIds":["rec-terms-cell-biology-cooper-transcription"]}
+{"id":"template-coding-strand","title":"template / coding strand","cardIds":["rec-terms-cell-biology-cooper-template-coding-strand"]}
+{"id":"rna-polymerase","title":"RNA polymerase","cardIds":["rec-terms-cell-biology-cooper-rna-polymerase"]}
+{"id":"promoter","title":"promoter","cardIds":["rec-terms-cell-biology-cooper-promoter"]}
+{"id":"10-35-elements","title":"−10 / −35 elements","cardIds":["rec-terms-cell-biology-cooper-10-35-elements"]}
+{"id":"sigma-factor","title":"sigma factor","cardIds":["rec-terms-cell-biology-cooper-sigma-factor"]}
+{"id":"terminator","title":"terminator","cardIds":["rec-terms-cell-biology-cooper-terminator"]}
+{"id":"operon","title":"operon","cardIds":["rec-terms-cell-biology-cooper-operon"]}
+{"id":"lac-operon","title":"lac operon","cardIds":["rec-terms-cell-biology-cooper-lac-operon"]}
+{"id":"repressor","title":"repressor","cardIds":["rec-terms-cell-biology-cooper-repressor"]}
+{"id":"inducer","title":"inducer","cardIds":["rec-terms-cell-biology-cooper-inducer"]}
+{"id":"camp-cap-crp","title":"cAMP–CAP (CRP)","cardIds":["rec-terms-cell-biology-cooper-camp-cap-crp"]}
+{"id":"attenuation","title":"attenuation","cardIds":["rec-terms-cell-biology-cooper-attenuation"]}
+{"id":"rna-pol-i-ii-iii","title":"RNA pol I / II / III","cardIds":["rec-terms-cell-biology-cooper-rna-pol-i-ii-iii"]}
+{"id":"tata-box","title":"TATA box","cardIds":["rec-terms-cell-biology-cooper-tata-box"]}
+{"id":"tata-binding-protein","title":"TATA-binding protein","cardIds":["rec-terms-cell-biology-cooper-tata-binding-protein"]}
+{"id":"general-transcription-factors","title":"general transcription factors","cardIds":["rec-terms-cell-biology-cooper-general-transcription-factors"]}
+{"id":"preinitiation-complex-pic","title":"preinitiation complex (PIC)","cardIds":["rec-terms-cell-biology-cooper-preinitiation-complex-pic"]}
+{"id":"ctd-of-pol-ii","title":"CTD of pol II","cardIds":["rec-terms-cell-biology-cooper-ctd-of-pol-ii"]}
+{"id":"enhancer","title":"enhancer","cardIds":["rec-terms-cell-biology-cooper-enhancer"]}
+{"id":"silencer","title":"silencer","cardIds":["rec-terms-cell-biology-cooper-silencer"]}
+{"id":"insulator","title":"insulator","cardIds":["rec-terms-cell-biology-cooper-insulator"]}
+{"id":"mediator","title":"Mediator","cardIds":["rec-terms-cell-biology-cooper-mediator"]}
+{"id":"zinc-finger","title":"zinc finger","cardIds":["rec-terms-cell-biology-cooper-zinc-finger"]}
+{"id":"helix-turn-helix","title":"helix-turn-helix","cardIds":["rec-terms-cell-biology-cooper-helix-turn-helix"]}
+{"id":"leucine-zipper","title":"leucine zipper","cardIds":["rec-terms-cell-biology-cooper-leucine-zipper"]}
+{"id":"helix-loop-helix","title":"helix-loop-helix","cardIds":["rec-terms-cell-biology-cooper-helix-loop-helix"]}
+{"id":"gel-shift-emsa","title":"gel shift / EMSA","cardIds":["rec-terms-cell-biology-cooper-gel-shift-emsa"]}
+{"id":"dnase-footprinting","title":"DNase footprinting","cardIds":["rec-terms-cell-biology-cooper-dnase-footprinting"]}
+{"id":"chromatin-immunoprecipitation","title":"chromatin immunoprecipitation","cardIds":["rec-terms-cell-biology-cooper-chromatin-immunoprecipitation"]}
+{"id":"reporter-gene","title":"reporter gene","cardIds":["rec-terms-cell-biology-cooper-reporter-gene"]}
+{"id":"5-cap","title":"5' cap","cardIds":["rec-terms-cell-biology-cooper-5-cap"]}
+{"id":"polyadenylation","title":"polyadenylation","cardIds":["rec-terms-cell-biology-cooper-polyadenylation"]}
+{"id":"splicing","title":"splicing","cardIds":["rec-terms-cell-biology-cooper-splicing"]}
+{"id":"spliceosome","title":"spliceosome","cardIds":["rec-terms-cell-biology-cooper-spliceosome"]}
+{"id":"intron-exon","title":"intron / exon","cardIds":["rec-terms-cell-biology-cooper-intron-exon"]}
+{"id":"alternative-splicing","title":"alternative splicing","cardIds":["rec-terms-cell-biology-cooper-alternative-splicing"]}
+{"id":"rna-editing","title":"RNA editing","cardIds":["rec-terms-cell-biology-cooper-rna-editing"]}
+{"id":"rnase-p","title":"RNase P","cardIds":["rec-terms-cell-biology-cooper-rnase-p"]}
+{"id":"nucleolus","title":"nucleolus","cardIds":["rec-terms-cell-biology-cooper-nucleolus"]}
+{"id":"chromatin-remodeling","title":"chromatin remodeling","cardIds":["rec-terms-cell-biology-cooper-chromatin-remodeling"]}
+{"id":"histone-acetylation","title":"histone acetylation","cardIds":["rec-terms-cell-biology-cooper-histone-acetylation"]}
+{"id":"histone-code","title":"histone code","cardIds":["rec-terms-cell-biology-cooper-histone-code"]}
+{"id":"dna-methylation","title":"DNA methylation","cardIds":["rec-terms-cell-biology-cooper-dna-methylation"]}
+{"id":"cpg-islands","title":"CpG islands","cardIds":["rec-terms-cell-biology-cooper-cpg-islands"]}
+{"id":"genomic-imprinting","title":"genomic imprinting","cardIds":["rec-terms-cell-biology-cooper-genomic-imprinting"]}
+{"id":"epigenetics","title":"epigenetics","cardIds":["rec-terms-cell-biology-cooper-epigenetics"]}
+{"id":"codon","title":"codon","cardIds":["rec-terms-cell-biology-cooper-codon"]}
+{"id":"degenerate-code","title":"degenerate code","cardIds":["rec-terms-cell-biology-cooper-degenerate-code"]}
+{"id":"wobble","title":"wobble","cardIds":["rec-terms-cell-biology-cooper-wobble"]}
+{"id":"reading-frame","title":"reading frame","cardIds":["rec-terms-cell-biology-cooper-reading-frame"]}
+{"id":"start-stop-codon","title":"start / stop codon","cardIds":["rec-terms-cell-biology-cooper-start-stop-codon"]}
+{"id":"shine-dalgarno","title":"Shine–Dalgarno","cardIds":["rec-terms-cell-biology-cooper-shine-dalgarno"]}
+{"id":"kozak-scanning","title":"Kozak / scanning","cardIds":["rec-terms-cell-biology-cooper-kozak-scanning"]}
+{"id":"5-3-utr","title":"5' / 3' UTR","cardIds":["rec-terms-cell-biology-cooper-5-3-utr"]}
+{"id":"aminoacyl-trna-synthetase","title":"aminoacyl-tRNA synthetase","cardIds":["rec-terms-cell-biology-cooper-aminoacyl-trna-synthetase"]}
+{"id":"a-p-e-sites","title":"A, P, E sites","cardIds":["rec-terms-cell-biology-cooper-a-p-e-sites"]}
+{"id":"peptidyl-transferase","title":"peptidyl transferase","cardIds":["rec-terms-cell-biology-cooper-peptidyl-transferase"]}
+{"id":"ef-tu-ef-g-eef1-eef2","title":"EF-Tu / EF-G (eEF1/eEF2)","cardIds":["rec-terms-cell-biology-cooper-ef-tu-ef-g-eef1-eef2"]}
+{"id":"release-factor","title":"release factor","cardIds":["rec-terms-cell-biology-cooper-release-factor"]}
+{"id":"polysome","title":"polysome","cardIds":["rec-terms-cell-biology-cooper-polysome"]}
+{"id":"eif2","title":"eIF2","cardIds":["rec-terms-cell-biology-cooper-eif2"]}
+{"id":"internal-ribosome-entry-site","title":"internal ribosome entry site","cardIds":["rec-terms-cell-biology-cooper-internal-ribosome-entry-site"]}
+{"id":"iron-response-element-irp","title":"iron response element / IRP","cardIds":["rec-terms-cell-biology-cooper-iron-response-element-irp"]}
+{"id":"mirna-and-risc","title":"miRNA and RISC","cardIds":["rec-terms-cell-biology-cooper-mirna-and-risc"]}
+{"id":"protein-folding","title":"protein folding","cardIds":["rec-terms-cell-biology-cooper-protein-folding"]}
+{"id":"chaperone-hsp70","title":"chaperone (Hsp70)","cardIds":["rec-terms-cell-biology-cooper-chaperone-hsp70"]}
+{"id":"chaperonin-groel-tric","title":"chaperonin (GroEL / TRiC)","cardIds":["rec-terms-cell-biology-cooper-chaperonin-groel-tric"]}
+{"id":"protein-disulfide-isomerase","title":"protein disulfide isomerase","cardIds":["rec-terms-cell-biology-cooper-protein-disulfide-isomerase"]}
+{"id":"peptidyl-prolyl-isomerase","title":"peptidyl prolyl isomerase","cardIds":["rec-terms-cell-biology-cooper-peptidyl-prolyl-isomerase"]}
+{"id":"amyloid","title":"amyloid","cardIds":["rec-terms-cell-biology-cooper-amyloid"]}
+{"id":"prion","title":"prion","cardIds":["rec-terms-cell-biology-cooper-prion"]}
+{"id":"proteolytic-cleavage","title":"proteolytic cleavage","cardIds":["rec-terms-cell-biology-cooper-proteolytic-cleavage"]}
+{"id":"glycosylation","title":"glycosylation","cardIds":["rec-terms-cell-biology-cooper-glycosylation"]}
+{"id":"lipid-anchor-gpi-prenylation","title":"lipid anchor (GPI, prenylation)","cardIds":["rec-terms-cell-biology-cooper-lipid-anchor-gpi-prenylation"]}
+{"id":"molecular-switch","title":"molecular switch","cardIds":["rec-terms-cell-biology-cooper-molecular-switch"]}
+{"id":"gtp-binding-protein","title":"GTP-binding protein","cardIds":["rec-terms-cell-biology-cooper-gtp-binding-protein"]}
+{"id":"guanine-nucleotide-exchange-factor","title":"guanine nucleotide exchange factor","cardIds":["rec-terms-cell-biology-cooper-guanine-nucleotide-exchange-factor"]}
+{"id":"gtpase-activating-protein","title":"GTPase-activating protein","cardIds":["rec-terms-cell-biology-cooper-gtpase-activating-protein"]}
+{"id":"ras","title":"Ras","cardIds":["rec-terms-cell-biology-cooper-ras"]}
+{"id":"protein-kinase","title":"protein kinase","cardIds":["rec-terms-cell-biology-cooper-protein-kinase"]}
+{"id":"protein-phosphatase","title":"protein phosphatase","cardIds":["rec-terms-cell-biology-cooper-protein-phosphatase"]}
+{"id":"tyr-vs-ser-thr-kinase","title":"Tyr vs Ser/Thr kinase","cardIds":["rec-terms-cell-biology-cooper-tyr-vs-ser-thr-kinase"]}
+{"id":"second-messenger-camp","title":"second messenger (cAMP)","cardIds":["rec-terms-cell-biology-cooper-second-messenger-camp"]}
+{"id":"ubiquitin","title":"ubiquitin","cardIds":["rec-terms-cell-biology-cooper-ubiquitin"]}
+{"id":"e1-e2-e3","title":"E1, E2, E3","cardIds":["rec-terms-cell-biology-cooper-e1-e2-e3"]}
+{"id":"26s-proteasome","title":"26S proteasome","cardIds":["rec-terms-cell-biology-cooper-26s-proteasome"]}
+{"id":"n-end-rule-degron","title":"N-end rule / degron","cardIds":["rec-terms-cell-biology-cooper-n-end-rule-degron"]}
+{"id":"autophagy","title":"autophagy","cardIds":["rec-terms-cell-biology-cooper-autophagy"]}

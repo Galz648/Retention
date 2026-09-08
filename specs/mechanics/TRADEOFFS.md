@@ -1,0 +1,5 @@
+- **Environment variables vs arguments.** Env is shorter to type once, but it is a second interface and it hides which tree you are on. This version takes titles / a picker so the command line is the whole story.
+- **Compiler vs Bun compile.** TypeScript cannot produce a native binary. Bun compile embeds the runtime: one file, no `bun src/cli/main.ts`, larger artifact. Accepted for this version.
+- **Confirm every write vs `--yes`.** Piped input cannot grade. That is the point until a later version needs non-interactive use.
+- **Queue hides answers; `show` prints them.** Review stays unspoiled; inspect does not require opening files.
+- **Titles vs folder names.** Folder names are short to type but unreadable. The program speaks titles. Folder names remain an implementation detail.

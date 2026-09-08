@@ -1,12 +1,19 @@
-# Legend - TBD - move into individual components
-- Recall card: a prompt whose answer you either have or you don't. Facts, conventions, definitions. Graded on whether you produced it, seconds to answer, decays faster than derivation.
+# Legend
 
-- Derivation card: a prompt asking you to rebuild reasoning from scratch. Graded on whether your explanation covered its must-hits, minutes to answer, and decays slower than recall.
+Glossary lives in [CONTEXT.md](../../CONTEXT.md). This file is the short reading list plus how we write.
 
-- Practice card: a prompt asking you to execute a technique on a concrete instance. Separation of variables on a given equation. Graded on whether you got there, not on whether you explained why. Sits between recall and derivation in cost. 
+- Recall, derivation, must-hit, tree, title, node, card, queue, brightness: see CONTEXT.md.
 
-- Must-hits: the three or four claims a good explanation has to make. Checked semantically, not by keyword: naming a concept without using it correctly doesn't count. They accumulate over time as reviews expose blind spots.
+- Practice card: parked. A prompt to execute a technique on a concrete instance. Graded on whether you got there, not on whether you explained why.
 
-- Knowledge Tree: a directed graph that describes dependencies between cards
+- Grader — parked for this version. Model-driven check of a spoken/typed derivation against must-hits. The event log only ever stores a plain grade.
 
-- Grader — model-driven. Reads what you actually said and checks it against the card's must-hits semantically. Maps coverage onto four grades — all covered cleanly → easy; covered slowly or with a nudge → good; one or two missed → hard; didn't get there → again. Writes a plain grade to the event log; nothing downstream knows a model was involved.
+## Names the person sees
+
+User-facing text (the program's help and output, Getting Started, examples in specs, and chat about using the program) uses **titles and glossary words**.
+
+It does not use folder names, card ids, file formats, or library names.
+
+If an example needs a tree, write the title (`Biology II — seed tree`). If it needs a card, write the prompt (`Explain Diffusion from scratch.`), never a card id.
+
+Folder names and card ids are for the computer. They may stay in code and on disk. They are not how we talk to you.

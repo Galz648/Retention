@@ -1,0 +1,5 @@
+{"_tag":"recall","id":"rec-terms-cbbtn-dimensional-analysis-1-μm3-nm3","nodeId":"1-μm3-nm3","prompt":"1 μm³ → nm³","answer":"10⁹ nm³","tags":["terms-cbbtn-dimensional-analysis"]}
+{"_tag":"recall","id":"rec-terms-cbbtn-dimensional-analysis-1-μm3-l","nodeId":"1-μm3-l","prompt":"1 μm³ → L","answer":"10⁻¹⁵ L","tags":["terms-cbbtn-dimensional-analysis"]}
+{"_tag":"recall","id":"rec-terms-cbbtn-dimensional-analysis-1000-copies-in-e-coli-mol-l","nodeId":"1000-copies-in-e-coli-mol-l","prompt":"1000 copies in *E. coli* → mol/L","answer":"≈ 1.7 × 10⁻²¹ mol/L","tags":["terms-cbbtn-dimensional-analysis"]}
+{"_tag":"recall","id":"rec-terms-cbbtn-dimensional-analysis-10-nm-in-a-bacterium-copies-per-cell","nodeId":"10-nm-in-a-bacterium-copies-per-cell","prompt":"10 nM in a bacterium → copies per cell","answer":"≈ 5 copies","tags":["terms-cbbtn-dimensional-analysis"]}
+{"_tag":"recall","id":"rec-terms-cbbtn-dimensional-analysis-1-μm-in-a-human-cell-copies","nodeId":"1-μm-in-a-human-cell-copies","prompt":"1 μM in a human cell → copies","answer":"— (self-caught, abandoned)","tags":["terms-cbbtn-dimensional-analysis"]}

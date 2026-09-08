@@ -1,0 +1,389 @@
+{"id":"cell-theory","title":"Cell theory","cardIds":["rec-cell-theory"]}
+{"id":"prokaryote-vs-eukaryote","title":"Prokaryote vs eukaryote","cardIds":["der-prokaryote-vs-eukaryote"]}
+{"id":"organelle-inventory","title":"Organelle inventory","cardIds":["rec-organelle-inventory"]}
+{"id":"endosymbiosis","title":"Endosymbiosis","cardIds":["der-endosymbiosis"]}
+{"id":"mito-chloroplast-genome","title":"Mitochondrial / chloroplast genome as endosymbiosis evidence","cardIds":["der-mito-chloroplast-genome"]}
+{"id":"model-organisms","title":"Model organisms","cardIds":["rec-model-organisms"]}
+{"id":"genome-comparison","title":"Genome comparison reveals common heritage","cardIds":["rec-genome-comparison"]}
+{"id":"resolution-limit","title":"Resolution limit","cardIds":["der-resolution-limit"]}
+{"id":"light-phase-dic-microscopy","title":"Light / phase-contrast / DIC microscopy","cardIds":["rec-light-phase-dic-microscopy"]}
+{"id":"fluorescence-gfp","title":"Fluorescence microscopy and GFP tagging","cardIds":["der-fluorescence-gfp"]}
+{"id":"confocal-microscopy","title":"Confocal microscopy","cardIds":["rec-confocal-microscopy"]}
+{"id":"tem-sem","title":"TEM / SEM","cardIds":["rec-tem-sem"]}
+{"id":"cryo-em","title":"Cryo-electron microscopy","cardIds":["rec-cryo-em"]}
+{"id":"homogenization","title":"Homogenization","cardIds":["rec-homogenization"]}
+{"id":"differential-centrifugation","title":"Differential centrifugation","cardIds":["der-differential-centrifugation"]}
+{"id":"density-gradient-centrifugation","title":"Density-gradient centrifugation","cardIds":["der-density-gradient-centrifugation"]}
+{"id":"marker-enzyme","title":"Marker enzyme","cardIds":["rec-marker-enzyme"]}
+{"id":"restriction-enzyme","title":"Restriction enzyme","cardIds":["der-restriction-enzyme"]}
+{"id":"gel-electrophoresis","title":"Gel electrophoresis","cardIds":["der-gel-electrophoresis"]}
+{"id":"hybridization","title":"Hybridization","cardIds":["der-hybridization"]}
+{"id":"cloning-vector","title":"Cloning vector","cardIds":["der-cloning-vector"]}
+{"id":"bacterial-cloning","title":"Bacterial cloning of recombinant DNA","cardIds":["der-bacterial-cloning"]}
+{"id":"cdna-library","title":"cDNA library","cardIds":["der-cdna-library"]}
+{"id":"pcr","title":"PCR","cardIds":["der-pcr"]}
+{"id":"dna-sequencing","title":"DNA sequencing (next-gen)","cardIds":["der-dna-sequencing"]}
+{"id":"microarray-rnaseq","title":"Microarray / RNA-seq","cardIds":["der-microarray-rnaseq"]}
+{"id":"in-situ-hybridization","title":"In situ hybridization","cardIds":["der-in-situ-hybridization"]}
+{"id":"reporter-gene","title":"Reporter gene","cardIds":["der-reporter-gene"]}
+{"id":"rnai-tool","title":"RNA interference (as a tool)","cardIds":["der-rnai-tool"]}
+{"id":"gene-knockout","title":"Gene knockout / knock-in","cardIds":["der-gene-knockout"]}
+{"id":"transgenic-organism","title":"Transgenic organism","cardIds":["rec-transgenic-organism"]}
+{"id":"crispr-cas9","title":"CRISPR-Cas9","cardIds":["der-crispr-cas9"]}
+{"id":"covalent-bond","title":"Covalent bond","cardIds":["rec-covalent-bond"]}
+{"id":"polar-covalent","title":"Polar covalent bond / electronegativity","cardIds":["der-polar-covalent"]}
+{"id":"ionic-bond","title":"Ionic bond","cardIds":["rec-ionic-bond"]}
+{"id":"hydrogen-bond","title":"Hydrogen bond","cardIds":["der-hydrogen-bond"]}
+{"id":"noncovalent-bonds","title":"Noncovalent bonds bring molecules together","cardIds":["der-noncovalent-bonds"]}
+{"id":"acid-base","title":"Acid-base behavior in water","cardIds":["der-acid-base"]}
+{"id":"ph-scale","title":"pH scale","cardIds":["der-ph-scale"]}
+{"id":"four-families","title":"Four families of small organic molecules","cardIds":["rec-four-families"]}
+{"id":"sugars-glycosidic","title":"Sugars — glycosidic bond","cardIds":["der-sugars-glycosidic"]}
+{"id":"fatty-acids-membrane","title":"Fatty acids as membrane components","cardIds":["der-fatty-acids-membrane"]}
+{"id":"amino-acids-subunit","title":"Amino acids as protein subunits","cardIds":["der-amino-acids-subunit"]}
+{"id":"nucleotides-subunit","title":"Nucleotides as DNA/RNA subunits","cardIds":["der-nucleotides-subunit"]}
+{"id":"macromolecule-sequence","title":"Macromolecule sequence specificity","cardIds":["der-macromolecule-sequence"]}
+{"id":"noncovalent-shape","title":"Noncovalent bonds determine macromolecule shape","cardIds":["der-noncovalent-shape"]}
+{"id":"binding-specificity","title":"Binding specificity from shape","cardIds":["der-binding-specificity"]}
+{"id":"order-needs-energy","title":"Order requires energy release","cardIds":["rec-order-needs-energy"]}
+{"id":"energy-conversion","title":"Energy conversion between forms","cardIds":["rec-energy-conversion"]}
+{"id":"oxidation-redox","title":"Oxidation of organic molecules / redox","cardIds":["der-oxidation-redox"]}
+{"id":"free-energy-direction","title":"Free-energy direction of reactions","cardIds":["der-free-energy-direction"]}
+{"id":"dg-toward-equilibrium","title":"ΔG changes toward equilibrium","cardIds":["der-dg-toward-equilibrium"]}
+{"id":"standard-dg","title":"Standard free-energy change ΔG°","cardIds":["der-standard-dg"]}
+{"id":"dg-keq-relation","title":"ΔG° relates to Keq","cardIds":["der-dg-keq-relation"]}
+{"id":"sequential-dg-additive","title":"Sequential reactions — ΔG values are additive","cardIds":["der-sequential-dg-additive"]}
+{"id":"enzyme-lowers-ea","title":"Enzymes lower activation energy","cardIds":["der-enzyme-lowers-ea"]}
+{"id":"thermal-motion-encounter","title":"Thermal motion and substrate encounter","cardIds":["der-thermal-motion-encounter"]}
+{"id":"km-vmax","title":"Km and Vmax","cardIds":["der-km-vmax"]}
+{"id":"activated-carrier-coupling","title":"Activated carrier coupling","cardIds":["der-activated-carrier-coupling"]}
+{"id":"atp-carrier","title":"ATP as activated carrier","cardIds":["der-atp-carrier"]}
+{"id":"nadh-nadph-roles","title":"NADH vs NADPH roles","cardIds":["der-nadh-nadph-roles"]}
+{"id":"other-activated-carriers","title":"Other activated carriers","cardIds":["rec-other-activated-carriers"]}
+{"id":"polymer-synthesis-energy","title":"Polymer synthesis needs energy input","cardIds":["der-polymer-synthesis-energy"]}
+{"id":"sequence-specifies-shape","title":"Sequence specifies shape","cardIds":["der-sequence-specifies-shape"]}
+{"id":"lowest-energy-conformation","title":"Lowest-energy conformation / folding","cardIds":["der-lowest-energy-conformation"]}
+{"id":"helix-sheet","title":"α-helix and β-sheet","cardIds":["der-helix-sheet"]}
+{"id":"protein-organization-levels","title":"Levels of protein organization (1°–4°)","cardIds":["der-protein-organization-levels"]}
+{"id":"unstructured-regions","title":"Unstructured regions","cardIds":["rec-unstructured-regions"]}
+{"id":"sequence-space-useful","title":"Sequence space vs useful fraction","cardIds":["rec-sequence-space-useful"]}
+{"id":"protein-family","title":"Protein family","cardIds":["rec-protein-family"]}
+{"id":"multi-subunit-assembly","title":"Multi-subunit / quaternary assembly","cardIds":["der-multi-subunit-assembly"]}
+{"id":"filament-sheet-sphere","title":"Filament/sheet/sphere assembly and fibrous proteins","cardIds":["rec-filament-sheet-sphere"]}
+{"id":"covalent-cross-linkage","title":"Covalent cross-linkage (extracellular)","cardIds":["der-covalent-cross-linkage"]}
+{"id":"binding-site","title":"Binding site — general","cardIds":["der-binding-site"]}
+{"id":"antibody-diversity","title":"Antibody diversity","cardIds":["rec-antibody-diversity"]}
+{"id":"enzyme-specificity-lysozyme","title":"Enzyme specificity / lysozyme mechanism","cardIds":["der-enzyme-specificity-lysozyme"]}
+{"id":"drug-inhibition","title":"Drug inhibition of enzymes","cardIds":["rec-drug-inhibition"]}
+{"id":"cofactor-role","title":"Tightly bound small molecule (cofactor)","cardIds":["der-cofactor-role"]}
+{"id":"allosteric-sites","title":"Allosteric binding sites","cardIds":["der-allosteric-sites"]}
+{"id":"phosphorylation-conformation","title":"Phosphorylation-driven conformational change","cardIds":["der-phosphorylation-conformation"]}
+{"id":"gtp-binding-cycle","title":"GTP-binding protein cycle","cardIds":["der-gtp-binding-cycle"]}
+{"id":"motor-protein-atp","title":"Motor protein ATP hydrolysis","cardIds":["der-motor-protein-atp"]}
+{"id":"protein-machine","title":"Protein machine complexes","cardIds":["rec-protein-machine"]}
+{"id":"protein-purification","title":"Protein purification","cardIds":["der-protein-purification"]}
+{"id":"sequence-determination","title":"Sequence determination","cardIds":["der-sequence-determination"]}
+{"id":"genetic-engineering-proteins","title":"Genetic engineering of proteins","cardIds":["der-genetic-engineering-proteins"]}
+{"id":"homology-prediction","title":"Homology-based structure/function prediction","cardIds":["rec-homology-prediction"]}
+{"id":"double-helix","title":"Double helix / complementary strands","cardIds":["der-double-helix"]}
+{"id":"heredity-from-structure","title":"Heredity mechanism from structure","cardIds":["der-heredity-from-structure"]}
+{"id":"gene-as-string","title":"Chromosome count and gene-as-string","cardIds":["rec-gene-as-string"]}
+{"id":"replication-segregation-sequences","title":"Replication-origin and segregation sequences","cardIds":["der-replication-segregation-sequences"]}
+{"id":"interphase-nonrandom","title":"Interphase chromosomes are nonrandomly distributed","cardIds":["rec-interphase-nonrandom"]}
+{"id":"dna-always-condensed","title":"DNA is always condensed","cardIds":["der-dna-always-condensed"]}
+{"id":"nucleosome","title":"Nucleosome — basic packing unit","cardIds":["der-nucleosome"]}
+{"id":"multilevel-packing","title":"Multi-level chromosome packing","cardIds":["der-multilevel-packing"]}
+{"id":"nucleosome-access-changes","title":"Nucleosome structure changes allow DNA access","cardIds":["der-nucleosome-access-changes"]}
+{"id":"condensed-vs-extended-chromatin","title":"Condensed vs extended chromatin","cardIds":["der-condensed-vs-extended-chromatin"]}
+{"id":"base-pairing-replication","title":"Base pairing enables replication","cardIds":["der-base-pairing-replication"]}
+{"id":"origin-two-forks","title":"Replication origin, two forks per origin","cardIds":["der-origin-two-forks"]}
+{"id":"polymerase-template-primer","title":"DNA polymerase needs template and primer","cardIds":["der-polymerase-template-primer"]}
+{"id":"fork-asymmetry","title":"Replication fork asymmetry (leading/lagging)","cardIds":["der-fork-asymmetry"]}
+{"id":"rna-primer","title":"RNA primer for DNA synthesis","cardIds":["der-rna-primer"]}
+{"id":"replication-machine","title":"Replication machine cooperation","cardIds":["der-replication-machine"]}
+{"id":"polymerase-proofreading","title":"Polymerase self-correction (proofreading)","cardIds":["der-polymerase-proofreading"]}
+{"id":"mismatch-repair","title":"Mismatch repair","cardIds":["der-mismatch-repair"]}
+{"id":"telomerase","title":"Telomerase replicates chromosome ends","cardIds":["der-telomerase"]}
+{"id":"dna-damage-continual","title":"DNA damage occurs continually","cardIds":["rec-dna-damage-continual"]}
+{"id":"repair-mechanism-diversity","title":"Repair mechanism diversity","cardIds":["rec-repair-mechanism-diversity"]}
+{"id":"dsb-different-strategy","title":"Double-strand break needs different strategy","cardIds":["der-dsb-different-strategy"]}
+{"id":"homologous-recombination-repair","title":"Homologous recombination repair","cardIds":["der-homologous-recombination-repair"]}
+{"id":"unrepaired-damage-consequences","title":"Unrepaired damage has severe consequences","cardIds":["rec-unrepaired-damage-consequences"]}
+{"id":"fidelity-in-genome-record","title":"Replication/repair fidelity recorded in genome","cardIds":["rec-fidelity-in-genome-record"]}
+{"id":"dna-transcribed-to-rna","title":"DNA transcribed to RNA","cardIds":["der-dna-transcribed-to-rna"]}
+{"id":"rna-complementary-one-strand","title":"RNA complementary to one strand","cardIds":["der-rna-complementary-one-strand"]}
+{"id":"rna-types","title":"RNA types produced","cardIds":["rec-rna-types"]}
+{"id":"polymerase-start-stop-signals","title":"Polymerase start/stop signals","cardIds":["der-polymerase-start-stop-signals"]}
+{"id":"eukaryotic-initiation-complexity","title":"Eukaryotic transcription initiation complexity","cardIds":["der-eukaryotic-initiation-complexity"]}
+{"id":"general-transcription-factors","title":"General transcription factors","cardIds":["der-general-transcription-factors"]}
+{"id":"intron-exon-splicing","title":"Intron/exon and splicing","cardIds":["der-intron-exon-splicing"]}
+{"id":"mrna-nuclear-export","title":"mRNA nuclear export","cardIds":["der-mrna-nuclear-export"]}
+{"id":"mrna-degradation","title":"mRNA degradation","cardIds":["rec-mrna-degradation"]}
+{"id":"polycistronic-mrna","title":"Polycistronic mRNA","cardIds":["der-polycistronic-mrna"]}
+{"id":"operon","title":"Operon (the DNA-level parallel)","cardIds":["der-operon"]}
+{"id":"ribosome-binding-site","title":"Ribosome-binding site (book's term)","cardIds":["der-ribosome-binding-site"]}
+{"id":"shine-dalgarno","title":"Shine–Dalgarno sequence / 16S rRNA pairing","cardIds":["der-shine-dalgarno"]}
+{"id":"eukaryotic-monocistronic-contrast","title":"Eukaryotic monocistronic contrast","cardIds":["rec-eukaryotic-monocistronic-contrast"]}
+{"id":"codon","title":"Codon","cardIds":["der-codon"]}
+{"id":"trna-matches-codon","title":"tRNA matches amino acid to codon","cardIds":["der-trna-matches-codon"]}
+{"id":"aminoacyl-trna-synthetase","title":"Aminoacyl-tRNA synthetase coupling","cardIds":["der-aminoacyl-trna-synthetase"]}
+{"id":"ribosome-decodes-mrna","title":"Ribosome decodes mRNA","cardIds":["der-ribosome-decodes-mrna"]}
+{"id":"ribosome-is-ribozyme","title":"Ribosome is a ribozyme","cardIds":["der-ribosome-is-ribozyme"]}
+{"id":"start-stop-codons","title":"Start/stop codons signal the ribosome","cardIds":["der-start-stop-codons"]}
+{"id":"polyribosome","title":"Polyribosome","cardIds":["rec-polyribosome"]}
+{"id":"antibiotic-inhibition","title":"Antibiotic inhibition of prokaryotic synthesis","cardIds":["rec-antibiotic-inhibition"]}
+{"id":"controlled-protein-breakdown","title":"Controlled protein breakdown regulates amount","cardIds":["der-controlled-protein-breakdown"]}
+{"id":"autocatalysis-requirement","title":"Autocatalysis requirement (origin of life)","cardIds":["rec-autocatalysis-requirement"]}
+{"id":"rna-stores-catalyzes","title":"RNA stores and catalyzes","cardIds":["rec-rna-stores-catalyzes"]}
+{"id":"rna-predates-dna","title":"RNA predates DNA","cardIds":["rec-rna-predates-dna"]}
+{"id":"same-genome-different-cells","title":"Same genome, different cell types","cardIds":["rec-same-genome-different-cells"]}
+{"id":"differential-protein-sets","title":"Differential protein sets per cell type","cardIds":["rec-differential-protein-sets"]}
+{"id":"external-signal-response","title":"External signal changes gene expression","cardIds":["rec-external-signal-response"]}
+{"id":"regulation-any-step","title":"Regulation possible at any DNA→RNA→protein step","cardIds":["der-regulation-any-step"]}
+{"id":"transcription-regulator-binding","title":"Transcription regulator binds regulatory DNA","cardIds":["der-transcription-regulator-binding"]}
+{"id":"repressor-vs-activator","title":"Repressor vs activator","cardIds":["der-repressor-vs-activator"]}
+{"id":"lac-operon","title":"Lac operon — activator + repressor together","cardIds":["der-lac-operon"]}
+{"id":"enhancer-action-at-distance","title":"Eukaryotic action at a distance (enhancer)","cardIds":["der-enhancer-action-at-distance"]}
+{"id":"chromatin-modifying-recruitment","title":"Recruiting chromatin-modifying proteins","cardIds":["der-chromatin-modifying-recruitment"]}
+{"id":"combinatorial-control","title":"Combinatorial control","cardIds":["der-combinatorial-control"]}
+{"id":"single-protein-coordinates","title":"Single protein coordinates gene expression","cardIds":["der-single-protein-coordinates"]}
+{"id":"combinatorial-cell-diversity","title":"Combinatorial control generates cell-type diversity","cardIds":["rec-combinatorial-cell-diversity"]}
+{"id":"reprogramming-pluripotency","title":"Reprogramming to pluripotency","cardIds":["rec-reprogramming-pluripotency"]}
+{"id":"single-regulator-triggers-organ","title":"Single regulator triggers organ formation","cardIds":["rec-single-regulator-triggers-organ"]}
+{"id":"epigenetic-identity-maintenance","title":"Epigenetic identity maintenance","cardIds":["der-epigenetic-identity-maintenance"]}
+{"id":"mrna-self-control","title":"mRNA controls own degradation and translation","cardIds":["der-mrna-self-control"]}
+{"id":"regulatory-rna-mirna","title":"Regulatory RNA / microRNA","cardIds":["der-regulatory-rna-mirna"]}
+{"id":"sirna-foreign-dsrna","title":"siRNA from foreign dsRNA","cardIds":["der-sirna-foreign-dsrna"]}
+{"id":"lncrna-regulation","title":"Long noncoding RNA regulation","cardIds":["rec-lncrna-regulation"]}
+{"id":"germline-vs-somatic","title":"Germ-line vs somatic mutation","cardIds":["rec-germline-vs-somatic"]}
+{"id":"point-mutation-origin","title":"Point mutation from copying/repair failure","cardIds":["der-point-mutation-origin"]}
+{"id":"point-mutation-regulation","title":"Point mutation changes gene regulation","cardIds":["rec-point-mutation-regulation"]}
+{"id":"gene-duplication-divergence","title":"Gene duplication and family divergence","cardIds":["der-gene-duplication-divergence"]}
+{"id":"whole-genome-duplication","title":"Whole-genome duplication","cardIds":["rec-whole-genome-duplication"]}
+{"id":"exon-shuffling","title":"Exon shuffling","cardIds":["der-exon-shuffling"]}
+{"id":"mobile-genetic-elements","title":"Mobile genetic elements","cardIds":["der-mobile-genetic-elements"]}
+{"id":"horizontal-gene-transfer","title":"Horizontal gene transfer","cardIds":["rec-horizontal-gene-transfer"]}
+{"id":"selective-advantage-preserved","title":"Selective advantage preserves change","cardIds":["rec-selective-advantage-preserved"]}
+{"id":"genome-similarity-relatedness","title":"Genome similarity tracks relatedness","cardIds":["rec-genome-similarity-relatedness"]}
+{"id":"conserved-dna-islands","title":"Conserved DNA islands mark function","cardIds":["der-conserved-dna-islands"]}
+{"id":"rapid-gain-loss-vertebrate","title":"Rapid gain/loss outside conserved regions","cardIds":["rec-rapid-gain-loss-vertebrate"]}
+{"id":"mobile-element-machinery","title":"Mobile element self-encoded machinery","cardIds":["der-mobile-element-machinery"]}
+{"id":"human-transposable-families","title":"Human genome transposable-element families","cardIds":["rec-human-transposable-families"]}
+{"id":"virus-moves-cells","title":"Virus moves between cells and organisms","cardIds":["rec-virus-moves-cells"]}
+{"id":"retrovirus-reverses-flow","title":"Retrovirus reverses information flow","cardIds":["der-retrovirus-reverses-flow"]}
+{"id":"human-genome-arrangement","title":"Gene arrangement from sequence (human genome)","cardIds":["rec-human-genome-arrangement"]}
+{"id":"conserved-sequence-human-specific","title":"Conserved-sequence changes mark human-specific traits","cardIds":["rec-conserved-sequence-human-specific"]}
+{"id":"genome-variation-individuality","title":"Genome variation vs individuality","cardIds":["rec-genome-variation-individuality"]}
+{"id":"bilayer-self-assembly","title":"Phospholipid bilayer self-assembly","cardIds":["der-bilayer-self-assembly"]}
+{"id":"bilayer-fluidity","title":"Bilayer fluidity","cardIds":["der-bilayer-fluidity"]}
+{"id":"composition-determines-fluidity","title":"Composition determines fluidity","cardIds":["der-composition-determines-fluidity"]}
+{"id":"er-membrane-asymmetry","title":"ER begins membrane assembly, lipid asymmetry","cardIds":["der-er-membrane-asymmetry"]}
+{"id":"membrane-protein-modes","title":"Membrane protein association modes","cardIds":["der-membrane-protein-modes"]}
+{"id":"transmembrane-helix","title":"Transmembrane α-helix","cardIds":["der-transmembrane-helix"]}
+{"id":"detergent-solubilization","title":"Detergent solubilization","cardIds":["rec-detergent-solubilization"]}
+{"id":"cortex-restricts-movement","title":"Cortex restricts membrane-protein movement","cardIds":["der-cortex-restricts-movement"]}
+{"id":"surface-carbohydrate-coat","title":"Surface carbohydrate coat","cardIds":["rec-surface-carbohydrate-coat"]}
+{"id":"bilayer-impermeable","title":"Bilayer impermeable to ions/most polar molecules","cardIds":["der-bilayer-impermeable"]}
+{"id":"ion-concentration-difference","title":"Ion concentration difference across the membrane","cardIds":["der-ion-concentration-difference"]}
+{"id":"membrane-potential","title":"Membrane potential from ion gradients","cardIds":["der-membrane-potential"]}
+{"id":"transporter-vs-channel","title":"Transporter vs channel","cardIds":["rec-transporter-vs-channel"]}
+{"id":"passive-vs-active-transport","title":"Passive vs active transport","cardIds":["der-passive-vs-active-transport"]}
+{"id":"gradient-potential-passive","title":"Gradient and potential both drive passive transport","cardIds":["der-gradient-potential-passive"]}
+{"id":"osmosis","title":"Osmosis","cardIds":["der-osmosis"]}
+{"id":"passive-transporter","title":"Passive transporter along gradient","cardIds":["der-passive-transporter"]}
+{"id":"na-k-pump","title":"Pump against gradient (Na-K pump)","cardIds":["der-na-k-pump"]}
+{"id":"na-pump-gradient","title":"Na-pump generates the Na gradient","cardIds":["der-na-pump-gradient"]}
+{"id":"ca-pump","title":"Ca-pump keeps cytosolic Ca low","cardIds":["der-ca-pump"]}
+{"id":"coupled-pump-na","title":"Coupled pump — Na-gradient-driven (animals)","cardIds":["der-coupled-pump-na"]}
+{"id":"coupled-pump-h","title":"Coupled pump — H-gradient-driven (plants/fungi/bacteria)","cardIds":["der-coupled-pump-h"]}
+{"id":"channel-selectivity-gating","title":"Channel selectivity and gating","cardIds":["der-channel-selectivity-gating"]}
+{"id":"stimulus-gates-channels","title":"Stimulus types gate channels","cardIds":["rec-stimulus-gates-channels"]}
+{"id":"voltage-gated-channel","title":"Voltage-gated channel","cardIds":["der-voltage-gated-channel"]}
+{"id":"action-potential","title":"Action potential","cardIds":["der-action-potential"]}
+{"id":"voltage-gated-cation-mechanism","title":"Voltage-gated cation channel drives action potential","cardIds":["der-voltage-gated-cation-mechanism"]}
+{"id":"ca-channel-synapse","title":"Ca-channel converts electrical to chemical (synapse)","cardIds":["der-ca-channel-synapse"]}
+{"id":"transmitter-gated-channel","title":"Transmitter-gated channel converts back to electrical","cardIds":["der-transmitter-gated-channel"]}
+{"id":"excitatory-vs-inhibitory","title":"Excitatory vs inhibitory neurotransmitter","cardIds":["rec-excitatory-vs-inhibitory"]}
+{"id":"psychoactive-drug-binding","title":"Psychoactive drug receptor binding","cardIds":["rec-psychoactive-drug-binding"]}
+{"id":"food-breakdown-stages","title":"Food breakdown, three stages","cardIds":["rec-food-breakdown-stages"]}
+{"id":"glycolysis-extracts-energy","title":"Glycolysis extracts energy","cardIds":["der-glycolysis-extracts-energy"]}
+{"id":"glycolysis-atp-nadh","title":"Glycolysis yields ATP and NADH","cardIds":["der-glycolysis-atp-nadh"]}
+{"id":"fermentation","title":"Fermentation without oxygen","cardIds":["der-fermentation"]}
+{"id":"glycolytic-oxidation-coupling","title":"Glycolytic oxidation coupled to carrier storage","cardIds":["der-glycolytic-oxidation-coupling"]}
+{"id":"acetyl-coa-formation","title":"Acetyl-CoA formation","cardIds":["der-acetyl-coa-formation"]}
+{"id":"citric-acid-cycle","title":"Citric acid cycle oxidizes acetyl to CO2","cardIds":["der-citric-acid-cycle"]}
+{"id":"biosynthesis-branches","title":"Biosynthesis branches off central pathways","cardIds":["rec-biosynthesis-branches"]}
+{"id":"electron-transport-drives-atp","title":"Electron transport drives most ATP synthesis","cardIds":["der-electron-transport-drives-atp"]}
+{"id":"catabolic-anabolic-feedback","title":"Catabolic/anabolic organization and feedback","cardIds":["der-catabolic-anabolic-feedback"]}
+{"id":"food-storage-reservoirs","title":"Food-storage reservoirs","cardIds":["rec-food-storage-reservoirs"]}
+{"id":"membrane-based-energy","title":"Membrane-based energy mechanism","cardIds":["der-membrane-based-energy"]}
+{"id":"chemiosmotic-ancient","title":"Chemiosmotic coupling is ancient","cardIds":["rec-chemiosmotic-ancient"]}
+{"id":"mito-two-compartments","title":"Two membranes, two compartments (mitochondrion)","cardIds":["rec-mito-two-compartments"]}
+{"id":"cac-supplies-electrons","title":"Citric acid cycle supplies high-energy electrons","cardIds":["der-cac-supplies-electrons"]}
+{"id":"electron-proton-coupling","title":"Electron movement coupled to proton pumping","cardIds":["der-electron-proton-coupling"]}
+{"id":"proton-gradient-inner-membrane","title":"Steep proton gradient across inner membrane","cardIds":["der-proton-gradient-inner-membrane"]}
+{"id":"atp-synthase","title":"ATP synthase uses the gradient","cardIds":["der-atp-synthase"]}
+{"id":"coupled-transport-gradient","title":"Coupled transport also gradient-driven","cardIds":["der-coupled-transport-gradient"]}
+{"id":"respiration-efficiency","title":"Respiration efficiency","cardIds":["der-respiration-efficiency"]}
+{"id":"electron-transfer-moves-protons","title":"Electron transfer moves protons","cardIds":["der-electron-transfer-moves-protons"]}
+{"id":"redox-potential","title":"Redox potential measures electron affinity","cardIds":["der-redox-potential"]}
+{"id":"metal-bound-carriers","title":"Metal-bound electron carriers","cardIds":["der-metal-bound-carriers"]}
+{"id":"cytochrome-c-oxidase","title":"Cytochrome c oxidase reduces O2","cardIds":["der-cytochrome-c-oxidase"]}
+{"id":"thylakoid-compartment","title":"Thylakoid — chloroplast's extra compartment","cardIds":["rec-thylakoid-compartment"]}
+{"id":"photosynthesis-generates-consumes","title":"Photosynthesis generates then consumes ATP/NADPH","cardIds":["der-photosynthesis-generates-consumes"]}
+{"id":"chlorophyll-absorbs-light","title":"Chlorophyll absorbs light energy","cardIds":["der-chlorophyll-absorbs-light"]}
+{"id":"energy-funneled-reaction-center","title":"Energy funneled to reaction center","cardIds":["der-energy-funneled-reaction-center"]}
+{"id":"two-photosystems-cooperate","title":"Two photosystems cooperate","cardIds":["der-two-photosystems-cooperate"]}
+{"id":"water-splitting-psii","title":"Water-splitting at PSII (O2 released)","cardIds":["der-water-splitting-psii"]}
+{"id":"psi-receives-from-psii","title":"PSI receives electrons from PSII","cardIds":["der-psi-receives-from-psii"]}
+{"id":"carbon-fixation","title":"Carbon fixation uses ATP/NADPH","cardIds":["der-carbon-fixation"]}
+{"id":"fixed-carbon-stored-consumed","title":"Fixed carbon stored or consumed","cardIds":["rec-fixed-carbon-stored-consumed"]}
+{"id":"oxphos-evolved-stages","title":"Oxidative phosphorylation evolved in stages","cardIds":["rec-oxphos-evolved-stages"]}
+{"id":"photosynthetic-bacteria-low-demand","title":"Photosynthetic bacteria made low environmental demands","cardIds":["rec-photosynthetic-bacteria-low-demand"]}
+{"id":"ancient-chemiosmosis-evidence","title":"Ancient chemiosmosis evidence (Methanococcus)","cardIds":["rec-ancient-chemiosmosis-evidence"]}
+{"id":"basic-organelle-set","title":"Basic organelle set","cardIds":["rec-basic-organelle-set"]}
+{"id":"organelles-evolved-differently","title":"Organelles evolved differently","cardIds":["rec-organelles-evolved-differently"]}
+{"id":"three-sorting-mechanisms","title":"Three protein-sorting mechanisms","cardIds":["der-three-sorting-mechanisms"]}
+{"id":"signal-sequence","title":"Signal sequence directs compartment","cardIds":["der-signal-sequence"]}
+{"id":"nuclear-pore-import","title":"Nuclear pore import","cardIds":["der-nuclear-pore-import"]}
+{"id":"unfolding-mito-chloroplast-import","title":"Unfolding required for mito/chloroplast import","cardIds":["der-unfolding-mito-chloroplast-import"]}
+{"id":"peroxisome-import","title":"Peroxisome import routes","cardIds":["rec-peroxisome-import"]}
+{"id":"co-translational-er-entry","title":"Co-translational ER entry","cardIds":["der-co-translational-er-entry"]}
+{"id":"soluble-vs-transmembrane-er","title":"Soluble vs transmembrane ER product","cardIds":["der-soluble-vs-transmembrane-er"]}
+{"id":"start-stop-transfer-signals","title":"Start/stop transfer signals in the bilayer","cardIds":["der-start-stop-transfer-signals"]}
+{"id":"vesicle-carries-cargo","title":"Vesicle carries protein and membrane","cardIds":["der-vesicle-carries-cargo"]}
+{"id":"coat-protein-budding","title":"Coat protein drives vesicle budding","cardIds":["der-coat-protein-budding"]}
+{"id":"tether-snare-docking","title":"Tether and SNARE-mediated docking","cardIds":["der-tether-snare-docking"]}
+{"id":"er-covalent-modification","title":"ER covalent modification","cardIds":["der-er-covalent-modification"]}
+{"id":"er-exit-quality-control","title":"Quality control gates ER exit","cardIds":["der-er-exit-quality-control"]}
+{"id":"golgi-modify-sort","title":"Golgi further modifies and sorts","cardIds":["der-golgi-modify-sort"]}
+{"id":"exocytosis","title":"Exocytosis","cardIds":["der-exocytosis"]}
+{"id":"phagocytosis","title":"Phagocytosis","cardIds":["rec-phagocytosis"]}
+{"id":"pinocytosis","title":"Pinocytosis","cardIds":["rec-pinocytosis"]}
+{"id":"receptor-mediated-endocytosis","title":"Receptor-mediated endocytosis","cardIds":["der-receptor-mediated-endocytosis"]}
+{"id":"endosome-sorting","title":"Endosome sorting","cardIds":["der-endosome-sorting"]}
+{"id":"lysosome-digestion","title":"Lysosome — principal digestion site","cardIds":["der-lysosome-digestion"]}
+{"id":"signal-range","title":"Signal range (long/short)","cardIds":["rec-signal-range"]}
+{"id":"response-depends-on-state","title":"Response depends on cell history and state","cardIds":["rec-response-depends-on-state"]}
+{"id":"fast-vs-slow-response","title":"Fast vs slow response","cardIds":["rec-fast-vs-slow-response"]}
+{"id":"intracellular-receptor","title":"Intracellular receptor (steroid hormones)","cardIds":["der-intracellular-receptor"]}
+{"id":"gas-direct-activation","title":"Dissolved gas direct enzyme activation","cardIds":["der-gas-direct-activation"]}
+{"id":"cell-surface-receptor-relay","title":"Cell-surface receptor relay","cardIds":["der-cell-surface-receptor-relay"]}
+{"id":"molecular-switch","title":"Molecular switch concept","cardIds":["der-molecular-switch"]}
+{"id":"three-receptor-classes","title":"Three receptor classes","cardIds":["rec-three-receptor-classes"]}
+{"id":"ion-channel-coupled-receptor","title":"Ion-channel-coupled receptor","cardIds":["der-ion-channel-coupled-receptor"]}
+{"id":"gpcr-activates-g-protein","title":"GPCR activates G-protein subunits","cardIds":["der-gpcr-activates-g-protein"]}
+{"id":"g-protein-activates-enzyme","title":"G-protein activates membrane enzyme","cardIds":["der-g-protein-activates-enzyme"]}
+{"id":"camp-pathway","title":"cAMP pathway","cardIds":["der-camp-pathway"]}
+{"id":"inositol-pathway-ca-rise","title":"Inositol phospholipid pathway, Ca2+ rise","cardIds":["der-inositol-pathway-ca-rise"]}
+{"id":"ca-signal-triggers-processes","title":"Ca2+ signal triggers biological processes","cardIds":["rec-ca-signal-triggers-processes"]}
+{"id":"gpcr-speed-sensitivity","title":"Signaling speed, sensitivity, adaptability","cardIds":["rec-gpcr-speed-sensitivity"]}
+{"id":"bacterial-toxin-g-protein","title":"Bacterial toxin alters G-protein activity","cardIds":["rec-bacterial-toxin-g-protein"]}
+{"id":"g-protein-direct-channel","title":"G-protein directly regulates ion channel","cardIds":["der-g-protein-direct-channel"]}
+{"id":"rtk-recruits-complex","title":"RTK recruits signaling complex","cardIds":["der-rtk-recruits-complex"]}
+{"id":"rtk-activates-ras","title":"RTK activates Ras","cardIds":["der-rtk-activates-ras"]}
+{"id":"rtk-pi3k","title":"RTK activates PI3-kinase, lipid docking sites","cardIds":["der-rtk-pi3k"]}
+{"id":"fast-track-nucleus","title":"Some receptors fast-track to the nucleus","cardIds":["rec-fast-track-nucleus"]}
+{"id":"kinase-network-integration","title":"Kinase network integrates behavior control","cardIds":["der-kinase-network-integration"]}
+{"id":"intermediate-filament-strength","title":"Intermediate filaments — rope-like strength","cardIds":["der-intermediate-filament-strength"]}
+{"id":"mechanical-stress-resistance","title":"Mechanical stress resistance","cardIds":["rec-mechanical-stress-resistance"]}
+{"id":"nuclear-envelope-support","title":"Nuclear envelope support by intermediate filaments","cardIds":["rec-nuclear-envelope-support"]}
+{"id":"microtubule-hollow-tube","title":"Microtubule — hollow polar tube","cardIds":["der-microtubule-hollow-tube"]}
+{"id":"centrosome-organizing-center","title":"Centrosome organizing center","cardIds":["rec-centrosome-organizing-center"]}
+{"id":"dynamic-instability","title":"Dynamic instability","cardIds":["der-dynamic-instability"]}
+{"id":"gtp-hydrolysis-instability","title":"GTP hydrolysis drives instability","cardIds":["der-gtp-hydrolysis-instability"]}
+{"id":"drugs-modify-microtubule","title":"Drugs modify microtubule dynamics","cardIds":["rec-drugs-modify-microtubule"]}
+{"id":"motor-proteins-transport","title":"Motor proteins drive intracellular transport","cardIds":["der-motor-proteins-transport"]}
+{"id":"motors-position-organelles","title":"Motors position organelles","cardIds":["rec-motors-position-organelles"]}
+{"id":"cilia-flagella-dynein","title":"Cilia/flagella moved by dynein","cardIds":["der-cilia-flagella-dynein"]}
+{"id":"actin-filament-structure","title":"Actin filament — thin flexible structure","cardIds":["der-actin-filament-structure"]}
+{"id":"actin-tubulin-polymerize","title":"Actin/tubulin polymerize by similar mechanisms","cardIds":["der-actin-tubulin-polymerize"]}
+{"id":"actin-binding-proteins","title":"Actin-binding proteins modify properties","cardIds":["der-actin-binding-proteins"]}
+{"id":"actin-cortex-membrane","title":"Cortex underlies plasma membrane","cardIds":["der-actin-cortex-membrane"]}
+{"id":"cell-crawling","title":"Cell crawling depends on cortical actin","cardIds":["der-cell-crawling"]}
+{"id":"actin-myosin-contractile","title":"Actin-myosin contractile structures","cardIds":["der-actin-myosin-contractile"]}
+{"id":"external-signals-actin","title":"External signals rearrange actin","cardIds":["rec-external-signals-actin"]}
+{"id":"muscle-sliding-filaments","title":"Actin-myosin sliding filaments (muscle)","cardIds":["der-muscle-sliding-filaments"]}
+{"id":"ca-triggers-muscle-contraction","title":"Ca2+ triggers muscle contraction","cardIds":["der-ca-triggers-muscle-contraction"]}
+{"id":"muscle-type-diversity","title":"Muscle type diversity","cardIds":["rec-muscle-type-diversity"]}
+{"id":"four-phase-cycle","title":"Four-phase cell cycle","cardIds":["rec-four-phase-cycle"]}
+{"id":"control-system-triggers","title":"Control system triggers cycle processes","cardIds":["der-control-system-triggers"]}
+{"id":"cdk-cyclic-activation","title":"Cdk cyclically activated","cardIds":["der-cdk-cyclic-activation"]}
+{"id":"cyclin-cdk-per-step","title":"Cyclin-Cdk complex per step","cardIds":["der-cyclin-cdk-per-step"]}
+{"id":"cyclin-regulation","title":"Cyclin regulated by transcription and proteolysis","cardIds":["der-cyclin-regulation"]}
+{"id":"cdk-phospho-regulation","title":"Cdk activity needs phosphorylation/dephosphorylation","cardIds":["der-cdk-phospho-regulation"]}
+{"id":"cdk-inhibitor-proteins","title":"Cdk inhibitor proteins","cardIds":["der-cdk-inhibitor-proteins"]}
+{"id":"control-system-pause","title":"Control system can pause the cycle","cardIds":["rec-control-system-pause"]}
+{"id":"cdk-inactive-g1","title":"Cdks stably inactivated in G1","cardIds":["der-cdk-inactive-g1"]}
+{"id":"mitogens-cyclin-production","title":"Mitogens promote cyclin production","cardIds":["der-mitogens-cyclin-production"]}
+{"id":"dna-damage-halts-g1","title":"DNA damage halts G1 progression","cardIds":["der-dna-damage-halts-g1"]}
+{"id":"nondividing-states","title":"Nondividing states (prolonged delay)","cardIds":["rec-nondividing-states"]}
+{"id":"s-cdk-initiates-replication","title":"S-Cdk initiates replication, blocks re-replication","cardIds":["der-s-cdk-initiates-replication"]}
+{"id":"incomplete-replication-g2-arrest","title":"Incomplete replication arrests G2","cardIds":["der-incomplete-replication-g2-arrest"]}
+{"id":"m-cdk-entry","title":"M-Cdk drives entry into M phase","cardIds":["der-m-cdk-entry"]}
+{"id":"cohesins-condensins","title":"Cohesins/condensins configure chromosomes","cardIds":["der-cohesins-condensins"]}
+{"id":"centrosome-duplication-poles","title":"Centrosome duplication forms spindle poles","cardIds":["der-centrosome-duplication-poles"]}
+{"id":"spindle-assembly-prophase","title":"Spindle assembles in prophase","cardIds":["der-spindle-assembly-prophase"]}
+{"id":"chromosome-attachment-prometaphase","title":"Chromosome attachment at prometaphase","cardIds":["der-chromosome-attachment-prometaphase"]}
+{"id":"metaphase-alignment","title":"Metaphase alignment","cardIds":["der-metaphase-alignment"]}
+{"id":"proteolysis-triggers-anaphase","title":"Proteolysis triggers anaphase separation","cardIds":["der-proteolysis-triggers-anaphase"]}
+{"id":"unattached-chromosome-blocks","title":"Unattached chromosome blocks separation","cardIds":["der-unattached-chromosome-blocks"]}
+{"id":"telophase-envelope-reforms","title":"Telophase — nuclear envelope reforms","cardIds":["rec-telophase-envelope-reforms"]}
+{"id":"spindle-determines-cleavage","title":"Spindle determines cleavage plane","cardIds":["der-spindle-determines-cleavage"]}
+{"id":"contractile-ring-cell-plate","title":"Contractile ring (animal) / cell plate (plant)","cardIds":["der-contractile-ring-cell-plate"]}
+{"id":"organelle-distribution-division","title":"Organelle distribution to daughter cells","cardIds":["rec-organelle-distribution-division"]}
+{"id":"apoptosis-regulates-number","title":"Apoptosis regulates cell number","cardIds":["rec-apoptosis-regulates-number"]}
+{"id":"caspase-cascade","title":"Intracellular proteolytic cascade (caspases)","cardIds":["der-caspase-cascade"]}
+{"id":"bcl2-intrinsic-pathway","title":"Bcl2 family regulates intrinsic pathway","cardIds":["der-bcl2-intrinsic-pathway"]}
+{"id":"extracellular-induce-apoptosis","title":"Extracellular signals can induce apoptosis","cardIds":["rec-extracellular-induce-apoptosis"]}
+{"id":"survival-factors-suppress","title":"Survival factors suppress apoptosis","cardIds":["rec-survival-factors-suppress"]}
+{"id":"mitogens-vs-growth-factors","title":"Mitogens vs growth factors","cardIds":["rec-mitogens-vs-growth-factors"]}
+{"id":"inhibitory-signal-proteins","title":"Inhibitory extracellular signal proteins","cardIds":["rec-inhibitory-signal-proteins"]}
+{"id":"diploid-haploid","title":"Diploid and haploid cells","cardIds":["rec-diploid-haploid"]}
+{"id":"sex-generates-diversity","title":"Sex generates genetic diversity","cardIds":["rec-sex-generates-diversity"]}
+{"id":"sex-competitive-advantage","title":"Competitive advantage in changing environment","cardIds":["rec-sex-competitive-advantage"]}
+{"id":"one-replication-two-divisions","title":"One replication, two divisions (meiosis)","cardIds":["der-one-replication-two-divisions"]}
+{"id":"homolog-pairing","title":"Homolog pairing","cardIds":["der-homolog-pairing"]}
+{"id":"crossing-over","title":"Crossing-over between duplicated homologs","cardIds":["der-crossing-over"]}
+{"id":"pairing-crossover-segregation","title":"Pairing and crossover ensure segregation","cardIds":["der-pairing-crossover-segregation"]}
+{"id":"second-division-haploid","title":"Second meiotic division produces haploid cells","cardIds":["der-second-division-haploid"]}
+{"id":"reassorted-genetic-info","title":"Reassorted genetic information in gametes","cardIds":["rec-reassorted-genetic-info"]}
+{"id":"meiosis-nondisjunction","title":"Meiosis can fail (nondisjunction)","cardIds":["der-meiosis-nondisjunction"]}
+{"id":"fertilization-restores-diploid","title":"Fertilization restores diploid genome","cardIds":["rec-fertilization-restores-diploid"]}
+{"id":"discrete-trait-inheritance","title":"Discrete trait inheritance","cardIds":["rec-discrete-trait-inheritance"]}
+{"id":"dominant-recessive-alleles","title":"Dominant / recessive alleles","cardIds":["der-dominant-recessive-alleles"]}
+{"id":"one-allele-per-gamete","title":"One allele per gamete","cardIds":["der-one-allele-per-gamete"]}
+{"id":"law-of-segregation","title":"Law of segregation","cardIds":["der-law-of-segregation"]}
+{"id":"independent-assortment","title":"Independent assortment","cardIds":["der-independent-assortment"]}
+{"id":"chromosome-behavior-mendel","title":"Chromosome behavior explains Mendel's laws","cardIds":["der-chromosome-behavior-mendel"]}
+{"id":"crossover-linked-genes","title":"Crossing-over lets linked genes segregate independently","cardIds":["der-crossover-linked-genes"]}
+{"id":"loss-vs-gain-function","title":"Loss-of-function vs gain-of-function mutation","cardIds":["der-loss-vs-gain-function"]}
+{"id":"recessive-mutation-burden","title":"Recessive mutation burden","cardIds":["rec-recessive-mutation-burden"]}
+{"id":"random-mutagenesis-screen","title":"Random mutagenesis screen","cardIds":["der-random-mutagenesis-screen"]}
+{"id":"conditional-mutants","title":"Conditional mutants for lethal genes","cardIds":["der-conditional-mutants"]}
+{"id":"complementation-test","title":"Complementation test","cardIds":["der-complementation-test"]}
+{"id":"cheap-sequencing-genetics","title":"Cheap sequencing revolutionizes human genetics","cardIds":["rec-cheap-sequencing-genetics"]}
+{"id":"linked-polymorphism-blocks","title":"Linked polymorphism blocks","cardIds":["rec-linked-polymorphism-blocks"]}
+{"id":"disease-association-search","title":"Disease association search via polymorphisms","cardIds":["rec-disease-association-search"]}
+{"id":"plant-cell-wall","title":"Plant cell wall tensile strength","cardIds":["der-plant-cell-wall"]}
+{"id":"animal-ecm","title":"Animal ECM is ligand plus structure","cardIds":["rec-animal-ecm"]}
+{"id":"collagen-tensile-strength","title":"Collagen provides tensile strength","cardIds":["der-collagen-tensile-strength"]}
+{"id":"integrin-couples-matrix","title":"Integrin couples matrix to cytoskeleton","cardIds":["der-integrin-couples-matrix"]}
+{"id":"polysaccharide-gel-compression","title":"Polysaccharide gel resists compression","cardIds":["rec-polysaccharide-gel-compression"]}
+{"id":"epithelial-polarity","title":"Epithelial polarity and basal lamina","cardIds":["der-epithelial-polarity"]}
+{"id":"tight-junction","title":"Tight junction seals epithelium","cardIds":["der-tight-junction"]}
+{"id":"cytoskeleton-linked-junctions","title":"Cytoskeleton-linked junctions bind cells","cardIds":["der-cytoskeleton-linked-junctions"]}
+{"id":"gap-junction","title":"Gap junction passes small molecules","cardIds":["der-gap-junction"]}
+{"id":"tissue-renewal-varies","title":"Tissue renewal rate varies","cardIds":["rec-tissue-renewal-varies"]}
+{"id":"stem-cell-supplies-differentiated","title":"Stem cell supplies differentiated cells","cardIds":["der-stem-cell-supplies-differentiated"]}
+{"id":"signals-maintain-stem-cells","title":"Signals maintain stem-cell populations","cardIds":["der-signals-maintain-stem-cells"]}
+{"id":"stem-cells-repair-tissue","title":"Stem cells repair damaged tissue","cardIds":["rec-stem-cells-repair-tissue"]}
+{"id":"therapeutic-vs-reproductive-cloning","title":"Therapeutic vs reproductive cloning","cardIds":["rec-therapeutic-vs-reproductive-cloning"]}
+{"id":"induced-pluripotent-stem-cells","title":"Induced pluripotent stem cells","cardIds":["der-induced-pluripotent-stem-cells"]}
+{"id":"cancer-proliferation-invasion","title":"Cancer proliferation, invasion, metastasis","cardIds":["rec-cancer-proliferation-invasion"]}
+{"id":"preventable-causes-epidemiology","title":"Preventable causes (epidemiology)","cardIds":["rec-preventable-causes-epidemiology"]}
+{"id":"mutation-accumulation-model","title":"Mutation accumulation model","cardIds":["der-mutation-accumulation-model"]}
+{"id":"clonal-evolution-cancer","title":"Clonal evolution gives competitive advantage","cardIds":["der-clonal-evolution-cancer"]}
+{"id":"oncogene-vs-tumor-suppressor","title":"Oncogene vs tumor suppressor","cardIds":["der-oncogene-vs-tumor-suppressor"]}
+{"id":"pathway-clustering-colorectal","title":"Pathway clustering of cancer mutations (colorectal example)","cardIds":["der-pathway-clustering-colorectal"]}
+{"id":"cancer-biology-treatment","title":"Understanding cancer biology opens new treatments","cardIds":["rec-cancer-biology-treatment"]}

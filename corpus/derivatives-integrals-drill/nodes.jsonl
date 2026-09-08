@@ -1,0 +1,21 @@
+{"id":"limits-refresh","title":"Limits Refresh","cardIds":["der-limits-refresh"]}
+{"id":"power-rule","title":"Power Rule","cardIds":["der-power-rule"]}
+{"id":"product-rule","title":"Product Rule","cardIds":["der-product-rule"]}
+{"id":"quotient-rule","title":"Quotient Rule","cardIds":["der-quotient-rule"]}
+{"id":"chain-rule","title":"Chain Rule","cardIds":["der-chain-rule"]}
+{"id":"trig-derivatives","title":"Trig Derivatives","cardIds":["der-trig-derivatives"]}
+{"id":"exp-log-derivatives","title":"Exp/Log Derivatives","cardIds":["der-exp-log-derivatives"]}
+{"id":"implicit-differentiation","title":"Implicit Differentiation","cardIds":["der-implicit-differentiation"]}
+{"id":"related-rates","title":"Related Rates","cardIds":["der-related-rates"]}
+{"id":"first-derivative-test","title":"First Derivative Test","cardIds":["der-first-derivative-test"]}
+{"id":"second-derivative-test","title":"Second Derivative Test","cardIds":["der-second-derivative-test"]}
+{"id":"optimization","title":"Optimization","cardIds":["der-optimization"]}
+{"id":"curve-sketching","title":"Curve Sketching","cardIds":["der-curve-sketching"]}
+{"id":"antiderivative-basics","title":"Antiderivative Basics","cardIds":["der-antiderivative-basics"]}
+{"id":"u-substitution","title":"U-Substitution","cardIds":["der-u-substitution"]}
+{"id":"integration-by-parts","title":"Integration by Parts","cardIds":["der-integration-by-parts"]}
+{"id":"ftc-definite-integrals","title":"FTC / Definite Integrals","cardIds":["der-ftc-definite-integrals"]}
+{"id":"area-between-curves","title":"Area Between Curves","cardIds":["der-area-between-curves"]}
+{"id":"volume-of-revolution","title":"Volume of Revolution","cardIds":["der-volume-of-revolution"]}
+{"id":"average-value","title":"Average Value","cardIds":["der-average-value"]}
+{"id":"mixed-interleaved-review","title":"Mixed Interleaved Review","cardIds":["der-mixed-interleaved-review"]}

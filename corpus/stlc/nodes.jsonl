@@ -1,5 +1,0 @@
-{"id":"terms","title":"Terms: variables, abstraction, and application","cardIds":["rec-term-formers"]}
-{"id":"types","title":"Types: base types and function types","cardIds":["rec-fn-type"]}
-{"id":"typing","title":"Typing rules T-Var, T-Abs, T-App","cardIds":["rec-t-app","der-identity"]}
-{"id":"substitution","title":"Capture-avoiding substitution","cardIds":["rec-capture"]}
-{"id":"safety","title":"Progress and preservation","cardIds":["rec-progress","der-preservation"]}

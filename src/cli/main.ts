@@ -16,7 +16,7 @@ type Io = {
 const bun = (globalThis as unknown as { Bun: BunRuntime }).Bun
 const io = (globalThis as unknown as { console: Io }).console
 
-const treeId = Schema.decodeUnknownSync(TreeId)(bun.env["NTH_TREE"] ?? "stlc")
+const treeId = Schema.decodeUnknownSync(TreeId)(bun.env["NTH_TREE"] ?? "biology-ii")
 const logPath = bun.env["NTH_LOG"] ?? "data/log.jsonl"
 const corpusDir = bun.env["NTH_CORPUS"] ?? "corpus"
 

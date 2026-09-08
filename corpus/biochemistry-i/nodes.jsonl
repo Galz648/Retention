@@ -1,0 +1,105 @@
+{"id":"covalent-bond","title":"Covalent bond","cardIds":["rec-covalent-bond"]}
+{"id":"electronegativity-polarity","title":"Electronegativity and polarity","cardIds":["der-electronegativity-polarity"]}
+{"id":"resonance","title":"Resonance","cardIds":["der-resonance"]}
+{"id":"hydrogen-bond","title":"Hydrogen bond","cardIds":["der-hydrogen-bond"]}
+{"id":"water-structure","title":"Water structure","cardIds":["der-water-structure"]}
+{"id":"hydrophobic-effect","title":"Hydrophobic effect","cardIds":["der-hydrophobic-effect"]}
+{"id":"acid-base-pka","title":"Acid-base and pKa","cardIds":["der-acid-base-pka"]}
+{"id":"henderson-hasselbalch","title":"Henderson-Hasselbalch","cardIds":["der-henderson-hasselbalch"]}
+{"id":"buffer-capacity","title":"Buffer capacity","cardIds":["der-buffer-capacity"]}
+{"id":"amino-acid-structure","title":"Amino acid structure","cardIds":["der-amino-acid-structure"]}
+{"id":"side-chain-classes","title":"Side-chain classes","cardIds":["der-side-chain-classes"]}
+{"id":"aa-pka-ladder","title":"Amino acid pKa ladder","cardIds":["der-aa-pka-ladder"]}
+{"id":"zwitterion","title":"Zwitterion","cardIds":["der-zwitterion"]}
+{"id":"titration-curve","title":"Titration curve","cardIds":["der-titration-curve"]}
+{"id":"pi-calculation","title":"pI calculation","cardIds":["der-pi-calculation"]}
+{"id":"peptide-bond-formation","title":"Peptide bond formation","cardIds":["der-peptide-bond-formation"]}
+{"id":"peptide-bond-planarity","title":"Peptide bond planarity","cardIds":["der-peptide-bond-planarity"]}
+{"id":"protein-purification","title":"Protein purification","cardIds":["der-protein-purification"]}
+{"id":"specific-activity","title":"Specific activity","cardIds":["der-specific-activity"]}
+{"id":"backbone-dihedrals","title":"Backbone dihedrals","cardIds":["der-backbone-dihedrals"]}
+{"id":"ramachandran","title":"Ramachandran","cardIds":["der-ramachandran"]}
+{"id":"alpha-helix-geometry","title":"Alpha helix geometry","cardIds":["der-alpha-helix-geometry"]}
+{"id":"alpha-helix-hbond","title":"Alpha helix hydrogen bonding","cardIds":["der-alpha-helix-hbond"]}
+{"id":"helix-breakers","title":"Helix breakers","cardIds":["der-helix-breakers"]}
+{"id":"beta-strand-extended","title":"Beta strand extended","cardIds":["der-beta-strand-extended"]}
+{"id":"beta-sheet-hbond","title":"Beta sheet hydrogen bonding","cardIds":["der-beta-sheet-hbond"]}
+{"id":"parallel-vs-antiparallel","title":"Parallel vs antiparallel","cardIds":["der-parallel-vs-antiparallel"]}
+{"id":"tertiary-drivers","title":"Tertiary structure drivers","cardIds":["der-tertiary-drivers"]}
+{"id":"quaternary-structure","title":"Quaternary structure","cardIds":["der-quaternary-structure"]}
+{"id":"denaturation","title":"Denaturation","cardIds":["der-denaturation"]}
+{"id":"proteostasis","title":"Proteostasis","cardIds":["rec-proteostasis"]}
+{"id":"reversible-binding-kd","title":"Reversible binding and Kd","cardIds":["der-reversible-binding-kd"]}
+{"id":"binding-curve-hyperbolic","title":"Hyperbolic binding curve","cardIds":["der-binding-curve-hyperbolic"]}
+{"id":"hemoglobin-subunits","title":"Hemoglobin subunits","cardIds":["der-hemoglobin-subunits"]}
+{"id":"t-r-states","title":"T and R states","cardIds":["der-t-r-states"]}
+{"id":"cooperativity-sigmoidal","title":"Cooperativity and sigmoidal curves","cardIds":["der-cooperativity-sigmoidal"]}
+{"id":"hill-coefficient","title":"Hill coefficient","cardIds":["der-hill-coefficient"]}
+{"id":"binding-models","title":"Binding models","cardIds":["der-binding-models"]}
+{"id":"bohr-effect","title":"Bohr effect","cardIds":["der-bohr-effect"]}
+{"id":"co2-carbamate","title":"CO2 and carbamate","cardIds":["der-co2-carbamate"]}
+{"id":"bpg-effect","title":"BPG effect","cardIds":["der-bpg-effect"]}
+{"id":"hb-mutations","title":"Hemoglobin mutations","cardIds":["der-hb-mutations"]}
+{"id":"catalysis-vs-equilibrium","title":"Catalysis vs equilibrium","cardIds":["der-catalysis-vs-equilibrium"]}
+{"id":"transition-state","title":"Transition state","cardIds":["der-transition-state"]}
+{"id":"binding-energy","title":"Binding energy","cardIds":["der-binding-energy"]}
+{"id":"induced-fit","title":"Induced fit","cardIds":["der-induced-fit"]}
+{"id":"ec-classes","title":"EC classes","cardIds":["rec-ec-classes"]}
+{"id":"cofactor-coenzyme-prosthetic","title":"Cofactor, coenzyme, prosthetic group","cardIds":["rec-cofactor-coenzyme-prosthetic"]}
+{"id":"initial-velocity","title":"Initial velocity","cardIds":["der-initial-velocity"]}
+{"id":"steady-state","title":"Steady state","cardIds":["der-steady-state"]}
+{"id":"michaelis-menten","title":"Michaelis-Menten","cardIds":["der-michaelis-menten"]}
+{"id":"km-meaning","title":"Km meaning","cardIds":["der-km-meaning"]}
+{"id":"km-vs-kd","title":"Km vs Kd","cardIds":["der-km-vs-kd"]}
+{"id":"vmax-kcat","title":"Vmax and kcat","cardIds":["der-vmax-kcat"]}
+{"id":"specificity-constant","title":"Specificity constant","cardIds":["der-specificity-constant"]}
+{"id":"lineweaver-burk","title":"Lineweaver-Burk","cardIds":["der-lineweaver-burk"]}
+{"id":"competitive-inhibition","title":"Competitive inhibition","cardIds":["der-competitive-inhibition"]}
+{"id":"uncompetitive-inhibition","title":"Uncompetitive inhibition","cardIds":["der-uncompetitive-inhibition"]}
+{"id":"mixed-inhibition","title":"Mixed inhibition","cardIds":["der-mixed-inhibition"]}
+{"id":"irreversible-inhibition","title":"Irreversible inhibition","cardIds":["der-irreversible-inhibition"]}
+{"id":"general-acid-base-catalysis","title":"General acid-base catalysis","cardIds":["der-general-acid-base-catalysis"]}
+{"id":"covalent-catalysis","title":"Covalent catalysis","cardIds":["der-covalent-catalysis"]}
+{"id":"metal-ion-catalysis","title":"Metal ion catalysis","cardIds":["der-metal-ion-catalysis"]}
+{"id":"ph-activity-residue-id","title":"pH-activity residue identification","cardIds":["der-ph-activity-residue-id"]}
+{"id":"allosteric-enzymes","title":"Allosteric enzymes","cardIds":["der-allosteric-enzymes"]}
+{"id":"phosphorylation","title":"Phosphorylation","cardIds":["der-phosphorylation"]}
+{"id":"zymogen-activation","title":"Zymogen activation","cardIds":["der-zymogen-activation"]}
+{"id":"chirality","title":"Chirality","cardIds":["der-chirality"]}
+{"id":"fischer-dl","title":"Fischer projection and D/L","cardIds":["der-fischer-dl"]}
+{"id":"stereoisomer-count","title":"Stereoisomer count","cardIds":["der-stereoisomer-count"]}
+{"id":"ring-anomeric","title":"Ring formation and the anomeric carbon","cardIds":["der-ring-anomeric"]}
+{"id":"mutarotation","title":"Mutarotation","cardIds":["der-mutarotation"]}
+{"id":"glycosidic-bond","title":"Glycosidic bond","cardIds":["der-glycosidic-bond"]}
+{"id":"amylose-vs-cellulose","title":"Amylose vs cellulose","cardIds":["der-amylose-vs-cellulose"]}
+{"id":"branching","title":"Branching","cardIds":["der-branching"]}
+{"id":"nucleotide-components","title":"Nucleotide components","cardIds":["rec-nucleotide-components"]}
+{"id":"phosphodiester","title":"Phosphodiester backbone","cardIds":["der-phosphodiester"]}
+{"id":"base-pairing","title":"Base pairing","cardIds":["der-base-pairing"]}
+{"id":"tm-gc-content","title":"Tm and GC content","cardIds":["der-tm-gc-content"]}
+{"id":"non-enzymatic-damage","title":"Non-enzymatic damage","cardIds":["der-non-enzymatic-damage"]}
+{"id":"fatty-acid-saturation","title":"Fatty acid saturation","cardIds":["der-fatty-acid-saturation"]}
+{"id":"triacylglycerol","title":"Triacylglycerol","cardIds":["der-triacylglycerol"]}
+{"id":"phospholipid-amphipathic","title":"Amphipathic phospholipid","cardIds":["der-phospholipid-amphipathic"]}
+{"id":"bilayer","title":"Bilayer","cardIds":["der-bilayer"]}
+{"id":"membrane-fluidity","title":"Membrane fluidity","cardIds":["der-membrane-fluidity"]}
+{"id":"cholesterol-effect","title":"Cholesterol effect","cardIds":["der-cholesterol-effect"]}
+{"id":"fluid-mosaic","title":"Fluid mosaic","cardIds":["rec-fluid-mosaic"]}
+{"id":"membrane-asymmetry","title":"Membrane asymmetry","cardIds":["der-membrane-asymmetry"]}
+{"id":"transport-types","title":"Transport types","cardIds":["der-transport-types"]}
+{"id":"gibbs-free-energy","title":"Gibbs free energy","cardIds":["der-gibbs-free-energy"]}
+{"id":"standard-vs-actual-dg","title":"Standard vs actual delta G","cardIds":["der-standard-vs-actual-dg"]}
+{"id":"keq-dg-relation","title":"Keq and delta G","cardIds":["der-keq-dg-relation"]}
+{"id":"reaction-coupling","title":"Reaction coupling","cardIds":["der-reaction-coupling"]}
+{"id":"atp-hydrolysis","title":"ATP hydrolysis","cardIds":["der-atp-hydrolysis"]}
+{"id":"redox-potential","title":"Redox potential","cardIds":["der-redox-potential"]}
+{"id":"electron-carriers","title":"Electron carriers","cardIds":["der-electron-carriers"]}
+{"id":"glycolysis-stages","title":"Glycolysis stages","cardIds":["der-glycolysis-stages"]}
+{"id":"glycolysis-irreversible-steps","title":"Glycolysis irreversible steps","cardIds":["der-glycolysis-irreversible-steps"]}
+{"id":"pyruvate-fates","title":"Pyruvate fates","cardIds":["der-pyruvate-fates"]}
+{"id":"fermentation","title":"Fermentation","cardIds":["der-fermentation"]}
+{"id":"cori-cycle","title":"Cori cycle","cardIds":["der-cori-cycle"]}
+{"id":"gluconeogenesis-bypasses","title":"Gluconeogenesis bypasses","cardIds":["der-gluconeogenesis-bypasses"]}
+{"id":"ppp-purpose","title":"Pentose phosphate pathway","cardIds":["der-ppp-purpose"]}
+{"id":"pfk-regulation","title":"PFK regulation","cardIds":["der-pfk-regulation"]}
+{"id":"glycogen-phosphorylase-regulation","title":"Glycogen phosphorylase regulation","cardIds":["der-glycogen-phosphorylase-regulation"]}

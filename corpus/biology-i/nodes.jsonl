@@ -1,0 +1,226 @@
+{"id":"functional-groups","title":"Functional groups","cardIds":["der-functional-groups"]}
+{"id":"condensation","title":"Condensation reaction","cardIds":["der-condensation"]}
+{"id":"hydrolysis","title":"Hydrolysis reaction","cardIds":["der-hydrolysis"]}
+{"id":"carbohydrates","title":"Carbohydrates","cardIds":["der-carbohydrates"]}
+{"id":"lipids","title":"Lipids","cardIds":["der-lipids"]}
+{"id":"proteins","title":"Proteins","cardIds":["der-proteins"]}
+{"id":"nucleic-acids","title":"Nucleic acids","cardIds":["der-nucleic-acids"]}
+{"id":"organelles","title":"Organelles","cardIds":["der-organelles"]}
+{"id":"cell-membrane","title":"Cell membrane","cardIds":["der-cell-membrane"]}
+{"id":"cytoplasm","title":"Cytoplasm","cardIds":["der-cytoplasm"]}
+{"id":"nucleus","title":"Nucleus","cardIds":["der-nucleus"]}
+{"id":"cell-wall","title":"Cell wall","cardIds":["der-cell-wall"]}
+{"id":"cytoskeleton","title":"Cytoskeleton","cardIds":["der-cytoskeleton"]}
+{"id":"cell-theory","title":"Cell theory","cardIds":["der-cell-theory"]}
+{"id":"potential-energy","title":"Potential energy","cardIds":["der-potential-energy"]}
+{"id":"active-site","title":"Active site","cardIds":["der-active-site"]}
+{"id":"allosteric-site","title":"Allosteric site","cardIds":["der-allosteric-site"]}
+{"id":"cofactors","title":"Cofactors","cardIds":["der-cofactors"]}
+{"id":"coenzymes","title":"Coenzymes","cardIds":["der-coenzymes"]}
+{"id":"ATP","title":"ATP","cardIds":["der-ATP"]}
+{"id":"wavelength","title":"Wavelength","cardIds":["der-wavelength"]}
+{"id":"chlorophyll","title":"Chlorophyll","cardIds":["der-chlorophyll"]}
+{"id":"photolysis","title":"Photolysis","cardIds":["der-photolysis"]}
+{"id":"light-reactions","title":"Light reactions","cardIds":["der-light-reactions"]}
+{"id":"dark-reactions","title":"Dark reactions","cardIds":["der-dark-reactions"]}
+{"id":"krebs-cycle","title":"Krebs cycle","cardIds":["der-krebs-cycle"]}
+{"id":"electron-transport-chain","title":"Electron transport chain","cardIds":["der-electron-transport-chain"]}
+{"id":"oxidative-phosphorylation","title":"Oxidative phosphorylation","cardIds":["der-oxidative-phosphorylation"]}
+{"id":"glycolysis","title":"Glycolysis","cardIds":["der-glycolysis"]}
+{"id":"anaerobic-respiration","title":"Anaerobic respiration","cardIds":["der-anaerobic-respiration"]}
+{"id":"aerobic-vs-anaerobic","title":"Aerobic vs anaerobic","cardIds":["der-aerobic-vs-anaerobic"]}
+{"id":"nucleotide-structure","title":"Nucleotide structure","cardIds":["der-nucleotide-structure"]}
+{"id":"base-pairing","title":"Base pairing","cardIds":["der-base-pairing"]}
+{"id":"DNA-double-helix","title":"DNA double helix","cardIds":["der-DNA-double-helix"]}
+{"id":"chromatin","title":"Chromatin","cardIds":["der-chromatin"]}
+{"id":"nucleosome","title":"Nucleosome","cardIds":["der-nucleosome"]}
+{"id":"chromosome","title":"Chromosome","cardIds":["der-chromosome"]}
+{"id":"DNA-polymerase","title":"DNA polymerase","cardIds":["der-DNA-polymerase"]}
+{"id":"DNA-ligase","title":"DNA ligase","cardIds":["der-DNA-ligase"]}
+{"id":"semi-conservative-replication","title":"Semi-conservative replication","cardIds":["der-semi-conservative-replication"]}
+{"id":"replication-origin","title":"Replication origin","cardIds":["der-replication-origin"]}
+{"id":"replication-fork","title":"Replication fork","cardIds":["der-replication-fork"]}
+{"id":"leading-lagging-strand","title":"Leading & lagging strand","cardIds":["der-leading-lagging-strand"]}
+{"id":"okazaki-fragments","title":"Okazaki fragments","cardIds":["der-okazaki-fragments"]}
+{"id":"DNA-repair-mechanisms","title":"DNA repair mechanisms","cardIds":["der-DNA-repair-mechanisms"]}
+{"id":"environmental-mutagens","title":"Environmental mutagens","cardIds":["der-environmental-mutagens"]}
+{"id":"genetic-code-RNA-types","title":"Genetic code & RNA types","cardIds":["der-genetic-code-RNA-types"]}
+{"id":"transcription-initiation","title":"Transcription initiation & enzymology","cardIds":["der-transcription-initiation"]}
+{"id":"transcription-termination","title":"Transcription elongation & termination","cardIds":["der-transcription-termination"]}
+{"id":"RNA-processing","title":"RNA processing in eukaryotes","cardIds":["der-RNA-processing"]}
+{"id":"ribosome-translation-initiation","title":"Ribosome structure & translation initiation","cardIds":["der-ribosome-translation-initiation"]}
+{"id":"translation-elongation","title":"Translation elongation","cardIds":["der-translation-elongation"]}
+{"id":"translation-termination-folding","title":"Translation termination & protein folding","cardIds":["der-translation-termination-folding"]}
+{"id":"point-mutations","title":"Point mutations & substitutions","cardIds":["der-point-mutations"]}
+{"id":"frameshift-mutations","title":"Frameshift mutations & insertions/deletions","cardIds":["der-frameshift-mutations"]}
+{"id":"transposable-elements","title":"Transposable elements","cardIds":["der-transposable-elements"]}
+{"id":"transcription-factors-regulators","title":"Regulatory proteins & transcription factors","cardIds":["der-transcription-factors-regulators"]}
+{"id":"prokaryotic-operons","title":"Prokaryotic gene regulation: operons","cardIds":["der-prokaryotic-operons"]}
+{"id":"chromatin-histones","title":"Chromatin structure & histone modification","cardIds":["der-chromatin-histones"]}
+{"id":"DNA-methylation-epigenetics","title":"DNA methylation & epigenetics","cardIds":["der-DNA-methylation-epigenetics"]}
+{"id":"developmental-hox-genes","title":"Developmental gene control & Hox genes","cardIds":["der-developmental-hox-genes"]}
+{"id":"X-inactivation","title":"X-chromosome inactivation","cardIds":["der-X-inactivation"]}
+{"id":"post-transcriptional-regulation","title":"Post-transcriptional regulation","cardIds":["der-post-transcriptional-regulation"]}
+{"id":"RNA-interference","title":"RNA interference & gene silencing","cardIds":["der-RNA-interference"]}
+{"id":"translational-control","title":"Translational control","cardIds":["der-translational-control"]}
+{"id":"G1-phase","title":"G1 phase & G1/S checkpoint","cardIds":["der-G1-phase"]}
+{"id":"S-phase-replication","title":"S phase & DNA replication","cardIds":["der-S-phase-replication"]}
+{"id":"G2-phase","title":"G2 phase & G2/M checkpoint","cardIds":["der-G2-phase"]}
+{"id":"mitosis-prophase-metaphase","title":"Mitosis: prophase & metaphase","cardIds":["der-mitosis-prophase-metaphase"]}
+{"id":"mitosis-anaphase-telophase","title":"Mitosis: anaphase & telophase","cardIds":["der-mitosis-anaphase-telophase"]}
+{"id":"cytokinesis-mechanisms","title":"Cytokinesis mechanisms","cardIds":["der-cytokinesis-mechanisms"]}
+{"id":"spindle-checkpoint-SAC","title":"Spindle checkpoint & SAC","cardIds":["der-spindle-checkpoint-SAC"]}
+{"id":"telomeres-senescence","title":"Telomeres & cellular senescence","cardIds":["der-telomeres-senescence"]}
+{"id":"cancer-oncogenes-suppressors","title":"Cancer: oncogenes & tumor suppressors","cardIds":["der-cancer-oncogenes-suppressors"]}
+{"id":"apoptosis-programmed-death","title":"Apoptosis & programmed cell death","cardIds":["der-apoptosis-programmed-death"]}
+{"id":"meiosis-I-prophase-metaphase","title":"Meiosis I: prophase I & metaphase I","cardIds":["der-meiosis-I-prophase-metaphase"]}
+{"id":"meiosis-I-anaphase-telophase","title":"Meiosis I: anaphase I & telophase I","cardIds":["der-meiosis-I-anaphase-telophase"]}
+{"id":"meiosis-II","title":"Meiosis II","cardIds":["der-meiosis-II"]}
+{"id":"crossing-over-recombination","title":"Crossing over & genetic recombination","cardIds":["der-crossing-over-recombination"]}
+{"id":"independent-assortment-diversity","title":"Independent assortment & genetic diversity","cardIds":["der-independent-assortment-diversity"]}
+{"id":"spermatogenesis","title":"Spermatogenesis","cardIds":["der-spermatogenesis"]}
+{"id":"oogenesis","title":"Oogenesis","cardIds":["der-oogenesis"]}
+{"id":"fertilization-zygote","title":"Fertilization & zygote formation","cardIds":["der-fertilization-zygote"]}
+{"id":"sexual-reproduction-evolution","title":"Evolutionary advantage of sexual reproduction","cardIds":["der-sexual-reproduction-evolution"]}
+{"id":"alleles-mendelian","title":"Alleles & Mendelian inheritance","cardIds":["der-alleles-mendelian"]}
+{"id":"dominance-patterns","title":"Dominance & expression patterns","cardIds":["der-dominance-patterns"]}
+{"id":"monohybrid-crosses","title":"Monohybrid crosses & test crosses","cardIds":["der-monohybrid-crosses"]}
+{"id":"dihybrid-crosses-assortment","title":"Dihybrid crosses & independent assortment","cardIds":["der-dihybrid-crosses-assortment"]}
+{"id":"linkage-genetic-mapping","title":"Linkage & genetic mapping","cardIds":["der-linkage-genetic-mapping"]}
+{"id":"epistasis-interactions","title":"Epistasis & gene interactions","cardIds":["der-epistasis-interactions"]}
+{"id":"pleiotropy-effects","title":"Pleiotropy & multiple phenotypic effects","cardIds":["der-pleiotropy-effects"]}
+{"id":"polygenic-inheritance","title":"Polygenic inheritance & continuous variation","cardIds":["der-polygenic-inheritance"]}
+{"id":"environmental-phenotype","title":"Environmental effects on phenotype","cardIds":["der-environmental-phenotype"]}
+{"id":"penetrance-expressivity","title":"Penetrance & expressivity","cardIds":["der-penetrance-expressivity"]}
+{"id":"human-inheritance-patterns","title":"Human inheritance patterns","cardIds":["der-human-inheritance-patterns"]}
+{"id":"chromosomal-abnormalities","title":"Chromosomal abnormalities","cardIds":["der-chromosomal-abnormalities"]}
+{"id":"sex-determination-sex-linked","title":"Sex determination & sex-linked traits","cardIds":["der-sex-determination-sex-linked"]}
+{"id":"DNA-cloning-sequencing","title":"DNA cloning & sequencing","cardIds":["der-DNA-cloning-sequencing"]}
+{"id":"PCR-DNA-analysis","title":"PCR & DNA analysis","cardIds":["der-PCR-DNA-analysis"]}
+{"id":"genetic-engineering","title":"Genetic engineering & biotechnology","cardIds":["der-genetic-engineering"]}
+{"id":"natural-selection","title":"Evolution & natural selection","cardIds":["der-natural-selection"]}
+{"id":"adaptation","title":"Adaptation","cardIds":["der-adaptation"]}
+{"id":"fossil-record","title":"Fossil record","cardIds":["der-fossil-record"]}
+{"id":"plate-tectonics","title":"Plate tectonics","cardIds":["der-plate-tectonics"]}
+{"id":"biogeography","title":"Biogeography","cardIds":["der-biogeography"]}
+{"id":"comparative-anatomy","title":"Comparative anatomy","cardIds":["der-comparative-anatomy"]}
+{"id":"gene-frequencies","title":"Gene frequencies","cardIds":["der-gene-frequencies"]}
+{"id":"hardy-weinberg","title":"Hardy-Weinberg equilibrium","cardIds":["der-hardy-weinberg"]}
+{"id":"selection-patterns","title":"Selection patterns","cardIds":["der-selection-patterns"]}
+{"id":"genetic-drift","title":"Genetic drift","cardIds":["der-genetic-drift"]}
+{"id":"gene-flow","title":"Gene flow","cardIds":["der-gene-flow"]}
+{"id":"founder-effect","title":"Founder effect","cardIds":["der-founder-effect"]}
+{"id":"reproductive-isolation","title":"Reproductive isolation","cardIds":["der-reproductive-isolation"]}
+{"id":"speciation","title":"Speciation","cardIds":["der-speciation"]}
+{"id":"phylogenetics","title":"Phylogenetics","cardIds":["der-phylogenetics"]}
+{"id":"cladistics","title":"Cladistics","cardIds":["der-cladistics"]}
+{"id":"molecular-clocks","title":"Molecular clocks","cardIds":["der-molecular-clocks"]}
+{"id":"homologous-analogous","title":"Homologous & analogous structures","cardIds":["der-homologous-analogous"]}
+{"id":"convergent-evolution","title":"Convergent evolution","cardIds":["der-convergent-evolution"]}
+{"id":"RNA-world","title":"RNA world hypothesis","cardIds":["der-RNA-world"]}
+{"id":"endosymbiosis","title":"Endosymbiosis","cardIds":["der-endosymbiosis"]}
+{"id":"early-life","title":"Early life history","cardIds":["der-early-life"]}
+{"id":"virus-structure","title":"Virus structure","cardIds":["der-virus-structure"]}
+{"id":"viral-replication","title":"Viral replication","cardIds":["der-viral-replication"]}
+{"id":"bacteria-structure","title":"Bacteria structure","cardIds":["der-bacteria-structure"]}
+{"id":"bacterial-metabolism","title":"Bacterial metabolism & bioenergetics","cardIds":["der-bacterial-metabolism"]}
+{"id":"bacterial-reproduction","title":"Bacterial reproduction","cardIds":["der-bacterial-reproduction"]}
+{"id":"archaea","title":"Archaea","cardIds":["der-archaea"]}
+{"id":"protist-diversity","title":"Protist diversity & classification","cardIds":["der-protist-diversity"]}
+{"id":"algae","title":"Algae","cardIds":["der-algae"]}
+{"id":"parasitic-protists","title":"Parasitic protists","cardIds":["der-parasitic-protists"]}
+{"id":"plant-evolution","title":"Plant evolution","cardIds":["der-plant-evolution"]}
+{"id":"mosses","title":"Mosses","cardIds":["der-mosses"]}
+{"id":"ferns","title":"Ferns","cardIds":["der-ferns"]}
+{"id":"seed-plants","title":"Seed plants","cardIds":["der-seed-plants"]}
+{"id":"flowering-plants","title":"Flowering plants","cardIds":["der-flowering-plants"]}
+{"id":"vascular-tissue","title":"Vascular tissue","cardIds":["der-vascular-tissue"]}
+{"id":"fungal-structure","title":"Fungal structure & cell walls","cardIds":["der-fungal-structure"]}
+{"id":"fungal-life-cycles","title":"Fungal life cycles","cardIds":["der-fungal-life-cycles"]}
+{"id":"symbiosis-fungi","title":"Symbiosis in fungi","cardIds":["der-symbiosis-fungi"]}
+{"id":"animal-body-plans","title":"Animal body plans & symmetry","cardIds":["der-animal-body-plans"]}
+{"id":"invertebrates","title":"Invertebrates","cardIds":["der-invertebrates"]}
+{"id":"arthropods","title":"Arthropods","cardIds":["der-arthropods"]}
+{"id":"chordate-features","title":"Chordate features","cardIds":["der-chordate-features"]}
+{"id":"vertebrate-evolution","title":"Vertebrate evolution","cardIds":["der-vertebrate-evolution"]}
+{"id":"fish","title":"Fish","cardIds":["der-fish"]}
+{"id":"amphibians","title":"Amphibians","cardIds":["der-amphibians"]}
+{"id":"reptiles","title":"Reptiles","cardIds":["der-reptiles"]}
+{"id":"birds","title":"Birds","cardIds":["der-birds"]}
+{"id":"mammals","title":"Mammals","cardIds":["der-mammals"]}
+{"id":"ectotherms-endotherms","title":"Ectotherms & endotherms","cardIds":["der-ectotherms-endotherms"]}
+{"id":"pedigree-analysis","title":"Pedigree analysis & inheritance patterns","cardIds":["der-pedigree-analysis"]}
+{"id":"autosomal-dominant","title":"Autosomal dominant disorders","cardIds":["der-autosomal-dominant"]}
+{"id":"autosomal-recessive","title":"Autosomal recessive disorders","cardIds":["der-autosomal-recessive"]}
+{"id":"X-linked-inheritance","title":"X-linked inheritance & carrier detection","cardIds":["der-X-linked-inheritance"]}
+{"id":"X-linked-recessive-disorders","title":"X-linked recessive disorders","cardIds":["der-X-linked-recessive-disorders"]}
+{"id":"aneuploidy-imbalance","title":"Aneuploidy & chromosomal imbalance","cardIds":["der-aneuploidy-imbalance"]}
+{"id":"down-syndrome-trisomy","title":"Down syndrome & autosomal trisomy","cardIds":["der-down-syndrome-trisomy"]}
+{"id":"sex-chromosome-aneuploidy","title":"Sex chromosome aneuploidy","cardIds":["der-sex-chromosome-aneuploidy"]}
+{"id":"structural-rearrangements","title":"Structural chromosomal rearrangements","cardIds":["der-structural-rearrangements"]}
+{"id":"genetic-counseling-diagnosis","title":"Genetic counseling & prenatal diagnosis","cardIds":["der-genetic-counseling-diagnosis"]}
+{"id":"restriction-enzymes","title":"Restriction enzymes & DNA cutting","cardIds":["der-restriction-enzymes"]}
+{"id":"plasmids-vectors","title":"Plasmids & cloning vectors","cardIds":["der-plasmids-vectors"]}
+{"id":"ligation-recombinant-DNA","title":"Ligation & recombinant DNA","cardIds":["der-ligation-recombinant-DNA"]}
+{"id":"PCR-amplification","title":"PCR & DNA amplification","cardIds":["der-PCR-amplification"]}
+{"id":"DNA-sequencing","title":"DNA sequencing methods","cardIds":["der-DNA-sequencing"]}
+{"id":"DNA-fingerprinting","title":"DNA fingerprinting & forensics","cardIds":["der-DNA-fingerprinting"]}
+{"id":"genetic-engineering-transgenic","title":"Genetic engineering & transgenic organisms","cardIds":["der-genetic-engineering-transgenic"]}
+{"id":"GMO-agriculture","title":"GMOs & agriculture applications","cardIds":["der-GMO-agriculture"]}
+{"id":"gene-therapy-medical","title":"Gene therapy & medical applications","cardIds":["der-gene-therapy-medical"]}
+{"id":"biotechnology-ethics","title":"Ethical issues & regulation","cardIds":["der-biotechnology-ethics"]}
+{"id":"natural-selection-adaptation","title":"Natural selection & adaptation","cardIds":["der-natural-selection-adaptation"]}
+{"id":"selection-types","title":"Types of natural selection","cardIds":["der-selection-types"]}
+{"id":"artificial-selection","title":"Artificial selection & breeding","cardIds":["der-artificial-selection"]}
+{"id":"fossil-record-paleontology","title":"Fossil record & paleontology","cardIds":["der-fossil-record-paleontology"]}
+{"id":"comparative-anatomy-homology","title":"Comparative anatomy & homology","cardIds":["der-comparative-anatomy-homology"]}
+{"id":"biogeography-plate-tectonics","title":"Biogeography & plate tectonics","cardIds":["der-biogeography-plate-tectonics"]}
+{"id":"molecular-evolution-evidence","title":"Molecular evidence for evolution","cardIds":["der-molecular-evolution-evidence"]}
+{"id":"allele-frequencies-gene-pools","title":"Allele frequencies & gene pools","cardIds":["der-allele-frequencies-gene-pools"]}
+{"id":"hardy-weinberg-equilibrium","title":"Hardy-Weinberg equilibrium","cardIds":["der-hardy-weinberg-equilibrium"]}
+{"id":"HW-violations","title":"Violations of Hardy-Weinberg","cardIds":["der-HW-violations"]}
+{"id":"mutation-genetic-variation","title":"Mutation & genetic variation","cardIds":["der-mutation-genetic-variation"]}
+{"id":"genetic-drift-founder","title":"Genetic drift & founder effect","cardIds":["der-genetic-drift-founder"]}
+{"id":"gene-flow-migration","title":"Gene flow & migration","cardIds":["der-gene-flow-migration"]}
+{"id":"selection-populations","title":"Natural selection in populations","cardIds":["der-selection-populations"]}
+{"id":"balanced-polymorphism","title":"Balanced polymorphism","cardIds":["der-balanced-polymorphism"]}
+{"id":"speciation-concepts","title":"Speciation concepts","cardIds":["der-speciation-concepts"]}
+{"id":"allopatric-speciation","title":"Allopatric speciation","cardIds":["der-allopatric-speciation"]}
+{"id":"peripatric-parapatric-speciation","title":"Peripatric & parapatric speciation","cardIds":["der-peripatric-parapatric-speciation"]}
+{"id":"phylogenetic-reconstruction","title":"Phylogenetic reconstruction","cardIds":["der-phylogenetic-reconstruction"]}
+{"id":"molecular-clocks-dating","title":"Molecular clocks & dating","cardIds":["der-molecular-clocks-dating"]}
+{"id":"adaptive-radiation","title":"Adaptive radiation & ecological speciation","cardIds":["der-adaptive-radiation"]}
+{"id":"convergent-divergent-evolution","title":"Convergent & divergent evolution","cardIds":["der-convergent-divergent-evolution"]}
+{"id":"RNA-world-hypothesis","title":"RNA world hypothesis","cardIds":["der-RNA-world-hypothesis"]}
+{"id":"abiogenesis-prebiotic","title":"Abiogenesis & prebiotic chemistry","cardIds":["der-abiogenesis-prebiotic"]}
+{"id":"early-life-LUCA","title":"Early life & LUCA","cardIds":["der-early-life-LUCA"]}
+{"id":"endosymbiosis-organelles","title":"Endosymbiosis & organelle origin","cardIds":["der-endosymbiosis-organelles"]}
+{"id":"three-domains-life","title":"Three domains of life","cardIds":["der-three-domains-life"]}
+{"id":"viral-structure-replication","title":"Viral structure & replication","cardIds":["der-viral-structure-replication"]}
+{"id":"lytic-lysogenic","title":"Lytic vs lysogenic cycles","cardIds":["der-lytic-lysogenic"]}
+{"id":"retroviruses-reverse-transcription","title":"Retroviruses & reverse transcription","cardIds":["der-retroviruses-reverse-transcription"]}
+{"id":"viral-diseases-epidemiology","title":"Viral diseases & epidemiology","cardIds":["der-viral-diseases-epidemiology"]}
+{"id":"prokaryotic-diversity","title":"Prokaryotic diversity & classification","cardIds":["der-prokaryotic-diversity"]}
+{"id":"horizontal-gene-transfer","title":"Horizontal gene transfer in prokaryotes","cardIds":["der-horizontal-gene-transfer"]}
+{"id":"archaea-extremophiles","title":"Archaea: extremophiles & methanogens","cardIds":["der-archaea-extremophiles"]}
+{"id":"photosynthetic-protists-algae","title":"Photosynthetic protists & algae","cardIds":["der-photosynthetic-protists-algae"]}
+{"id":"parasitic-protists-disease","title":"Parasitic protists & disease","cardIds":["der-parasitic-protists-disease"]}
+{"id":"plant-evolution-land","title":"Plant evolution & adaptations to land","cardIds":["der-plant-evolution-land"]}
+{"id":"bryophytes","title":"Bryophytes: mosses & liverworts","cardIds":["der-bryophytes"]}
+{"id":"seedless-vascular-plants","title":"Seedless vascular plants: ferns & allies","cardIds":["der-seedless-vascular-plants"]}
+{"id":"gymnosperm-evolution","title":"Seed plants & gymnosperm evolution","cardIds":["der-gymnosperm-evolution"]}
+{"id":"angiosperm-diversity","title":"Flowering plants & angiosperm diversity","cardIds":["der-angiosperm-diversity"]}
+{"id":"fungal-reproduction","title":"Fungal reproduction & life cycles","cardIds":["der-fungal-reproduction"]}
+{"id":"fungal-major-groups","title":"Fungal diversity: zygomycetes, ascomycetes, basidiomycetes","cardIds":["der-fungal-major-groups"]}
+{"id":"fungal-symbiosis","title":"Fungal ecology & symbiosis","cardIds":["der-fungal-symbiosis"]}
+{"id":"sponges-cnidarians","title":"Sponges & cnidarians","cardIds":["der-sponges-cnidarians"]}
+{"id":"flatworms-roundworms","title":"Flatworms & roundworms","cardIds":["der-flatworms-roundworms"]}
+{"id":"mollusks-annelids","title":"Mollusks & annelids","cardIds":["der-mollusks-annelids"]}
+{"id":"arthropods-insects","title":"Arthropods & insects","cardIds":["der-arthropods-insects"]}
+{"id":"chordate-vertebrate-traits","title":"Chordate & vertebrate characteristics","cardIds":["der-chordate-vertebrate-traits"]}
+{"id":"fish-jawless-jawed","title":"Fish: jawless & jawed","cardIds":["der-fish-jawless-jawed"]}
+{"id":"amphibians-tetrapods","title":"Amphibians & tetrapod origin","cardIds":["der-amphibians-tetrapods"]}
+{"id":"reptiles-dinosaurs","title":"Reptiles & dinosaurs","cardIds":["der-reptiles-dinosaurs"]}
+{"id":"birds-theropods","title":"Birds: feathered theropods","cardIds":["der-birds-theropods"]}
+{"id":"mammals-thermoregulation","title":"Mammals & thermoregulation","cardIds":["der-mammals-thermoregulation"]}
+{"id":"primate-evolution-humans","title":"Primate evolution & human origins","cardIds":["der-primate-evolution-humans"]}
