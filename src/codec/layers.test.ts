@@ -1,26 +1,12 @@
 import { DateTime, Effect, Schema } from "effect"
 import { describe, expect, test } from "bun:test"
-import {
-  CardCreated,
-  CardId,
-  CardMustHitAdded,
-  CardRetired,
-  CardReviewed,
-  DerivationCard,
-  InboxCaptured,
-  InboxDiscarded,
-  InboxId,
-  InboxPromoted,
-  RecallCard,
-  type Event,
-} from "../events/interface.ts"
+import { CardId, CardReviewed, type Event } from "../events/interface.ts"
 import { Record } from "../store/interface.ts"
 import { Codec } from "./interface.ts"
 import { Live } from "./layers.ts"
 
 const record = (s: string): Record => Schema.decodeUnknownSync(Record)(s)
 const cardId = (s: string) => Schema.decodeUnknownSync(CardId)(s)
-const inboxId = (s: string) => Schema.decodeUnknownSync(InboxId)(s)
 const at = DateTime.unsafeFromDate(new Date("2026-03-10T12:00:00.000Z"))
 
 const withCodec = <A, E>(effect: Effect.Effect<A, E, Codec>) =>
@@ -30,49 +16,9 @@ const failCodec = <E>(effect: Effect.Effect<unknown, E, Codec>) =>
   withCodec(Effect.flip(effect))
 
 describe("Codec.Live", () => {
-  test("round-trips every locked event variant", async () => {
+  test("round-trips a review event; payload has no derived fields", async () => {
     const events: ReadonlyArray<Event> = [
-      new InboxCaptured({ id: inboxId("in-1"), at, text: "gap" }),
-      new InboxDiscarded({
-        id: inboxId("in-1"),
-        at,
-        reason: "once",
-      }),
-      new InboxPromoted({
-        id: inboxId("in-1"),
-        at,
-        cardId: cardId("card-1"),
-      }),
-      new CardCreated({
-        id: cardId("card-1"),
-        at,
-        origin: "curation",
-        card: new RecallCard({
-          id: cardId("card-1"),
-          prompt: "p",
-          answer: "a",
-          tags: [],
-        }),
-      }),
-      new CardCreated({
-        id: cardId("card-d"),
-        at,
-        origin: "curation",
-        card: new DerivationCard({
-          id: cardId("card-d"),
-          prompt: "why",
-          tags: [],
-          mustHits: ["hit"],
-        }),
-      }),
       new CardReviewed({ id: cardId("card-1"), at, rating: "Good" }),
-      new CardMustHitAdded({
-        id: cardId("card-d"),
-        at,
-        mustHit: "extra",
-        exposedBy: "review",
-      }),
-      new CardRetired({ id: cardId("card-1"), at, reason: "replaced" }),
     ]
     for (const event of events) {
       const decoded = await withCodec(
@@ -84,30 +30,21 @@ describe("Codec.Live", () => {
       )
       expect(decoded).toEqual(event)
     }
-  })
-
-  test("round-trips card.created; store payload stays JSON text", async () => {
-    const event = new CardCreated({
-      id: cardId("card-1"),
-      at,
-      origin: "curation",
-      card: new RecallCard({
-        id: cardId("card-1"),
-        prompt: "peek or consume?",
-        answer: "peek does not consume",
-        tags: ["compilers"],
-      }),
-    })
+    const first = events[0]
+    if (first === undefined) {
+      throw new Error("expected a review event")
+    }
     const encoded = await withCodec(
       Effect.gen(function* () {
         const codec = yield* Codec
-        return yield* codec.encode(event)
+        return yield* codec.encode(first)
       }),
     )
     expect(typeof encoded).toBe("string")
     expect(() => JSON.parse(encoded)).not.toThrow()
     expect(JSON.parse(encoded)).not.toHaveProperty("due")
     expect(JSON.parse(encoded)).not.toHaveProperty("interval")
+    expect(JSON.parse(encoded)).not.toHaveProperty("brightness")
   })
 
   test("complete junk line is SyntaxError, not a store error", async () => {
