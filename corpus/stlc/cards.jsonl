@@ -1,0 +1,7 @@
+{"_tag":"recall","id":"rec-term-formers","nodeId":"terms","prompt":"In the simply-typed lambda calculus, what are the three term formers?","answer":"Variable x, abstraction λx:τ. t, and application t t′.","tags":["stlc","syntax"]}
+{"_tag":"recall","id":"rec-fn-type","nodeId":"types","prompt":"How is a function type written, and what do the domain and codomain mean?","answer":"τ → τ′. Domain τ is the argument type; codomain τ′ is the result type.","tags":["stlc","types"]}
+{"_tag":"recall","id":"rec-t-app","nodeId":"typing","prompt":"State the T-App typing rule.","answer":"From Γ ⊢ t : τ → τ′ and Γ ⊢ t′ : τ conclude Γ ⊢ t t′ : τ′.","tags":["stlc","typing"]}
+{"_tag":"derivation","id":"der-identity","nodeId":"typing","prompt":"Derive Γ ⊢ (λx:τ. x) : τ → τ. Name each rule.","tags":["stlc","typing"],"mustHits":["T-Abs","T-Var"]}
+{"_tag":"recall","id":"rec-capture","nodeId":"substitution","prompt":"What does capture-avoiding substitution prevent?","answer":"A free variable being accidentally bound by an enclosing λ when a term is substituted under an abstraction.","tags":["stlc","substitution"]}
+{"_tag":"recall","id":"rec-progress","nodeId":"safety","prompt":"State the progress theorem for STLC (no effects).","answer":"A closed well-typed term is either a value or can take a β-reduction step.","tags":["stlc","safety"]}
+{"_tag":"derivation","id":"der-preservation","nodeId":"safety","prompt":"Sketch why type preservation for an application redex needs the substitution lemma.","tags":["stlc","safety"],"mustHits":["substitution lemma","T-App"]}
