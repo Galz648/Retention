@@ -1,7 +1,7 @@
 Session CLI (frontend) — impure as a component (it talks to Session and the filesystem). Individual **commands** are classified for the user as **pure** (read-only) or **impure** (create / append / move / delete).
 
-Does: drive inspect and review from one installed command. Name trees, show cards, print the queue, record a grade after consent.
-Does not: hold state, compute Brightness, decide due-ness, walk prerequisites, or create nodes. Does not require the user to set environment variables or open data files.
+Does: drive inspect, review, and capture from one installed command. Name trees, show cards, print the queue, record a grade after consent, append an inbox note after consent.
+Does not: hold state, compute Brightness, decide due-ness, walk prerequisites, or create nodes. Does not require the user to set environment variables or open data files. Does not run curation.
 
 ## Product surface
 
@@ -34,7 +34,9 @@ Creating the log (or its directory) counts as a side effect. `queue` on a missin
 [pure]    tree     one tree's nodes and edges
 [pure]    show     one due card including the answer / must-hits
 [pure]    queue    due and unblocked cards, numbered
+[pure]    inbox    captured notes waiting for curation
 [impure]  grade    append one review — asks first
+[impure]  capture  append one inbox note — asks first
 ```
 
 Unknown command: print help, exit non-zero.
@@ -98,6 +100,22 @@ Before writing, print a consent line in glossary language:
 
 Then `Proceed? [y/N]`. Only `y` / `yes` (case-insensitive) continue. Anything else aborts with no write.
 
+### `inbox`
+
+Pending captured notes, numbered, raw text. `inbox empty` if none. Does not write. No folder names, paths, or event tags.
+
+### `capture …` (impure)
+
+The rest of the command line is the note. If omitted in an interactive terminal, ask `Capture what?`. Empty text is not a write.
+
+Before writing, print a consent line:
+
+- the note (truncated if long)
+- that this **appends one inbox note** to the event log
+- if the log does not exist, that this **will create it**
+
+Then `Proceed? [y/N]`. Same yes/no rules as `grade`. Capture is not bound to a tree.
+
 ## Choosing a tree
 
 `[title]` is the tree's **title** (`Biology II`, `Biology II ecology terms`, …), or a unique prefix of that title.
@@ -110,7 +128,7 @@ If the prefix matches more than one title: select among the matches, or error th
 
 Useful first. Decoration second.
 
-- **Banner:** the existing Retention wordmark, **only** on `help` (and the no-args select). Never on `queue` / `show` / `grade`.
+- **Banner:** the existing Retention wordmark, **only** on `help` (and the no-args select). Never on `queue` / `show` / `grade` / `inbox` / `capture`.
 - **Color:** when stdout is a terminal. None when piped. Honor `NO_COLOR`. Impure / “this will write” uses a distinct color from pure lists. Do not rainbow every line.
 - **Completions:** generate shell completions for commands, ratings, and tree **titles** (`retention completions zsh` or equivalent). Typing `retention queue <tab>` offers titles, not folder names.
 - **Select:** arrow keys (and numbers) for command, tree, queue index, and rating when those arguments are omitted on a TTY. Typing the argument still works and is the non-interactive path.
@@ -131,4 +149,4 @@ Until that artifact exists, `bun src/cli/main.ts` may be the developer stand-in 
 
 ## Does not (parked)
 
-Interactive review loop, capture, curation, `--yes`, environment-variable config, opening or requiring the user to edit log or corpus files, showing folder names or card ids as the way to talk.
+Interactive review loop, curation, `--yes`, environment-variable config, opening or requiring the user to edit log or corpus files, showing folder names or card ids as the way to talk.

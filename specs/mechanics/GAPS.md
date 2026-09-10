@@ -20,7 +20,7 @@ You only talk to `retention`. You never set hidden settings, and you never open 
 
 **TTY may be cool; pipes stay boring.** Banner on help only. Color on terminals, none when piped (`NO_COLOR` too): knowledge cyan, terms magenta, warn yellow, due green, empty dim. Completions for commands and titles. TTY `session` is a fullscreen TUI (alternate screen, keys). One-shot commands stay CLI. Numbered `prompt()` is not the TTY product.
 
-Still parked: interactive one-card review loop, capture, curation, `--yes`.
+Still parked: interactive one-card review loop, curation, `--yes`.
 
 ## Why `trees` felt the same
 

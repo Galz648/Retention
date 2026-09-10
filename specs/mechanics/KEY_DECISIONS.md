@@ -3,7 +3,8 @@ Locked for this version.
 - **The command-line program is the only client.** No environment variables, no “open this file to see the card.” Tree, queue, card text, and grades all go through the program.
 - **The person sees titles and glossary words**, never folder names or card ids. Those stay on disk for the computer.
 - **Pure vs impure is a user-facing label.** Pure = no create/append/move/delete. Impure asks permission; default no. If the program cannot ask yes/no, impure commands refuse. No `--yes`.
-- **Consent is in the program, not in Session.** Session.grade does not prompt.
+- **Capture is an inbox, not the engine.** `retention capture` appends `inbox.captured` (raw text). `retention inbox` lists pending notes. Curation is parked. The engine never imports inbox; mastery folds only `card.reviewed`. A skill may call these commands; it does not write the log itself and does not invent cards.
+- **Consent is in the program, not in Session.** Session.grade and Inbox.capture do not prompt.
 - **TypeScript does not emit a binary.** The compiler emits JavaScript. The artifact is Bun compile → one standalone program.
 - Threshold, the spaced-repetition library's internal scales, and the name Brightness stay placeholders until evidence. Parked features stay parked.
 - **Adaptive parameters are learned, not configured.** Anything that should fit a person — the forgetting / Brightness curves, the scheduler's intervals, how much one review sitting should hold, how card types (recall vs derivation) are paced — comes from that person's event log via a calibrator, never from a config field or a hand-set constant. The calibrator is not built; the design assumes it will be. Clients (e.g. a review-session skill) keep only fixed preferences in config, decide the rest with the user in the moment, and record what actually happened so the calibrator has data. Reaching for a tuning constant is the signal that the value belongs in the log instead.

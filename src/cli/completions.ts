@@ -7,7 +7,9 @@ const commands: ReadonlyArray<{ readonly name: string; readonly hint: string }> 
   { name: "tree", hint: "one tree: nodes and edges" },
   { name: "show", hint: "one due card including the answer / must-hits" },
   { name: "queue", hint: "due and unblocked cards, numbered" },
+  { name: "inbox", hint: "captured notes waiting for curation" },
   { name: "grade", hint: "append one review — asks first" },
+  { name: "capture", hint: "append one inbox note — asks first" },
   { name: "completions", hint: "shell completion script" },
 ]
 

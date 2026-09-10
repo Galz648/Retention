@@ -4,6 +4,7 @@ export {
   CardReviewed,
   DerivationCard,
   Event,
+  InboxCaptured,
   Outcome,
   RecallCard,
 } from "../domain/index.ts"

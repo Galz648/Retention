@@ -8,7 +8,7 @@ import {
 } from "ts-fsrs"
 import { Brightness } from "../../domain/brightness.ts"
 import type { Card, Outcome } from "../../domain/cards.ts"
-import type { Event } from "../../domain/events.ts"
+import { CardReviewed, type Event } from "../../domain/events.ts"
 import type { CardId } from "../../domain/ids.ts"
 import { Mastery } from "./interface.ts"
 
@@ -81,6 +81,7 @@ const brightnessOf = (
 ): Brightness => {
   const scheduler = schedulerFor(card)
   const reviews = events
+    .filter((event): event is CardReviewed => event._tag === "card.reviewed")
     .filter((event) => event.id === card.id)
     .map((event) => ({
       at: DateTime.toEpochMillis(event.at),

@@ -6,6 +6,8 @@ retention trees
 retention queue "Biology II"
 retention show 1 "Biology II"
 retention grade 1 Good "Biology II"    # asks before writing
+retention capture "diffusion is net flow down a gradient"
+retention inbox
 ```
 
 Omit the title in an interactive terminal → select (grouped knowledge trees vs term decks).
@@ -18,6 +20,6 @@ Developer stand-in until compile is wired — same arguments, still no environme
 bun src/cli/main.ts help
 ```
 
-`grade` is the only impure command. It will ask. Say no → nothing is created.
+`grade` and `capture` are impure. They will ask. Say no → nothing is created.
 
 Agent git process: [LIFECYCLE.md](./LIFECYCLE.md). Pre-commit runs typecheck + tests, including invariant properties — see [INVARIANTS.md](./INVARIANTS.md).

@@ -9,6 +9,7 @@ Forester specced as a programmatic pipeline: [FORESTER.md](./components/FORESTER
 [Graph](./components/GRAPH.md) — pure. Knows what depends on what, and what you're ready for.
 
 [Session](./components/SESSION.md) — impure. Runs a review: composes the engine, reads the stores, records what happened.
+[Inbox](./components/INBOX.md) — impure. Appends raw captured notes (`inbox.captured`); lists pending. Does not compose the engine. Consent is in Session CLI.
 [Session CLI](./components/SESSION_CLI.md) (frontend) — the user surface for this version. TTY `session` is a fullscreen TUI; one-shot commands are CLI. Component is impure; **commands** are labeled `[pure]` / `[impure]`. Impure commands ask before any write. The person sees tree **titles**, not folder names. Ships as a Bun-compiled binary named `retention`.
 
 [Forester](./components/FORESTER.md) — a programmatic pipeline with model-assisted stages. Turns course materials (learning outcomes, textbook, assignments, past exams) into a corpus tree anchored to the course's goals. Proposes; nothing lands without approval; never reads the event log.
@@ -16,17 +17,19 @@ Forester specced as a programmatic pipeline: [FORESTER.md](./components/FORESTER
 ```
      Session CLI                           Forester
           │                                    │
-          │     ┌──────────────────────────┐   │
-          └────►│         Session          │   │
-                │  ┌─────────────────────┐ │   │
-                │  │       Engine        │ │   │
-                │  │  Mastery    Graph   │ │   │
-                │  │      Scheduler      │ │   │
-                │  └─────────────────────┘ │   │
-                └────────────┬─────────────┘   │
-                             │                 │
-                        event logs             │
-                          Corpus ◄─────────────┘
+          ├────► Inbox                         │
+          │                                    │
+          │     ┌──────────────────────────┐     │
+          └────►│         Session          │     │
+                │  ┌─────────────────────┐ │     │
+                │  │       Engine        │ │     │
+                │  │  Mastery    Graph   │ │     │
+                │  │      Scheduler      │ │     │
+                │  └─────────────────────┘ │     │
+                └────────────┬─────────────┘     │
+                             │                    │
+                        event logs                │
+                          Corpus ◄───────────────┘
 ```
 
 ### Data Layer

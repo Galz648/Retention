@@ -60,7 +60,7 @@ INV-{kind}-{owner}-{nn}
 | Piece | Values |
 | --- | --- |
 | `kind` | `B` behavior (true of any run) · `C` construction (true of how a module is built) |
-| `owner` | `LANG` language · `CLI` Session CLI · `SES` Session · `ENG` Engine isolation · `MST` Mastery · `GRF` Graph · `SCH` Scheduler · `STO` Store · `MOD` any new module |
+| `owner` | `LANG` language · `CLI` Session CLI · `SES` Session · `ENG` Engine isolation · `MST` Mastery · `GRF` Graph · `SCH` Scheduler · `STO` Store · `INB` Inbox · `MOD` any new module |
 | `nn` | `01`… stable within owner + kind. Do not reuse. |
 
 One claim per id. The property cites the id; the id does not cite the property. Owner is the seam that must uphold the claim. Do not put placeholder knobs in the id (`BRIGHTNESS`, `W`, `0.9`). Parked product does not get an id.
@@ -129,6 +129,12 @@ The name of the `[0, 1]` number is a placeholder. The **relations** are locked. 
 | --- | --- | --- |
 | **INV-B-STO-01** | The store appends and reads records. It does not interpret them. A missing file is empty history, not an error. | example — `src/store/jsonl.test.ts`, `memory.test.ts` |
 
+### Inbox
+
+| Id | Claim | Encoding |
+| --- | --- | --- |
+| **INV-B-INB-01** | `capture` appends exactly one `inbox.captured` (trimmed text + time) and nothing else. Empty or whitespace text is not written. `pending` is those entries in log order. | example — `src/inbox/live.test.ts`, `src/cli/handle.test.ts` |
+
 ---
 
 ## Construction
@@ -138,7 +144,7 @@ The name of the `[0, 1]` number is a placeholder. The **relations** are locked. 
 | Id | Claim | Encoding |
 | --- | --- | --- |
 | **INV-C-ENG-01** | Mastery, graph, and scheduler never import each other. | example — `src/engine/no-cross-imports.test.ts` |
-| **INV-C-ENG-02** | Engine source does not import store, corpus I/O, session, or cli. | example — same file |
+| **INV-C-ENG-02** | Engine source does not import store, corpus I/O, session, cli, or inbox. | example — same file |
 | **INV-C-MST-01** | Mastery Live never provides a Clock. It lists Clock in `R`. It does not call `Date.now` or `Clock.currentTimeMillis`. | example — `no-cross-imports.test.ts`, `mastery/live.test.ts` |
 | **INV-C-GRF-01** | Graph Live does not import Clock. Graph does not know the time. | example — `src/engine/graph/live.test.ts` |
 | **INV-C-SCH-01** | Scheduler Live is blind to card type, edges, and Clock. It imports `THRESHOLD` from `src/config.ts`; it does not embed a magic literal. | example — `src/engine/scheduler/live.test.ts` |
@@ -159,6 +165,12 @@ The name of the `[0, 1]` number is a placeholder. The **relations** are locked. 
 | Id | Claim | Encoding |
 | --- | --- | --- |
 | **INV-C-STO-01** | The store adapter owns bytes and framing. It returns opaque records. Interpretation sits above the store. Encoded review payloads do not carry `due`, `interval`, or `brightness`. | example — `src/store/memory.test.ts`, `src/codec/layers.test.ts` |
+
+### Inbox
+
+| Id | Claim | Encoding |
+| --- | --- | --- |
+| **INV-C-INB-01** | Inbox does not import engine Tags, Session, cli, or `THRESHOLD`. It does not construct or provide Clock. Consent is in Session CLI. | example — `src/inbox/live.test.ts`, `src/invariants/construction.test.ts` |
 
 ### Any new module
 
@@ -184,10 +196,17 @@ Do not mint new product law in the module. New `INV-*` ids only when a locked sp
 **Engine Tag** (`src/engine/<name>/`, a `Context.Tag` + Live)
 
 - All **every** ids
-- `INV-C-ENG-01`, `INV-C-ENG-02` — no sibling Tag imports; no store / corpus I/O / session / cli
+- `INV-C-ENG-01`, `INV-C-ENG-02` — no sibling Tag imports; no store / corpus I/O / session / cli / inbox
 - Own `INV-C-<owner>-*` (Clock / time / blindness) — follow MST / GRF / SCH
 - Own `INV-B-<owner>-*` as FastCheck on Live (relations, not knobs)
 - If it needs time: list Clock in `R`; never provide Clock; never `Date.now`
+
+**Inbox** (`src/inbox/`, Tag + Live)
+
+- All **every** ids
+- `INV-C-INB-01`, `INV-B-INB-01` — no engine/Session/cli; one `inbox.captured` per capture; empty text is not written
+- Clock in `R` on `capture`; never provide Clock
+- Does not create cards or bind a tree
 
 **Session-shaped compose** (reads stores, writes log, composes Tags)
 
@@ -238,7 +257,8 @@ The hook only runs `bun run typecheck` and `bun test`. It cannot see a checklist
 | --- | --- |
 | New `src/engine/<name>/` not in the isolation glob | `INV-C-ENG-01` / `INV-C-ENG-02` scan — unknown engine dir, or sibling/store/cli import |
 | Engine Live with no FastCheck / no `INV-B-` test name | `INV-C-MOD-01` — each `src/engine/*/live.ts` has a `live.test.ts` that imports `effect/FastCheck` and names at least one `INV-B-` |
-| New top-level `src/<dir>/` not on the kind registry | `INV-C-MOD-01` — registry of kinds (`cli`, `session`, `engine`, `store`, `corpus`, `codec`, `domain`, `testing`). Unknown dir fails until classified and given the checks that kind requires |
+| New top-level `src/<dir>/` not on the kind registry | `INV-C-MOD-01` — registry of kinds (`cli`, `session`, `engine`, `store`, `corpus`, `codec`, `domain`, `testing`, `inbox`). Unknown dir fails until classified and given the checks that kind requires |
+| Inbox imports engine / Session / cli, or engine imports inbox | `INV-C-INB-01` / `INV-C-ENG-02` |
 | CLI sources import engine Tags (beyond one isolated command module) or `THRESHOLD` | `INV-C-CLI-01` / `INV-C-CLI-03` |
 | `--yes` in `src/cli` | `INV-C-CLI-02` |
 | `RETENTION_` env used to pick tree or paths | `INV-B-CLI-01` |
@@ -258,7 +278,7 @@ Not ids. Same files mention them.
 | Session node-fold TODO | Placeholder, not a claim about how a concept is known |
 | `--yes` as a future flag | Parked. **This version has no `--yes`** is `INV-C-CLI-02`. |
 | Env-var config as a future interface | Parked. **This version has no user-facing env-var interface** is `INV-B-CLI-01`. |
-| Forester, capture, curation, calibrator, dormancy, one-card review loop, practice cards, Grader | Do not build this version |
+| Forester, curation, calibrator, dormancy, one-card review loop, practice cards, Grader | Do not build this version |
 | Tag-level `--trace` | Parked |
 | TypeScript vs Rust client | Allowed, not chosen — see `INV-C-CLI-05` |
 | Session-level events for a calibrator | Open, not decided |

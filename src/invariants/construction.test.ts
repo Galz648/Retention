@@ -13,6 +13,7 @@ const knownTopLevel = new Set([
   "testing",
   "invariants",
   "events",
+  "inbox",
 ])
 
 const listTopLevel = async (): Promise<ReadonlyArray<string>> => {
@@ -67,9 +68,9 @@ describe("construction", () => {
     }
   })
 
-  test("INV-C-ENG-02: engine source does not import store, corpus, session, or cli", async () => {
+  test("INV-C-ENG-02: engine source does not import store, corpus, session, cli, or inbox", async () => {
     const files = await sourceOf("src/engine/**/*.ts")
-    const seams = ["store", "corpus", "session", "cli"] as const
+    const seams = ["store", "corpus", "session", "cli", "inbox"] as const
     for (const file of files) {
       if (file.path.endsWith(".test.ts")) continue
       for (const seam of seams) {
@@ -120,6 +121,17 @@ describe("construction", () => {
         /engine\/scheduler/.test(text),
       ].filter(Boolean)
       expect(tags.length).toBeLessThanOrEqual(1)
+    }
+  })
+
+  test("INV-C-INB-01: inbox does not import engine, session, cli, or THRESHOLD", async () => {
+    const files = await sourceOf("src/inbox/**/*.ts")
+    for (const file of files) {
+      if (file.path.endsWith(".test.ts")) continue
+      expect(file.text).not.toMatch(/from ["'][^"']*engine\//)
+      expect(file.text).not.toMatch(/from ["'][^"']*session\//)
+      expect(file.text).not.toMatch(/from ["'][^"']*cli\//)
+      expect(file.text).not.toMatch(/THRESHOLD/)
     }
   })
 

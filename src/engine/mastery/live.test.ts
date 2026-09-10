@@ -6,6 +6,7 @@ import {
   CardId,
   CardReviewed,
   DerivationCard,
+  InboxCaptured,
   NodeId,
   RecallCard,
   type Card,
@@ -120,6 +121,16 @@ describe("Mastery.Live", () => {
     expect(values.size).toBe(2)
     expect(values.get(cardId("fresh"))).toBe(unreviewed)
     expect(values.get(cardId("also-fresh"))).toBe(unreviewed)
+  })
+
+  test("INV-B-MST-01: inbox.captured events do not change Brightness", () => {
+    const cards = [recall("fresh")]
+    const events = [
+      new InboxCaptured({ text: "a thought", at: atMillis(NOW) }),
+    ]
+    const values = evaluateSync(events, cards, NOW)
+    expect(values.size).toBe(1)
+    expect(values.get(cardId("fresh"))).toBe(unreviewed)
   })
 
   test("INV-B-MST-01: reviews for unknown card ids are ignored", () => {
@@ -258,6 +269,7 @@ describe("Mastery.Live", () => {
           const late = evaluateSync(scenario.events, scenario.cards, t2)
           for (const card of scenario.cards) {
             const reviewedInWindow = scenario.events.some((event) => {
+              if (event._tag !== "card.reviewed") return false
               if (event.id !== card.id) return false
               const at = DateTime.toEpochMillis(event.at)
               return at > t1 && at <= t2
@@ -276,8 +288,10 @@ describe("Mastery.Live", () => {
 
     fc.assert(
       fc.property(scenarioArb, (scenario) => {
-        const reviewed = scenario.events.filter((event) =>
-          scenario.cards.some((card) => card.id === event.id),
+        const reviewed = scenario.events.filter(
+          (event): event is CardReviewed =>
+            event._tag === "card.reviewed" &&
+            scenario.cards.some((card) => card.id === event.id),
         )
         if (reviewed.length === 0) return true
         const first = reviewed[0]

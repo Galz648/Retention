@@ -1,5 +1,5 @@
 export { Brightness } from "./brightness.ts"
 export { Card, DerivationCard, Outcome, RecallCard } from "./cards.ts"
 export { Corpus, Edge, Node, TreeKind, type TreeListing } from "./corpus.ts"
-export { CardReviewed, Event } from "./events.ts"
+export { CardReviewed, Event, InboxCaptured } from "./events.ts"
 export { CardId, NodeId, TreeId } from "./ids.ts"

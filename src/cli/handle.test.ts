@@ -1,9 +1,11 @@
-import { Effect, Layer, Schema } from "effect"
+import { DateTime, Effect, Layer, Schema } from "effect"
 import { describe, expect, test } from "bun:test"
 import { AlreadyArchived, CorpusNotFound, CorpusStore } from "../corpus/interface.ts"
 import { RecallCard } from "../domain/cards.ts"
 import { Corpus, Edge, Node, type TreeListing } from "../domain/corpus.ts"
 import { CardId, NodeId, TreeId } from "../domain/ids.ts"
+import { Inbox } from "../inbox/interface.ts"
+import { InboxCaptured } from "../domain/events.ts"
 import { Session } from "../session/interface.ts"
 import { ClockAt } from "../testing/clock.ts"
 import { handle, helpText, type CliIo } from "./handle.ts"
@@ -73,7 +75,14 @@ const run = (
   args: ReadonlyArray<string>,
   io: CliIo,
   graded: Array<string>,
-): Promise<{ lines: Array<string>; graded: Array<string>; error?: string }> => {
+  captured: Array<string> = [],
+  pending: ReadonlyArray<string> = [],
+): Promise<{
+  lines: Array<string>
+  graded: Array<string>
+  captured: Array<string>
+  error?: string
+}> => {
   const Fake = Layer.succeed(
     Session,
     Session.of({
@@ -84,6 +93,27 @@ const run = (
         }),
     }),
   )
+  const FakeInbox = Layer.succeed(
+    Inbox,
+    Inbox.of({
+      capture: (text) =>
+        Effect.sync(() => {
+          captured.push(text)
+        }),
+      pending: () =>
+        Effect.succeed(
+          pending.map(
+            (text) =>
+              new InboxCaptured({
+                text,
+                at: DateTime.unsafeFromDate(
+                  new Date("2026-03-10T12:00:00.000Z"),
+                ),
+              }),
+          ),
+        ),
+    }),
+  )
   const lines: Array<string> = []
   const write = (line: string) => {
     lines.push(line)
@@ -91,11 +121,12 @@ const run = (
   return Effect.runPromise(
     handle(args, { ...io, write }).pipe(
       Effect.provide(Fake),
+      Effect.provide(FakeInbox),
       Effect.provide(CorpusFixed),
       Effect.provide(ClockAt(0)),
       Effect.match({
-        onFailure: (error) => ({ lines, graded, error: error.reason }),
-        onSuccess: () => ({ lines, graded }),
+        onFailure: (error) => ({ lines, graded, captured, error: error.reason }),
+        onSuccess: () => ({ lines, graded, captured }),
       }),
     ),
   )
@@ -110,6 +141,8 @@ describe("CLI handle", () => {
     expect(help.lines.join("\n")).toContain("what you can do")
     expect(help.lines.join("\n")).toContain("[impure]")
     expect(help.lines.join("\n")).toContain("asks first")
+    expect(help.lines.join("\n")).toContain("capture")
+    expect(help.lines.join("\n")).toContain("inbox")
     expect(help.lines.join("\n")).not.toContain("\u001b")
   })
 
@@ -175,6 +208,55 @@ describe("CLI handle", () => {
     expect(yes.lines.join("\n")).toContain("recorded")
     expect(yes.lines.join("\n")).not.toContain("This will create the event log.")
     expect(accepted).toEqual([`${cardId}:Good`])
+  })
+
+  test("capture without an interactive terminal refuses and does not write", async () => {
+    const captured: Array<string> = []
+    const result = await run(
+      ["capture", "diffusion is high to low"],
+      mute(),
+      [],
+      captured,
+    )
+    expect(result.error).toBe("Need an interactive terminal to confirm a write.")
+    expect(result.lines.join("\n")).toContain("This will create the event log.")
+    expect(captured).toEqual([])
+  })
+
+  test("capture no does not write; capture yes does", async () => {
+    const declined: Array<string> = []
+    const no = await run(
+      ["capture", "diffusion is high to low"],
+      mute({ interactive: true, logExists: true, ask: () => Effect.succeed("n") }),
+      [],
+      declined,
+    )
+    expect(no.lines.join("\n")).toContain("aborted")
+    expect(declined).toEqual([])
+
+    const accepted: Array<string> = []
+    const yes = await run(
+      ["capture", "diffusion is high to low"],
+      mute({
+        interactive: true,
+        logExists: true,
+        ask: () => Effect.succeed("yes"),
+      }),
+      [],
+      accepted,
+    )
+    expect(yes.lines.join("\n")).toContain("captured")
+    expect(yes.lines.join("\n")).not.toContain("This will create the event log.")
+    expect(accepted).toEqual(["diffusion is high to low"])
+  })
+
+  test("inbox lists captured texts, not paths", async () => {
+    const result = await run(["inbox"], mute(), [], [], ["diffusion is high to low"])
+    const text = result.lines.join("\n")
+    expect(text).toContain("inbox — captured notes waiting for curation")
+    expect(text).toContain("1. diffusion is high to low")
+    expect(text).not.toContain("data/log")
+    expect(text).not.toContain("inbox.captured")
   })
 
   test("tree prints node titles and edges, not folder names", async () => {

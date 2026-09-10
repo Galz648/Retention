@@ -3,11 +3,11 @@ import { Outcome } from "./cards.ts"
 import { CardId } from "./ids.ts"
 
 /**
- * V1 log is review facts only. Capture, curation, retirement, must-hit
- * accretion, and tree-archive events are parked — do not add them here.
- *
  * Events carry the time they happened as data. They never embed derived
  * values (no due date, interval, or brightness).
+ *
+ * Curation, retirement, must-hit accretion, and tree-archive events stay
+ * parked — do not add them here.
  */
 export class CardReviewed extends Schema.TaggedClass<CardReviewed>()(
   "card.reviewed",
@@ -18,5 +18,13 @@ export class CardReviewed extends Schema.TaggedClass<CardReviewed>()(
   },
 ) {}
 
-export const Event = Schema.Union(CardReviewed)
+export class InboxCaptured extends Schema.TaggedClass<InboxCaptured>()(
+  "inbox.captured",
+  {
+    text: Schema.String,
+    at: Schema.DateTimeUtc,
+  },
+) {}
+
+export const Event = Schema.Union(CardReviewed, InboxCaptured)
 export type Event = typeof Event.Type

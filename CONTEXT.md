@@ -65,3 +65,7 @@ _Avoid_: due list, session (session is the runner)
 **Brightness**:
 Placeholder name for how well a card is known right now, from 0 to 1.
 _Avoid_: stability, due date, interval (those stay inside mastery)
+
+**Inbox**:
+Raw captured notes waiting for curation. Not cards. Not a queue.
+_Avoid_: flashcard dump, draft deck, tags

@@ -1,6 +1,6 @@
 import { DateTime, Effect, Schema } from "effect"
 import { describe, expect, test } from "bun:test"
-import { CardId, CardReviewed, type Event } from "../events/interface.ts"
+import { CardId, CardReviewed, InboxCaptured, type Event } from "../events/interface.ts"
 import { Record } from "../store/interface.ts"
 import { Codec } from "./interface.ts"
 import { Live } from "./layers.ts"
@@ -42,6 +42,30 @@ describe("Codec.Live", () => {
     )
     expect(typeof encoded).toBe("string")
     expect(() => JSON.parse(encoded)).not.toThrow()
+    expect(JSON.parse(encoded)).not.toHaveProperty("due")
+    expect(JSON.parse(encoded)).not.toHaveProperty("interval")
+      expect(JSON.parse(encoded)).not.toHaveProperty("brightness")
+  })
+
+  test("round-trips an inbox.captured event; payload has no derived fields", async () => {
+    const event = new InboxCaptured({
+      text: "diffusion is high to low",
+      at,
+    })
+    const decoded = await withCodec(
+      Effect.gen(function* () {
+        const codec = yield* Codec
+        const encoded = yield* codec.encode(event)
+        return yield* codec.decode(encoded)
+      }),
+    )
+    expect(decoded).toEqual(event)
+    const encoded = await withCodec(
+      Effect.gen(function* () {
+        const codec = yield* Codec
+        return yield* codec.encode(event)
+      }),
+    )
     expect(JSON.parse(encoded)).not.toHaveProperty("due")
     expect(JSON.parse(encoded)).not.toHaveProperty("interval")
     expect(JSON.parse(encoded)).not.toHaveProperty("brightness")

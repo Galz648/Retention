@@ -4,6 +4,7 @@ import { Outcome, type Card } from "../domain/cards.ts"
 import type { Corpus, TreeListing } from "../domain/corpus.ts"
 import type { NodeId } from "../domain/ids.ts"
 import { Session, SessionError } from "../session/interface.ts"
+import { Inbox, InboxError } from "../inbox/interface.ts"
 import { banner } from "./banner.ts"
 import { completionsScript } from "./completions.ts"
 import { palette, type Palette } from "./style.ts"
@@ -29,7 +30,9 @@ export const helpText = `[pure]    help            what you can do
 [pure]    tree            one tree: nodes and edges
 [pure]    show            one due card including the answer / must-hits
 [pure]    queue           due and unblocked cards, numbered
+[pure]    inbox           captured notes waiting for curation
 [impure]  grade           append one review — asks first
+[impure]  capture         append one inbox note — asks first
 [pure]    completions     shell completion script (zsh or bash)`
 
 const fail = (reason: string): Effect.Effect<never, SessionError> =>
@@ -197,7 +200,11 @@ const yes = (raw: string): boolean => {
 export const handle = (
   args: ReadonlyArray<string>,
   io: CliIo,
-): Effect.Effect<void, SessionError, Session | CorpusStore | Clock.Clock> =>
+): Effect.Effect<
+  void,
+  SessionError,
+  Session | CorpusStore | Clock.Clock | Inbox
+> =>
   Effect.gen(function* () {
     const ink = palette(io.color)
     const argv = args.slice()
@@ -344,6 +351,61 @@ export const handle = (
       }
       yield* session.grade(listing.treeId, card.id, rating)
       io.write("recorded")
+      return yield* Effect.void
+    }
+    if (command === "inbox") {
+      context(io, ink, "inbox — captured notes waiting for curation")
+      const inbox = yield* Inbox
+      const pending = yield* inbox.pending().pipe(
+        Effect.mapError(
+          (error: InboxError) => new SessionError({ reason: error.reason }),
+        ),
+      )
+      if (pending.length === 0) {
+        io.write("inbox empty")
+        return yield* Effect.void
+      }
+      pending.forEach((entry, index) => {
+        io.write(`${index + 1}. ${entry.text}`)
+      })
+      return yield* Effect.void
+    }
+    if (command === "capture") {
+      let text = titleFromArgs(argv, 1)
+      if ((text === undefined || text.trim().length === 0) && io.interactive) {
+        const chosen = yield* io.ask("Capture what?")
+        if (chosen !== undefined) text = chosen
+      }
+      const trimmed = text?.trim() ?? ""
+      if (trimmed.length === 0) {
+        writeHelp(io, ink)
+        return yield* fail("Need something to capture.")
+      }
+      context(io, ink, "capture — append one inbox note")
+      const shown =
+        trimmed.length <= 80 ? trimmed : `${trimmed.slice(0, 77)}...`
+      io.write(ink.warn(`Capture "${shown}".`))
+      io.write("This appends one inbox note to the event log.")
+      if (!io.logExists) {
+        io.write(ink.warn("This will create the event log."))
+      }
+      if (!io.interactive) {
+        return yield* fail("Need an interactive terminal to confirm a write.")
+      }
+      const answer = yield* io.ask("Proceed? [y/N]")
+      if (answer === undefined || !yes(answer)) {
+        io.write("aborted")
+        return yield* Effect.void
+      }
+      const inbox = yield* Inbox
+      yield* inbox.capture(trimmed).pipe(
+        Effect.mapError((error: InboxError) =>
+          error.reason === "empty"
+            ? new SessionError({ reason: "Need something to capture." })
+            : new SessionError({ reason: error.reason }),
+        ),
+      )
+      io.write("captured")
       return yield* Effect.void
     }
     if (command === "completions") {
