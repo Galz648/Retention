@@ -4,6 +4,11 @@
 - **Queue hides answers; `show` prints them.** Review stays unspoiled; inspect does not require opening files.
 - **Titles vs folder names.** Folder names are short to type but unreadable. The program speaks titles. Folder names remain an implementation detail.
 - **Track vs tags.** Freeform tags on cards are a second interface. Two tracks on the tree (university vs curiosity) split why you sat down; kind is still how you study. A mixed queue across every university tree would compose many corpora in one Session.queue — rejected for this version.
-- **Counts on `trees` vs on `tree`.** Counts look precise and make every row look the same. Kind + one sentence is how you tell Biology II from ecology terms.
-- **Counts on `trees` vs on `tree`.** Counts look precise and make every row look the same. Kind + one sentence is how you tell Biology II from ecology terms.
-- **Bun TypeScript client vs Rust client.** Bun is already the compile path. Rust (clap, completions, inquire) is the usual home for this feel. Switching costs a second binary and a FFI/IPC seam to the engine. Do not switch until the current client has been tried against the feel spec.
+- **Where you are vs a `tree` dump.** A node/edge listing is a file. The TUI shows the path with `●` on the current node. The `tree` command is gone.
+- **Nest term decks vs merge them.** Hanging ecology terms under Biology II in the menu matches how the person thinks about the course. Merging them into one graph would mix two kinds of failure into one queue. Listing metadata (`belongsTo`) only.
+- **Session loop vs one-shot browse.** Returning to the shell after every look is a dump. The Session CLI is named for Session: stay until `q`. Piped commands stay one-shot.
+- **TUI vs numbered CLI loop.** A numbered `prompt()` loop is a scrolling transcript. The TTY product is a fullscreen TUI (alternate screen, highlight, keys). One-shot commands stay CLI so pipes and scripts stay boring. n/curses extras (boxes, mouse, type-to-filter) are optional chrome, not the contract.
+- **TTY `trees` enters the TUI vs always printing.** A pipe needs the list and a return. A terminal wants to walk in.
+- **In-process walk vs remembered tree.** Holding a tree across invocations is a hidden setting. The next process starts clean; the TUI only lasts until `q`.
+- **Probe maps vs composing engines in the CLI.** Graph and scheduler CLIs pass a snapshot / values map (all-0 / all-1). Wiring Mastery into those commands would import the other engines and rebuild Session.queue.
+- **Bun TypeScript client vs Rust client.** Bun is already the compile path. Rust (clap, ratatui/crossterm, completions) is the usual home for this feel. Switching costs a second binary and a FFI/IPC seam to the engine. Do not switch until the current client has been tried against the feel spec — including restoring the terminal after `q`.
