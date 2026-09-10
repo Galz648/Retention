@@ -11,8 +11,8 @@
     "exactOptionalPropertyTypes": true,
     "skipLibCheck": true,
     "noUncheckedIndexedAccess": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "types": ["bun"]
   },
-  "include": ["src"],
-  "exclude": ["src/**/*.test.ts"]
+  "include": ["src"]
 }
