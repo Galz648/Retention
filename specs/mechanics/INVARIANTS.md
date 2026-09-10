@@ -4,7 +4,7 @@ Standing law for this version. Agents, plans, and **new modules** must uphold th
 
 `KEY_DECISIONS.md` stays the product lock. This file is the **executable** subset: each id is one claim, cited from a test. Do not invent product policy here. Copy a claim from a locked spec, or do not add it.
 
-Draft for [Catalog format, property mapping, husky contract](https://github.com/Galz648/Retention/issues/38). Husky is specified, not installed.
+Draft for [Catalog format, property mapping, husky contract](https://github.com/Galz648/Retention/issues/38) and [New-module construction rules](https://github.com/Galz648/Retention/issues/39). Husky is specified, not installed.
 
 ## Lifecycle
 
@@ -58,7 +58,7 @@ Keep `effect/FastCheck` as the only PBT API. Do not add a second generator libra
 
 **Where examples belong:** Session CLI, TUI keys, ANSI, help labels, PTY, source scans. `test.each` over a command table is enough for "every impure command refuses when not interactive." Promote to FastCheck only if the input space is large and shrinking would help.
 
-A new module ships checks for the ids that apply at **its** seam (`INV-C-MOD-01`). How that handshake looks is [New-module construction rules](https://github.com/Galz648/Retention/issues/39).
+A new module ships checks for the ids that apply at **its** seam (`INV-C-MOD-01`). See **New module** below.
 
 ## Id scheme
 
@@ -173,8 +173,87 @@ The name of the `[0, 1]` number is a placeholder. The **relations** are locked. 
 
 | Id | Claim | Encoding |
 | --- | --- | --- |
-| **INV-C-MOD-01** | A new module ships checks for the catalog ids that apply at **its** seam. Generation means `effect/FastCheck` at engine-shaped seams. The interface is the test surface. | prose (meta). Pattern exists at MST / GRF / SCH only. Detail: issue 39. |
+| **INV-C-MOD-01** | A new module ships checks for the catalog ids that apply at **its** seam. Generation means `effect/FastCheck` at engine-shaped seams. The interface is the test surface. | prose (meta) until the construction scan below is installed |
 | **INV-C-MOD-02** | Adaptive parameters are learned, not configured. Do not add the knobs a calibrator would replace. Clients keep only fixed preferences and record what happened. | prose |
+
+## New module
+
+A module is **done** when callers and tests cross the same seam, and every catalog id that applies at that seam has a cited check. Adding a directory is not done. Parked product (Forester, calibrator, a Rust client) still follows this when its map opens — this section does not unpark them.
+
+Do not mint new product law in the module. New `INV-*` ids only when a locked spec (`KEY_DECISIONS.md` or a component spec) already states the claim.
+
+### Which ids apply
+
+**Every new module**
+
+- `INV-C-MOD-01` — checks at this seam
+- `INV-C-MOD-02` — no learned-parameter knobs
+- `INV-B-LANG-01` — if it prints or prompts (titles and glossary, not folder names or card ids)
+
+**Engine Tag** (`src/engine/<name>/`, a `Context.Tag` + Live)
+
+- All **every** ids
+- `INV-C-ENG-01`, `INV-C-ENG-02` — no sibling Tag imports; no store / corpus I/O / session / cli
+- Own `INV-C-<owner>-*` (Clock / time / blindness) — follow MST / GRF / SCH
+- Own `INV-B-<owner>-*` as FastCheck on Live (relations, not knobs)
+- If it needs time: list Clock in `R`; never provide Clock; never `Date.now`
+
+**Session-shaped compose** (reads stores, writes log, composes Tags)
+
+- All **every** ids
+- `INV-C-SES-01`, `INV-B-SES-01`…`04` as they apply — no Brightness/THRESHOLD math, no Clock construct, no prompt, `grade` is one event
+- Does not decide due-ness or walk prerequisites itself
+
+**CLI command or TUI surface**
+
+- All **every** ids
+- `INV-B-CLI-01`…`11` and `INV-C-CLI-01`…`04` as they apply: `[pure]`/`[impure]` labels, consent, refuse when non-interactive, no `--yes`, no env-var tree/path interface, titles not folder names
+- Isolated engine command: import **one** Tag (`INV-C-CLI-03`). Session CLI still does not compute the `[0, 1]` number (`INV-C-CLI-01`)
+- Examples, not generated PTY
+
+**Later client** (Rust or otherwise — not chosen)
+
+- `INV-C-CLI-05` — same commands and consent; does not reimplement mastery / graph / scheduler
+- `INV-B-LANG-01`, `INV-B-CLI-01`…`04` (consent / refuse / no env as the interface)
+- Engine stays TypeScript
+
+**Store adapter**
+
+- All **every** ids
+- `INV-B-STO-01`, `INV-C-STO-01` — opaque records; missing file is empty history; no derived `due` / `interval` / `brightness` on the wire
+
+**Forester (when a later map builds it)**
+
+- All **every** ids
+- Does not read the event log (`ARCHITECTURE.md`)
+- Proposes; nothing lands without approval
+- User-facing proposals: `INV-B-LANG-01`
+- No calibrator knobs (`INV-C-MOD-02`)
+- Does not import engine Tags to score the learner
+
+### What the author must add
+
+1. **Interface + adapter** at one seam. Tests call that interface, not a private interior.
+2. **Cited checks** for every applying id: FastCheck at engine-shaped Lives; examples for CLI/TUI; source scans for construction.
+3. **Isolation scan entry** if it is an engine Tag: extend `src/engine/no-cross-imports.test.ts` (or its successor) so the new directory is in the glob.
+4. CLI: help line with `[pure]`/`[impure]`; impure path has consent + non-interactive refuse; no `--yes`.
+5. No new `RETENTION_*` (or similar) for tree / corpus / log. `NO_COLOR` stays feel.
+
+### What pre-commit rejects
+
+The hook only runs `bun run typecheck` and `bun test`. It cannot see a checklist. So **done** is enforced by construction tests that `bun test` already runs. Specify these for the install session; do not add them on this map.
+
+| If the author skips | Failing check (to add under `src/`, citing the id in `test()`) |
+| --- | --- |
+| New `src/engine/<name>/` not in the isolation glob | `INV-C-ENG-01` / `INV-C-ENG-02` scan — unknown engine dir, or sibling/store/cli import |
+| Engine Live with no FastCheck / no `INV-B-` test name | `INV-C-MOD-01` — each `src/engine/*/live.ts` has a `live.test.ts` that imports `effect/FastCheck` and names at least one `INV-B-` |
+| New top-level `src/<dir>/` not on the kind registry | `INV-C-MOD-01` — registry of kinds (`cli`, `session`, `engine`, `store`, `corpus`, `codec`, `domain`, `testing`). Unknown dir fails until classified and given the checks that kind requires |
+| CLI sources import engine Tags (beyond one isolated command module) or `THRESHOLD` | `INV-C-CLI-01` / `INV-C-CLI-03` |
+| `--yes` in `src/cli` | `INV-C-CLI-02` |
+| `RETENTION_` env used to pick tree or paths | `INV-B-CLI-01` |
+| Typecheck hole on `*.test.ts` | hook `typecheck` — tests included |
+
+Existing engine FastCheck failures already fail the hook. A new Tag that never grows a property suite fails the Live-file scan, not a human review.
 
 ---
 
@@ -205,7 +284,7 @@ Locked in spec, untested or only implicit:
 4. **INV-C-CLI-02** — no `--yes`.
 5. **INV-B-CLI-06** — tree choice is per invocation, not process-sticky.
 6. **INV-C-CLI-03** — isolated engine commands, one Tag each.
-7. **INV-C-MOD-01 / INV-C-MOD-02** — how a new module is built (issue 39).
+7. **INV-C-MOD-01 / INV-C-MOD-02** — construction scans in the table above, not yet in `src/`.
 8. **INV-B-SES-04** (recall-then-derivation) and **INV-B-MST-04** — specified, example-only; good FastCheck promotions.
 
 Existing FastCheck already covers INV-B-MST-01…03, INV-B-GRF-01…04, INV-B-SCH-01…02. Cite those ids from the `test()` names when those files are next touched. Do not rewrite the engine suites on this map.
