@@ -2,7 +2,7 @@
 
 Glossary lives in [CONTEXT.md](../../CONTEXT.md). This file is the short reading list plus how we write.
 
-- Recall, derivation, must-hit, tree, title, node, card, queue, brightness: see CONTEXT.md.
+- Recall, derivation, must-hit, tree, track, title, node, card, queue, brightness: see CONTEXT.md.
 
 - Practice card: parked. A prompt to execute a technique on a concrete instance. Graded on whether you got there, not on whether you explained why.
 

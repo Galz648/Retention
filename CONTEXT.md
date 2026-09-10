@@ -19,8 +19,12 @@ The append-only log of records. It does not know about cards, intervals, or mean
 _Avoid_: Database, event store (implies it understands events)
 
 **Tree**:
-A named body of cards you study as one subject. Two kinds: knowledge tree and term deck.
+A named body of cards you study as one subject. Two kinds: knowledge tree and term deck. Each tree has one **track**.
 _Avoid_: deck (alone), corpus, slug, folder name
+
+**Track**:
+Why this tree exists for you: **university** (course work) or **curiosity** (personal research — a subject, concept, or tool). Orthogonal to kind. The person picks a track, then a tree.
+_Avoid_: tag, label, folder, mixed queue
 
 **Knowledge tree**:
 A map of concepts and the dependencies between them. You rebuild explanations (derivation), and name facts when they sit on those concepts.

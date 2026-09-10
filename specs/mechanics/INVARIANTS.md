@@ -8,7 +8,7 @@ Draft for [Catalog format, property mapping, husky contract](https://github.com/
 
 ## Lifecycle
 
-Solo developer. No CI.
+Solo developer. No CI. Agent git process: [LIFECYCLE.md](./LIFECYCLE.md) — one worktree per disjoint task, parallel only when write-sets do not overlap, merge to **`main`**, close the issue, remove the worktree.
 
 When hooks are later installed (not this ticket):
 

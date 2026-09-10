@@ -10,7 +10,8 @@ The **command-line program is the product surface** for this version. Inspect an
 - Session
 - Terminal CLI as specified in [SESSION_CLI.md](./components/SESSION_CLI.md): labeled pure/impure commands, consent before writes, tree chosen on the command line
 - Append-only event log
-- One or more hand-authored (or imported) trees in `corpus/`
+- One or more hand-authored (or imported) trees in `corpus/`, each with a track (university or curiosity)
+- Session / trees picker can filter by track; still one tree per sitting
 - Standalone `retention` binary via Bun compile
 
 ### This version — do not build

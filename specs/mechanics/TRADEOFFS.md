@@ -3,5 +3,7 @@
 - **Confirm every write vs `--yes`.** Piped input cannot grade. That is the point until a later version needs non-interactive use.
 - **Queue hides answers; `show` prints them.** Review stays unspoiled; inspect does not require opening files.
 - **Titles vs folder names.** Folder names are short to type but unreadable. The program speaks titles. Folder names remain an implementation detail.
+- **Track vs tags.** Freeform tags on cards are a second interface. Two tracks on the tree (university vs curiosity) split why you sat down; kind is still how you study. A mixed queue across every university tree would compose many corpora in one Session.queue — rejected for this version.
+- **Counts on `trees` vs on `tree`.** Counts look precise and make every row look the same. Kind + one sentence is how you tell Biology II from ecology terms.
 - **Counts on `trees` vs on `tree`.** Counts look precise and make every row look the same. Kind + one sentence is how you tell Biology II from ecology terms.
 - **Bun TypeScript client vs Rust client.** Bun is already the compile path. Rust (clap, completions, inquire) is the usual home for this feel. Switching costs a second binary and a FFI/IPC seam to the engine. Do not switch until the current client has been tried against the feel spec.
