@@ -69,6 +69,8 @@ Items are tagged by when they need an answer:
 - Is the knowledge/derivation split real in practice. *(Provisionally accepted.)* **[soon]**
 - Is weekly curation realistic. **[soon]**
 - How would I know any of this is working. **[soon]**
+- Can a whole university course be learned on this, not just retained. **[deferred]**
+- How to juggle several courses in one semester — shifting weekly allocation per course. **[deferred, needs discussion]**
 - Scope creep toward the tree. **[ongoing]**
 
 ---
@@ -248,6 +250,24 @@ Everything downstream depends on a recurring session actually happening. It's th
 
 **How would I know this is working.** [soon]
 No success measure exists beyond "the backend runs from a shell." The event log makes measurement possible — retention curves, promotion rates, interval growth — but nothing says what good looks like, so there's no way to tell improvement from mere activity.
+
+**Can a whole university course be learned on this, not just retained.** [deferred]
+The system is framed as a retention layer over material learned elsewhere. The stated
+ambition is bigger: make the tree the *primary* path through a course — Biology II as the
+test case. That needs (a) top-down traversal to exist, (b) the tree to actually cover the
+course's learning outcomes as nodes rather than a hand-picked subset, and (c) a way to
+tell "the tree is complete for this course" from "the tree has some nodes." Today Biology
+II is 42 derivation nodes with a 226-node Biology I tree unwired below it — coverage is
+unverified. See DECISIONS.md.
+
+**How to juggle several courses in one semester.** [deferred, needs discussion]
+Each course wants a different slice of weekly review time, and the slice moves: an exam
+three weeks out pulls attention, a just-started course needs ramp, a finished one needs
+only maintenance. `weights` holds a fixed stated priority and is explicitly barred from
+chasing a moving target (KEY_DECISIONS — that is the calibrator's job). Unresolved shape:
+a semester-level plan object; a per-course phase (ramp / build / exam-run / maintenance);
+dynamic reallocation read from the log; or a mix. Wants a real design pass, not a
+one-line answer. See DECISIONS.md.
 
 **Scope creep toward the tree.** [ongoing]
 The tree is the interesting problem and is explicitly out of scope. The realistic risk is spending future sessions refining the spec rather than using the system.
