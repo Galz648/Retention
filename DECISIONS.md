@@ -8,6 +8,14 @@ Newest first. Each entry: what was chosen, and where it lives.
 
 ## 2026-09-11
 
+**Forester is a programmatic pipeline, not a loose agent.** It ingests a course's real
+materials — learning outcomes (the goal spine), textbook, assignments, past exams — and
+proposes a corpus tree anchored to those outcomes, with a coverage report for outcomes
+that have no node. Fixed stages, model judgement contained inside them, every node
+traceable to a source and a goal. Supersedes the "model-driven, non-deterministic, runs
+as an agent skill" stub. Still out of scope for the CLI version; this is a hand-off spec.
+→ `specs/mechanics/components/FORESTER.md`, `ARCHITECTURE.md`, `ingestion-process.md`.
+
 **Engine-calls receipt is default on.** Every review session closes with a short block
 listing the `retention` calls it made, one-line digest each. Not a debug aid — a receipt
 that the tool drove the session. Config field `receipt` in the skill, default `true`;
