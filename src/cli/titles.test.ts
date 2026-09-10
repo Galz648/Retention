@@ -9,6 +9,8 @@ const treeId = (s: string) => Schema.decodeUnknownSync(TreeId)(s)
 const listing = (title: string, id: string): TreeListing => ({
   treeId: treeId(id),
   title,
+  kind: "knowledge",
+  summary: "Test fixture.",
   archived: false,
   nodeCount: 1,
   cardCount: 1,

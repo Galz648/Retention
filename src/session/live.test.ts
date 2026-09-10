@@ -1,4 +1,4 @@
-import { Effect, Layer, Schema } from "effect"
+import { Clock, Effect, Layer, Schema } from "effect"
 import { describe, expect, test } from "bun:test"
 import { Live as CodecLive } from "../codec/layers.ts"
 import { AlreadyArchived, CorpusNotFound, CorpusStore } from "../corpus/interface.ts"
@@ -97,7 +97,7 @@ const sessionLayer = Live().pipe(
 )
 
 const run = <A, E>(
-  effect: Effect.Effect<A, E, Session>,
+  effect: Effect.Effect<A, E, Session | Store | Codec | Clock.Clock>,
   epochMillis = NOW,
 ): Promise<A> =>
   Effect.runPromise(

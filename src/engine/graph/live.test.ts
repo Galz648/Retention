@@ -162,7 +162,7 @@ const arbCase: fc.Arbitrary<Case> = fc
   })
 
 describe("Graph.Live", () => {
-  test("never returns a node while a prerequisite is below THRESHOLD", () => {
+  test("INV-B-GRF-01: never returns a node while a prerequisite is below THRESHOLD", () => {
     fc.assert(
       fc.property(arbCase, ({ corpus, snapshot }) => {
         const result = eligible(corpus, snapshot)
@@ -178,7 +178,7 @@ describe("Graph.Live", () => {
     )
   })
 
-  test("archived corpus yields an empty list", () => {
+  test("INV-B-GRF-02: archived corpus yields an empty list", () => {
     fc.assert(
       fc.property(arbCase, ({ corpus, snapshot }) => {
         const archived = corpusOf(corpus.nodes, corpus.edges, true)
@@ -188,13 +188,13 @@ describe("Graph.Live", () => {
     )
   })
 
-  test("isolated node with no prerequisites is eligible", () => {
+  test("INV-B-GRF-03: isolated node with no prerequisites is eligible", () => {
     const corpus = corpusOf([node("solo")], [])
     expect(eligible(corpus, new Map())).toEqual([nodeId("solo")])
     expect(eligible(corpus, snapshotOf([["solo", 0]]))).toEqual([nodeId("solo")])
   })
 
-  test("nodes with only ignored dangling inbound edges are eligible", () => {
+  test("INV-B-GRF-03: nodes with only ignored dangling inbound edges are eligible", () => {
     fc.assert(
       fc.property(arbCase, ({ corpus, snapshot }) => {
         const result = new Set(eligible(corpus, snapshot))
@@ -208,7 +208,7 @@ describe("Graph.Live", () => {
     )
   })
 
-  test("same corpus and snapshot yield identical output", () => {
+  test("INV-B-GRF-04: same corpus and snapshot yield identical output", () => {
     fc.assert(
       fc.property(arbCase, ({ corpus, snapshot }) => {
         expect(eligible(corpus, snapshot)).toEqual(eligible(corpus, snapshot))
@@ -217,7 +217,7 @@ describe("Graph.Live", () => {
     )
   })
 
-  test("eligible ids are sorted and drawn only from corpus nodes", () => {
+  test("INV-B-GRF-04: eligible ids are sorted and drawn only from corpus nodes", () => {
     fc.assert(
       fc.property(arbCase, ({ corpus, snapshot }) => {
         const result = eligible(corpus, snapshot)
@@ -231,7 +231,7 @@ describe("Graph.Live", () => {
     )
   })
 
-  test("node order in the corpus does not change the result", () => {
+  test("INV-B-GRF-04: node order in the corpus does not change the result", () => {
     fc.assert(
       fc.property(arbCase, fc.array(fc.nat()), ({ corpus, snapshot }, salts) => {
         const rotated = [...corpus.nodes]
@@ -250,7 +250,7 @@ describe("Graph.Live", () => {
     )
   })
 
-  test("chain: missing snapshot treats prerequisites as 0", () => {
+  test("INV-B-GRF-01: chain: missing snapshot treats prerequisites as 0", () => {
     const corpus = corpusOf(
       [node("a"), node("b"), node("c")],
       [edge("a", "b"), edge("b", "c")],
@@ -278,7 +278,7 @@ describe("Graph.Live", () => {
     ).toEqual([nodeId("a"), nodeId("b"), nodeId("c")])
   })
 
-  test("dangling edges are ignored, not treated as prerequisites", () => {
+  test("INV-B-GRF-03: dangling edges are ignored, not treated as prerequisites", () => {
     const corpus = corpusOf(
       [node("a"), node("b")],
       [edge("ghost", "b"), edge("a", "ghost"), edge("a", "b")],
@@ -290,7 +290,7 @@ describe("Graph.Live", () => {
     expect(eligible(corpus, new Map())).toEqual([nodeId("a")])
   })
 
-  test("Graph Live does not import Clock", async () => {
+  test("INV-C-GRF-01: Graph Live does not import Clock", async () => {
     const text = await Bun.file(new URL("./live.ts", import.meta.url)).text()
     expect(text).not.toMatch(/\bClock\b/)
     expect(text).not.toMatch(/from ["'][^"']*testing\/clock/)

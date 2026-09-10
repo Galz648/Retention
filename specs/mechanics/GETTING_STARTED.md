@@ -20,4 +20,4 @@ bun src/cli/main.ts help
 
 `grade` is the only impure command. It will ask. Say no → nothing is created.
 
-Agent git process: [LIFECYCLE.md](./LIFECYCLE.md). Invariant catalog: [INVARIANTS.md](./INVARIANTS.md).
+Agent git process: [LIFECYCLE.md](./LIFECYCLE.md). Pre-commit runs typecheck + tests, including invariant properties — see [INVARIANTS.md](./INVARIANTS.md).

@@ -12,7 +12,7 @@ const sourceOf = async (dir: string): Promise<string> => {
 }
 
 describe("engine isolation", () => {
-  test("mastery, graph, and scheduler never import each other", async () => {
+  test("INV-C-ENG-01: mastery, graph, and scheduler never import each other", async () => {
     const sources = {
       mastery: await sourceOf("mastery"),
       graph: await sourceOf("graph"),
@@ -26,7 +26,7 @@ describe("engine isolation", () => {
     }
   })
 
-  test("engine never imports store, corpus I/O, session, or cli", async () => {
+  test("INV-C-ENG-02: engine never imports store, corpus I/O, session, or cli", async () => {
     const glob = new Bun.Glob("src/engine/**/*.ts")
     for await (const path of glob.scan(".")) {
       if (path.endsWith(".test.ts")) continue
@@ -38,7 +38,7 @@ describe("engine isolation", () => {
     }
   })
 
-  test("mastery Live never provides Clock", async () => {
+  test("INV-C-MST-01: mastery Live never provides Clock", async () => {
     const glob = new Bun.Glob("src/engine/mastery/**/*.ts")
     for await (const path of glob.scan(".")) {
       if (path.endsWith("interface.ts") || path.endsWith(".test.ts")) continue

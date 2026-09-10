@@ -4,18 +4,11 @@ Standing law for this version. Agents, plans, and **new modules** must uphold th
 
 `KEY_DECISIONS.md` stays the product lock. This file is the **executable** subset: each id is one claim, cited from a test. Do not invent product policy here. Copy a claim from a locked spec, or do not add it.
 
-Draft for [Catalog format, property mapping, husky contract](https://github.com/Galz648/Retention/issues/38) and [New-module construction rules](https://github.com/Galz648/Retention/issues/39). Husky is specified, not installed.
+Draft for [Catalog format, property mapping, husky contract](https://github.com/Galz648/Retention/issues/38) and [New-module construction rules](https://github.com/Galz648/Retention/issues/39). Husky is installed.
 
 ## Lifecycle
 
 Solo developer. No CI. Agent git process: [LIFECYCLE.md](./LIFECYCLE.md) — one worktree per disjoint task, parallel only when write-sets do not overlap, merge to **`main`**, close the issue, remove the worktree.
-
-When hooks are later installed (not this ticket):
-
-```
-bun add --dev husky
-bunx husky init
-```
 
 `.husky/pre-commit`:
 
@@ -28,11 +21,9 @@ That is `tsc --noEmit` then the existing `bun:test` suite, including `effect/Fas
 
 **Not on pre-commit:** `bun run compile`, PTY / `script` TTY walks, compiled `./retention`. Those stay the manual checklist in `GAPS.md`.
 
-**Typecheck covers tests.** `tsconfig.json` currently excludes `src/**/*.test.ts`, so today's `bun run typecheck` does not see properties. That is a hole. When hooks land, drop that exclude and add whatever bun test types `tsc` needs so `import { test } from "bun:test"` typechecks. Properties are standing law; they must typecheck on the same hook that runs them. If a property outgrows bun:test's 5s default, raise that test's timeout. Do not drop `numRuns` to fit the hook.
+**Typecheck covers tests.** `tsconfig.json` includes `src/**/*.test.ts` and `"types": ["bun"]` so `import { test } from "bun:test"` typechecks on the same hook that runs the properties. If a property outgrows bun:test's 5s default, raise that test's timeout. Do not drop `numRuns` to fit the hook.
 
-Until husky exists, `bun test` and `bun run typecheck` are still how a session proves it did not break the catalog. The hook is that same pair, automatic.
-
-`GETTING_STARTED.md` should point here in one line when the hook is installed ("pre-commit runs typecheck + tests, including invariant properties — see INVARIANTS.md"). Do not duplicate the catalog there.
+Pre-commit runs typecheck + tests, including invariant properties. Do not duplicate the catalog in GETTING_STARTED.
 
 ## How a check cites an id
 
@@ -284,10 +275,10 @@ Locked in spec, untested or only implicit:
 4. **INV-C-CLI-02** — no `--yes`.
 5. **INV-B-CLI-06** — tree choice is per invocation, not process-sticky.
 6. **INV-C-CLI-03** — isolated engine commands, one Tag each.
-7. **INV-C-MOD-01 / INV-C-MOD-02** — construction scans in the table above, not yet in `src/`.
+7. **INV-C-MOD-01 / INV-C-MOD-02** — construction scans live in `src/invariants/construction.test.ts`. Adaptive-parameter knobs (MOD-02) stay prose.
 8. **INV-B-SES-04** (recall-then-derivation) and **INV-B-MST-04** — specified, example-only; good FastCheck promotions.
 
-Existing FastCheck already covers INV-B-MST-01…03, INV-B-GRF-01…04, INV-B-SCH-01…02. Cite those ids from the `test()` names when those files are next touched. Do not rewrite the engine suites on this map.
+Existing FastCheck covers INV-B-MST-01…03, INV-B-GRF-01…04, INV-B-SCH-01…02. Those ids are in the `test()` names on the engine Live suites.
 
 ## Harvest
 

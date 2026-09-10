@@ -2,6 +2,7 @@ import { DateTime, Effect, Layer, Schema } from "effect"
 import * as fc from "effect/FastCheck"
 import { describe, expect, test } from "bun:test"
 import {
+  Brightness,
   CardId,
   CardReviewed,
   DerivationCard,
@@ -65,6 +66,8 @@ const evaluateSync = (
     }).pipe(Effect.provide(Layer.merge(Live, ClockAt(epochMillis)))),
   )
 
+const unreviewed = Schema.decodeUnknownSync(Brightness)(0)
+
 const serialize = (values: ReadonlyMap<CardId, Brightness>): string =>
   JSON.stringify(
     [...values.entries()].sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)),
@@ -115,11 +118,11 @@ describe("Mastery.Live", () => {
     const cards = [recall("fresh"), derivation("also-fresh")]
     const values = evaluateSync([], cards, NOW)
     expect(values.size).toBe(2)
-    expect(values.get(cardId("fresh"))).toBe(0)
-    expect(values.get(cardId("also-fresh"))).toBe(0)
+    expect(values.get(cardId("fresh"))).toBe(unreviewed)
+    expect(values.get(cardId("also-fresh"))).toBe(unreviewed)
   })
 
-  test("reviews for unknown card ids are ignored", () => {
+  test("INV-B-MST-01: reviews for unknown card ids are ignored", () => {
     const cards = [recall("known")]
     const events = [
       review("known", NOW - 10 * DAY, "Good"),
@@ -131,7 +134,7 @@ describe("Mastery.Live", () => {
     expect(values.has(cardId("known"))).toBe(true)
   })
 
-  test("every input card has exactly one Brightness in [0, 1]", () => {
+  test("INV-B-MST-01: every input card has exactly one Brightness in [0, 1]", () => {
     const cards = [recall("a"), derivation("b"), recall("c")]
     const events = [
       review("a", NOW - 30 * DAY, "Good"),
@@ -148,7 +151,7 @@ describe("Mastery.Live", () => {
     }
   })
 
-  test("evaluate twice with the same log and Clock is identical", () => {
+  test("INV-B-MST-02: evaluate twice with the same log and Clock is identical", () => {
     const cards = [recall("alpha"), derivation("beta")]
     const events = [
       review("alpha", NOW - 40 * DAY, "Good"),
@@ -172,7 +175,7 @@ describe("Mastery.Live", () => {
     expect(then).not.toBe(now)
   })
 
-  test("Brightness is monotonic between times with no review in the open-closed interval", () => {
+  test("INV-B-MST-03: Brightness is monotonic between times with no review in the open-closed interval", () => {
     const cards = [recall("mono")]
     const reviewedAt = NOW - 200 * DAY
     const events = [review("mono", reviewedAt, "Good")]
@@ -188,7 +191,7 @@ describe("Mastery.Live", () => {
     expect(late).toBeLessThanOrEqual(early)
   })
 
-  test("recall decays faster than derivation after the same history", () => {
+  test("INV-B-MST-04: recall decays faster than derivation after the same history", () => {
     const cards = [recall("r"), derivation("d")]
     const reviewedAt = NOW - 60 * DAY
     const events = [
@@ -209,7 +212,7 @@ describe("Mastery.Live", () => {
     expect(recallBrightness).toBeLessThan(derivationBrightness)
   })
 
-  test("live module never reads Date.now", async () => {
+  test("INV-C-MST-01: live module never reads Date.now", async () => {
     const text = await Bun.file(
       new URL("./live.ts", import.meta.url),
     ).text()
@@ -217,7 +220,7 @@ describe("Mastery.Live", () => {
     expect(text).not.toMatch(/Clock\.currentTimeMillis/)
   })
 
-  test("random logs: determinism, coverage, bounds, monotonic decay", () => {
+  test("INV-B-MST-01 INV-B-MST-02 INV-B-MST-03: random logs: determinism, coverage, bounds, monotonic decay", () => {
     fc.assert(
       fc.property(scenarioArb, (scenario) => {
         const first = evaluateSync(

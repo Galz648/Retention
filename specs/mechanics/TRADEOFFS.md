@@ -4,6 +4,7 @@
 - **Queue hides answers; `show` prints them.** Review stays unspoiled; inspect does not require opening files.
 - **Titles vs folder names.** Folder names are short to type but unreadable. The program speaks titles. Folder names remain an implementation detail.
 - **Track vs tags.** Freeform tags on cards are a second interface. Two tracks on the tree (university vs curiosity) split why you sat down; kind is still how you study. A mixed queue across every university tree would compose many corpora in one Session.queue — rejected for this version.
+- **Counts on `trees` vs on `tree`.** Counts look precise and make every row look the same. Kind + one sentence is how you tell Biology II from ecology terms.
 - **Where you are vs a `tree` dump.** A node/edge listing is a file. The TUI shows the path with `●` on the current node. The `tree` command is gone.
 - **Nest term decks vs merge them.** Hanging ecology terms under Biology II in the menu matches how the person thinks about the course. Merging them into one graph would mix two kinds of failure into one queue. Listing metadata (`belongsTo`) only.
 - **Session loop vs one-shot browse.** Returning to the shell after every look is a dump. The Session CLI is named for Session: stay until `q`. Piped commands stay one-shot.

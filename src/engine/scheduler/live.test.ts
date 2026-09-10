@@ -63,7 +63,7 @@ const entriesArb = fc.uniqueArray(
 )
 
 describe("Scheduler.Live", () => {
-  test("returns every sub-threshold card and only those cards", async () => {
+  test("INV-B-SCH-01: returns every sub-threshold card and only those cards", async () => {
     await fc.assert(
       fc.asyncProperty(classifiedArb, async ({ values, below, at, above }) => {
         const result = await due(values)
@@ -81,7 +81,7 @@ describe("Scheduler.Live", () => {
     )
   })
 
-  test("cards at exactly THRESHOLD are not due", async () => {
+  test("INV-B-SCH-01: cards at exactly THRESHOLD are not due", async () => {
     await fc.assert(
       fc.asyncProperty(
         fc.uniqueArray(cardIdArb, { minLength: 1, maxLength: 12 }),
@@ -95,7 +95,7 @@ describe("Scheduler.Live", () => {
     )
   })
 
-  test("same Map always yields the same ids in sorted CardId order", async () => {
+  test("INV-B-SCH-02: same Map always yields the same ids in sorted CardId order", async () => {
     const known = new Map<CardId, Brightness>([
       [asCardId("c"), asBrightness(0)],
       [asCardId("a"), asBrightness(0)],
@@ -129,7 +129,7 @@ describe("Scheduler.Live", () => {
     )
   })
 
-  test("Live source is blind to card type, edges, and Clock", async () => {
+  test("INV-C-SCH-01: Live source is blind to card type, edges, and Clock", async () => {
     const text = await Bun.file(new URL("./live.ts", import.meta.url)).text()
     expect(text).not.toMatch(/recall/i)
     expect(text).not.toMatch(/derivation/i)
