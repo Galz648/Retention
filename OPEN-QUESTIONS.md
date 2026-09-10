@@ -59,6 +59,7 @@ Items are tagged by when they need an answer:
 ## Knowledge tree
 - Edge derivation beyond a table of contents. **[deferred]**
 - Concept granularity. **[deferred]**
+- Top-down vs bottom-up traversal — a configurable mode: throw the derivations cold and infer weak sub-concepts from performance, or master prerequisites first and unlock derivations via the graph. **[deferred]**
 - Who assigns status, on what evidence. **[deferred]**
 - What triggers emit. **[deferred]**
 - Concepts worth holding that never become cards. **[deferred]**
@@ -204,6 +205,16 @@ The cheap version treats sequence as dependency. That is wrong in a way that wil
 
 **Concept granularity.** [deferred]
 What counts as one node. Too coarse and status is meaningless; too fine and the tree is unmaintainable.
+
+**Top-down vs bottom-up traversal.** [deferred]
+Two ways to walk the same tree, worth making a configurable mode per tree (or per session):
+
+- *Bottom-up* — the current model. Master the prerequisite nodes first; a derivation becomes due only once its `needs` edges are lit. The queue is the topological frontier. Safe, but a cold start means the frontier is just the graph roots and the finer concepts under them are invisible until seeded.
+- *Top-down* — throw the derivation cards cold, before anything below them is known. Grade the explanation, then use *where it broke* — which must-hits were missed, where the reasoning stalled — to infer which sub-concepts the learner is actually weak on, and activate or spawn those finer nodes bottom-up **from evidence** rather than from a pre-built tree. Performance drives granularity instead of the seeder guessing it up front.
+
+Top-down needs: must-hits rich enough that a miss localizes to a concept (today's roots carry stub must-hits — `["Biology I (assumed root)"]`), and a rule for turning "missed this point N times across cards" into a new node or a reactivated prerequisite. Bottom-up needs the prerequisite layer to exist at the right grain in the first place.
+
+Still in the fog, do not decide yet: whether to re-seed a tree (e.g. Biology II) at finer resolution, or wire an existing lower tree (Biology I, 226 nodes) in as its prerequisite layer via cross-tree edges. Either feeds bottom-up; top-down sidesteps the choice by deriving the layer from use.
 
 **Status vocabulary.** [deferred]
 Untouched / named / intuitive / mechanistic is a first guess. Who assigns a level, and on what evidence, is unaddressed.
