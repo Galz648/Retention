@@ -27,6 +27,7 @@ Items are tagged by when they need an answer:
 - Whether must-hit accretion is bounded. **[soon]**
 - Whether editing a card preserves its history or replaces it. **[soon]**
 - Where tags come from and whether they're constrained. **[soon]**
+- Card kinds beyond `recall` and `derivation` — `exercise` (worked application), `challenge` (unseen problem, e.g. an unfamiliar proof) — and whether kinds of all four can share one dependency graph. **[deferred]**
 
 ## Grading
 - Whether a model can be trusted to match paraphrase to must-hits. *(Assumed yes.)* **[soon]**
@@ -113,6 +114,14 @@ If a card's prompt is wrong, is that an event on the existing card or a retireme
 
 **Tag taxonomy.** [soon]
 "One store, tagged" is the load-bearing alternative to per-subject silos, but nothing says where tags come from, whether they're freeform, or who assigns them. Freeform tags reliably rot; a fixed taxonomy reliably fails to fit.
+
+**Card kinds beyond recall and derivation.** [deferred]
+Two kinds exist today: `recall` (a fact that must be memorised) and `derivation` (something re-derived from a principle). A stated use of the system is to **mix more kinds in one dependency graph**:
+
+- `exercise` — a worked application of a known method. Not memorised, not derived from a principle — *executed*. Decays like a motor skill: slower than recall, and lapses show as clumsiness before failure.
+- `challenge` — an unseen problem: an unfamiliar proof, a transfer task, a question the method has to be *found* for. Success is evidence the underlying concepts are not just held but usable. A `challenge` failure localises differently from a `derivation` failure — it can mean the pieces are all there but the assembly isn't.
+
+Open: whether these are genuinely distinct scheduling curves or just parameters on `derivation` (same shape as the recall-vs-derivation question); whether a `challenge` card even *has* must-hits or is graded purely on solved / not-solved plus a gap note; and whether one graph can carry edges like `recall → derivation → exercise → challenge` on the same concept (a natural ladder) without the eligibility logic getting muddy. Mastery's per-type decay curve (MASTERY.md — "recall fast, derivation slow, practice between") already anticipates a third; this is the fourth.
 
 ---
 
@@ -213,6 +222,8 @@ Two ways to walk the same tree, worth making a configurable mode per tree (or pe
 - *Top-down* — throw the derivation cards cold, before anything below them is known. Grade the explanation, then use *where it broke* — which must-hits were missed, where the reasoning stalled — to infer which sub-concepts the learner is actually weak on, and activate or spawn those finer nodes bottom-up **from evidence** rather than from a pre-built tree. Performance drives granularity instead of the seeder guessing it up front.
 
 Top-down needs: must-hits rich enough that a miss localizes to a concept (today's roots carry stub must-hits — `["Biology I (assumed root)"]`), and a rule for turning "missed this point N times across cards" into a new node or a reactivated prerequisite. Bottom-up needs the prerequisite layer to exist at the right grain in the first place.
+
+The **input** side of top-down is a concrete feature, spec'd separately and not blocked on the fog: **gap signal** — persisting which sub-concepts a learner missed during a sub-question review. See [`specs/mechanics/components/GAP_SIGNAL.md`](specs/mechanics/components/GAP_SIGNAL.md); first hand-captured instance in `signals/2026-09-10-biology-ii.jsonl`.
 
 Still in the fog, do not decide yet: whether to re-seed a tree (e.g. Biology II) at finer resolution, or wire an existing lower tree (Biology I, 226 nodes) in as its prerequisite layer via cross-tree edges. Either feeds bottom-up; top-down sidesteps the choice by deriving the layer from use.
 

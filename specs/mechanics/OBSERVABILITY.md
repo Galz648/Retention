@@ -36,3 +36,11 @@ Under `brief` or `full`, the grade handoff (Step 5) also shows the mapping it us
 **Tag-level tracing inside the CLI** — which of mastery / graph / scheduler / session a command touched, with intermediate values (a card's Brightness, the THRESHOLD compare, the eligibility check) — would need a `retention --trace` / verbose flag on the CLI itself. That is a CLI change and is **parked**. A client can only see command-level granularity: command in, output out. Trace mode surfaces exactly that and no more.
 
 Structured/machine-readable trace output (JSON lines a tool could diff across runs) is also parked; the first cut is human-readable inline text.
+
+## Open refinements (skill UX)
+
+Raised 2026-09-11 working the retention-session skill:
+
+**A standard "engine calls" section, not only a debug toggle.** `trace: "brief"` today reads as a debugging aid — turned on when something looks wrong. The stated want is a short, always-present section in the session (a footer, or a collapsible block) listing the `retention` calls that actually ran and a one-line digest of each — *not* to debug, but as **assurance the tool is really driving the session** and the questions aren't being freelanced. Same content as `brief`, different framing: a receipt. Open: whether this replaces `off` as the default, or is a fourth mode (`receipt`), and whether it belongs in the skill or should be a real `retention session --explain`.
+
+**Per-card engine detail.** `show` gives prompt + answer/must-hits; `mastery` gives one brightness number. Neither shows *why* a card is where it is — its Brightness with the difficulty/stability behind it, the THRESHOLD compare, the eligibility check that put it in (or kept it out of) the queue. Surfacing that per card is exactly the tag-level tracing parked above — it needs `retention --trace` or a richer `show` on the CLI. Recording the want here so the skill isn't the place it gets bolted on.
