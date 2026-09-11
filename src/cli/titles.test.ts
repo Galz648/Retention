@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test"
 import { Schema } from "effect"
 import { TreeId } from "../domain/ids.ts"
 import type { TreeListing } from "../domain/corpus.ts"
-import { matchTitle, pickByNumber } from "./titles.ts"
+import { matchTitle, matchTrack, pickByNumber } from "./titles.ts"
 
 const treeId = (s: string) => Schema.decodeUnknownSync(TreeId)(s)
 
@@ -21,6 +21,26 @@ const listing = (title: string, id: string): TreeListing => ({
 
 const biology = listing("Biology II — seed tree", "biology-ii")
 const cell = listing("Cell Biology — seed tree", "cell-biology")
+
+describe("matchTrack", () => {
+  test("university aliases", () => {
+    expect(matchTrack("university")).toBe("university")
+    expect(matchTrack("uni")).toBe("university")
+    expect(matchTrack("1")).toBe("university")
+    expect(matchTrack("course work")).toBe("university")
+  })
+
+  test("curiosity aliases", () => {
+    expect(matchTrack("curiosity")).toBe("curiosity")
+    expect(matchTrack("2")).toBe("curiosity")
+    expect(matchTrack("personal research")).toBe("curiosity")
+  })
+
+  test("empty and unknown are undefined", () => {
+    expect(matchTrack("")).toBeUndefined()
+    expect(matchTrack("biology")).toBeUndefined()
+  })
+})
 
 describe("matchTitle", () => {
   test("exact title wins", () => {

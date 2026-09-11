@@ -2,5 +2,6 @@
   "title": "Biology I",
   "kind": "knowledge",
   "summary": "First-year biology map: cells, genetics, evolution.",
-  "archived": false
+  "archived": false,
+  "track": "university"
 }

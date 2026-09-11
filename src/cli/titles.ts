@@ -1,4 +1,16 @@
-import type { TreeListing } from "../domain/corpus.ts"
+import type { Track, TreeListing } from "../domain/corpus.ts"
+
+export const matchTrack = (query: string): Track | undefined => {
+  const needle = query.trim().toLowerCase()
+  if (needle.length === 0) return undefined
+  if (needle === "1" || needle === "university" || needle === "uni") {
+    return "university"
+  }
+  if (needle.startsWith("course")) return "university"
+  if (needle === "2" || needle === "curiosity") return "curiosity"
+  if (needle.startsWith("personal")) return "curiosity"
+  return undefined
+}
 
 export const matchTitle = (
   listings: ReadonlyArray<TreeListing>,

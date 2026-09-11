@@ -2,5 +2,6 @@
   "title": "German sentence-mine terms",
   "kind": "terms",
   "summary": "Words taken from mined sentences.",
-  "archived": false
+  "archived": false,
+  "track": "curiosity"
 }

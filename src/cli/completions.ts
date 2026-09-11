@@ -4,7 +4,7 @@ const commands: ReadonlyArray<{ readonly name: string; readonly hint: string }> 
   { name: "help", hint: "what you can do" },
   { name: "version", hint: "which build this is" },
   { name: "status", hint: "whether a log exists; which tree if you named one" },
-  { name: "trees", hint: "every tree, by kind, with a one-line what-it-is" },
+  { name: "trees", hint: "every tree, by track then kind, with a one-line what-it-is" },
   { name: "session", hint: "options menu, then Session or the map; q quit" },
   { name: "mastery", hint: "brightness per card in one tree" },
   { name: "graph", hint: "eligible nodes if nothing is known, or full" },

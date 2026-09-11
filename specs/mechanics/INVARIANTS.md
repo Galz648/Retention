@@ -88,12 +88,12 @@ Product specs still say **component** (Engine, Session, Session CLI). Constructi
 | **INV-B-CLI-03** | Impure commands state what will happen, then ask. Default is no. Only `y` / `yes` (case-insensitive) continue. Grade consent names the prompt, the rating, that this appends one review, and that a missing log **will create it**. | example — `src/cli/handle.test.ts` |
 | **INV-B-CLI-04** | If the program cannot ask yes/no, an impure command **refuses** rather than writing. | example — `src/cli/handle.test.ts` |
 | **INV-B-CLI-05** | Missing log = empty history. Pure commands do not create the log or its directory. `queue` on a missing log must not create anything. | partial — store missing-file is example (`src/store/jsonl.test.ts`); no Session CLI test that `queue` leaves the filesystem untouched |
-| **INV-B-CLI-06** | Each invocation chooses a tree (title, unique prefix, or picker). Tree choice is not held across process invocations. | prose (title matching is example in `titles.test.ts`) |
+| **INV-B-CLI-06** | Each invocation chooses a tree (title, unique prefix, or track-then-tree picker). Title skips track. Tree choice is not held across process invocations. | prose (title matching is example in `titles.test.ts`) |
 | **INV-B-CLI-07** | Numbers on `queue` / `show` / `grade` refer to the current queue for that tree, not to internal card ids. | example — `src/cli/handle.test.ts` |
 | **INV-B-CLI-08** | `queue` prints type, node title, prompt — no answers, no card ids. `show` prints the answer (recall) or must-hits (derivation). | example — `src/cli/handle.test.ts` |
 | **INV-B-CLI-09** | Piped / non-TTY output is plain text: no color, no banner. Banner only on `help`. Honor `NO_COLOR`. | example — `src/cli/handle.test.ts`, `style.test.ts` |
 | **INV-B-CLI-10** | Unknown command: print help, exit non-zero. A listed command restates its description in context, then the payload. `completions` stdout is the script only. | partial — completions and context line are example; unknown-command exit is prose |
-| **INV-B-CLI-11** | `trees` is a short list by kind: **title** + one sentence. Not counts, folder names, or importer leftovers as the title. | example — `src/cli/handle.test.ts`, `trees-view.test.ts` |
+| **INV-B-CLI-11** | `trees` is a short list by **track then kind**: **title** + one sentence. Not counts, folder names, or importer leftovers as the title. | example — `src/cli/handle.test.ts`, `trees-view.test.ts` |
 
 TTY Session TUI (options menu, `q` leaves, no `tree` dump, you-are-here is `●`) is standing product law in `KEY_DECISIONS.md`. Do not mint TUI keybinding ids until that surface is the locked feel in this catalog's encoding, not remaining `/goal` work.
 

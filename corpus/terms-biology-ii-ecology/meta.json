@@ -3,5 +3,6 @@
   "kind": "terms",
   "summary": "Names and conventions from ecology.",
   "archived": false,
-  "belongsTo": "biology-ii"
+  "belongsTo": "biology-ii",
+  "track": "university"
 }

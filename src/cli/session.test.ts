@@ -193,12 +193,17 @@ describe("session graph", () => {
     ])
   })
 
-  test("root menu is knowledge trees plus unattached decks", () => {
-    const items = rootItems(listings)
-    expect(items.map((item) => (item._tag === "tree" ? item.listing.title : ""))).toEqual([
-      "Biology II",
-      "German frequency terms",
-    ])
+  test("root menu is knowledge trees plus unattached decks on one track", () => {
+    expect(
+      rootItems(listings, "university").map((item) =>
+        item._tag === "tree" ? item.listing.title : "",
+      ),
+    ).toEqual(["Biology II"])
+    expect(
+      rootItems(listings, "curiosity").map((item) =>
+        item._tag === "tree" ? item.listing.title : "",
+      ),
+    ).toEqual(["German frequency terms"])
   })
 
   test("location marks the current node in the path", () => {
@@ -249,6 +254,7 @@ describe("runSession", () => {
       { _tag: "enter" },
       { _tag: "enter" },
       { _tag: "enter" },
+      { _tag: "enter" },
       { _tag: "down" },
       { _tag: "enter" },
       { _tag: "yes" },
@@ -273,6 +279,8 @@ describe("runSession", () => {
       ),
     )
     const text = lines.join("\n")
+    expect(text).toContain("session — choose a track")
+    expect(text).toContain("University")
     expect(text).toContain("session — choose a tree")
     expect(text).toContain("session — Biology II")
     expect(text).toContain("Explain Diffusion from scratch.")
@@ -292,6 +300,7 @@ describe("runSession", () => {
         }),
     }
     const keys: ReadonlyArray<Key> = [
+      { _tag: "enter" },
       { _tag: "enter" },
       { _tag: "enter" },
       { _tag: "enter" },
@@ -328,11 +337,13 @@ describe("runSession", () => {
         { _tag: "enter" },
         { _tag: "enter" },
         { _tag: "enter" },
+        { _tag: "enter" },
         { _tag: "back" },
         { _tag: "quit" },
       ],
       { _tag: "home" },
     )
+    expect(text).toContain("trees — choose a track")
     expect(text).toContain("trees — walk the map")
     expect(text).toContain("trees — Biology II")
     expect(text).toContain("Biology II")

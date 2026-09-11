@@ -3,5 +3,6 @@
   "kind": "terms",
   "summary": "Core cell-biology names to recall.",
   "archived": false,
-  "belongsTo": "cell-biology"
+  "belongsTo": "cell-biology",
+  "track": "university"
 }

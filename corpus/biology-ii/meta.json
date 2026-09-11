@@ -2,5 +2,6 @@
   "title": "Biology II",
   "kind": "knowledge",
   "summary": "Animal systems and ecology, from the course map.",
-  "archived": false
+  "archived": false,
+  "track": "university"
 }

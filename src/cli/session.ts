@@ -1,11 +1,18 @@
 import { Effect } from "effect"
 import type { Card, Outcome } from "../domain/cards.ts"
-import type { Corpus, TreeListing } from "../domain/corpus.ts"
+import type { Corpus, Track, TreeListing } from "../domain/corpus.ts"
 import type { Node } from "../domain/corpus.ts"
 import type { CardId, NodeId, TreeId } from "../domain/ids.ts"
 import { SessionError } from "../session/interface.ts"
 import { formatShow, nodeTitle } from "./cards-view.ts"
-import { attachedDecks, knowledgeTrees, unattachedDecks } from "./trees-view.ts"
+import {
+  attachedDecks,
+  knowledgeTrees,
+  onTrack,
+  presentTracks,
+  TRACK_MENU,
+  unattachedDecks,
+} from "./trees-view.ts"
 import type { Palette } from "./style.ts"
 import {
   CLEAR,
@@ -37,13 +44,15 @@ export type SessionOps<R> = {
 
 export type MenuItem =
   | { readonly _tag: "option"; readonly id: "session" | "trees" | "status" }
+  | { readonly _tag: "track"; readonly track: Track }
   | { readonly _tag: "tree"; readonly listing: TreeListing }
   | { readonly _tag: "node"; readonly listing: TreeListing; readonly node: Node }
   | { readonly _tag: "card"; readonly listing: TreeListing; readonly card: Card }
 
 type Frame =
   | { readonly _tag: "home" }
-  | { readonly _tag: "pick"; readonly purpose: "session" | "trees" }
+  | { readonly _tag: "track"; readonly purpose: "session" | "trees" }
+  | { readonly _tag: "pick"; readonly purpose: "session" | "trees"; readonly track: Track }
   | { readonly _tag: "tree"; readonly listing: TreeListing }
   | { readonly _tag: "node"; readonly listing: TreeListing; readonly nodeId: NodeId }
   | {
@@ -141,14 +150,23 @@ export const locationLines = (
 
 export const rootItems = (
   listings: ReadonlyArray<TreeListing>,
-): ReadonlyArray<MenuItem> => [
-  ...knowledgeTrees(listings).map(
-    (listing): MenuItem => ({ _tag: "tree", listing }),
-  ),
-  ...unattachedDecks(listings).map(
-    (listing): MenuItem => ({ _tag: "tree", listing }),
-  ),
-]
+  track: Track,
+): ReadonlyArray<MenuItem> => {
+  const scoped = onTrack(listings, track)
+  return [
+    ...knowledgeTrees(scoped).map(
+      (listing): MenuItem => ({ _tag: "tree", listing }),
+    ),
+    ...unattachedDecks(scoped).map(
+      (listing): MenuItem => ({ _tag: "tree", listing }),
+    ),
+  ]
+}
+
+export const trackItems = (
+  listings: ReadonlyArray<TreeListing>,
+): ReadonlyArray<MenuItem> =>
+  presentTracks(listings).map((track): MenuItem => ({ _tag: "track", track }))
 
 export const treeItems = (
   listings: ReadonlyArray<TreeListing>,
@@ -201,6 +219,7 @@ const aligned = (title: string, summary: string, width: number): string =>
 
 const labelOf = (item: MenuItem, corpus: Corpus | undefined): string => {
   if (item._tag === "option") return optionLabel(item.id)
+  if (item._tag === "track") return TRACK_MENU[item.track]
   if (item._tag === "tree") return item.listing.title
   if (item._tag === "node") return item.node.title
   if (corpus === undefined) return item.card.prompt
@@ -254,6 +273,9 @@ const listPainted = (
     if (item._tag === "option") {
       return highlight(ink.enabled, index === cursor, optionLabel(item.id))
     }
+    if (item._tag === "track") {
+      return highlight(ink.enabled, index === cursor, TRACK_MENU[item.track])
+    }
     if (item._tag === "tree") {
       return highlight(
         ink.enabled,
@@ -296,9 +318,29 @@ const loadCached = <R>(
     return corpus
   })
 
-const opening = (entry: SessionEntry | undefined): Array<Frame> => {
+const pickFrame = (
+  purpose: "session" | "trees",
+  track: Track,
+): Frame => ({ _tag: "pick", purpose, track })
+
+const afterHome = (
+  purpose: "session" | "trees",
+  listings: ReadonlyArray<TreeListing>,
+): Frame => {
+  const tracks = presentTracks(listings)
+  if (tracks.length === 1) {
+    const only = tracks[0]
+    if (only !== undefined) return pickFrame(purpose, only)
+  }
+  return { _tag: "track", purpose }
+}
+
+const opening = (
+  entry: SessionEntry | undefined,
+  listings: ReadonlyArray<TreeListing>,
+): Array<Frame> => {
   if (entry === undefined || entry._tag === "home") return [{ _tag: "home" }]
-  if (entry._tag === "trees") return [{ _tag: "home" }, { _tag: "pick", purpose: "trees" }]
+  if (entry._tag === "trees") return [{ _tag: "home" }, afterHome("trees", listings)]
   return [{ _tag: "home" }, { _tag: "queue", listing: entry.listing }]
 }
 
@@ -312,7 +354,7 @@ export const runSession = <RLoad, ROps>(
 ): Effect.Effect<void, SessionError, RLoad | ROps> =>
   Effect.gen(function* () {
     const cache = new Map<string, Corpus>()
-    let stack: Array<Frame> = opening(entry)
+    let stack: Array<Frame> = opening(entry, listings)
     let cursor = 0
     let queueCards: ReadonlyArray<Card> = []
     const loop = Effect.gen(function* () {
@@ -336,16 +378,32 @@ export const runSession = <RLoad, ROps>(
             "tree: (chosen in Session or Trees)",
           ]
           io.write(frame(ops.version, crumbs, extra, footer))
+        } else if (current._tag === "track") {
+          crumbs = ink.dim(
+            current.purpose === "session"
+              ? "session — choose a track"
+              : "trees — choose a track",
+          )
+          items = trackItems(listings)
+          cursor = items.length === 0 ? 0 : cursor % Math.max(items.length, 1)
+          io.write(
+            frame(ops.version, crumbs, listPainted(items, cursor, ink, undefined), footer),
+          )
         } else if (current._tag === "pick") {
           crumbs = ink.dim(
             current.purpose === "session"
               ? "session — choose a tree"
               : "trees — walk the map",
           )
-          items = rootItems(listings)
+          items = rootItems(listings, current.track)
           cursor = items.length === 0 ? 0 : cursor % Math.max(items.length, 1)
           io.write(
-            frame(ops.version, crumbs, rootPainted(listings, items, cursor, ink), footer),
+            frame(
+              ops.version,
+              crumbs,
+              rootPainted(onTrack(listings, current.track), items, cursor, ink),
+              footer,
+            ),
           )
         } else if (current._tag === "queue") {
           const loaded = yield* loadCached(cache, current.listing, load)
@@ -522,7 +580,14 @@ export const runSession = <RLoad, ROps>(
             stack = [...stack, { _tag: "status" }]
             continue
           }
-          stack = [...stack, { _tag: "pick", purpose: picked.id }]
+          stack = [...stack, afterHome(picked.id, listings)]
+          continue
+        }
+        if (current._tag === "track") {
+          const picked = items[cursor]
+          if (picked === undefined || picked._tag !== "track") continue
+          cursor = 0
+          stack = [...stack, pickFrame(current.purpose, picked.track)]
           continue
         }
         if (current._tag === "pick") {

@@ -11,7 +11,7 @@ The command-line program is the only user-facing client in this version. All int
 - No user-facing environment variables.
 - Paths (corpus directory, event log) are owned by the program. The user never has to know them. Inspect commands print what they need in glossary language.
 - **You can see every tree** by title. Folder names are not how you refer to trees.
-- **Each one-shot invocation chooses a tree** (title argument or picker). A run is not glued to one tree from startup. The TUI walks trees until you quit; the next process starts clean.
+- **Each one-shot invocation chooses a tree** (title argument skips track; otherwise track then tree). A run is not glued to one tree from startup. The TUI walks trees until you quit; the next process starts clean.
 - **Writes wait for a yes.** Impure commands ask; default no. Help lists every command, each marked `[pure]` or `[impure]`, each with a one-line description of what it does.
 - **Cool must not hide the job.** Color, a banner, completions, and TUI chrome are allowed only when they make the next action clearer. Piped output stays plain text, no color, no banner, no alternate screen.
 
@@ -31,7 +31,7 @@ Creating the log (or its directory) counts as a side effect. `queue` on a missin
 [pure]    help         what you can do
 [pure]    version      which build this is
 [pure]    status       whether a log exists; which tree if you named one
-[pure]    trees        every tree, by kind, with a one-line what-it-is
+[pure]    trees        every tree, by track then kind, with a one-line what-it-is
 [pure]    session      options menu, then Session or the map; q quit
 [pure]    mastery      Brightness per card (see MASTERY_CLI)
 [pure]    graph        eligible and blocked nodes (see GRAPH_CLI)
@@ -163,11 +163,15 @@ Then `Proceed? [y/N]`. Same yes/no rules as `grade`.
 
 ## Choosing a tree
 
-`[title]` is the tree's **title** (`Biology II`, `Biology II ecology terms`, …), or a unique prefix of that title.
+`[title]` is the tree's **title** (`Biology II`, `Biology II ecology terms`, …), or a unique prefix of that title. A title argument **skips the track**.
 
-If omitted in an interactive terminal: a **picker** of titles (grouped as in `trees`), not a wall of counts. That prompt is not a write. One-shot commands stay in the same scrollback (CLI picker). Only `session` (and TTY `trees` / no-args, which enter it) takes the alternate screen.
-If omitted and the program cannot ask: error, print the compact title list, exit non-zero.
+If omitted in an interactive terminal: **track, then tree**. Track is university (course work) or curiosity (personal research). Then a **picker** of titles on that track (grouped as in `trees`), not a wall of counts. If only one live track exists, skip the track step. That prompt is not a write. One-shot commands stay in the same scrollback (CLI picker). Only `session` (and TTY `trees` / no-args, which enter it) takes the alternate screen.
+If omitted and the program cannot ask: error, print the compact title list (both tracks), exit non-zero.
 If the prefix matches more than one title: pick among the matches, or error the same way when not interactive.
+
+Piped `trees` lists every tree, grouped by track then kind. It does not pick.
+
+Still one tree per sitting. No mixed queue across trees.
 
 ## Feel (TTY)
 
@@ -176,7 +180,7 @@ Useful first. Decoration second.
 - **Banner:** the existing Retention wordmark, **only** on `help`. Never on `session` / `trees` / `queue` / `show` / `grade` / `inbox` / `capture` / `gap` / `gaps` / `mastery` / `graph` / `scheduler`. Version is on `help` and every TUI screen (`retention version` is the one-shot).
 - **Color:** when stdout is a terminal. None when piped. Honor `NO_COLOR`. Knowledge titles cyan, term decks magenta, impure / “this will write” yellow, due queue green, empty queue dim, breadcrumbs dim. Do not rainbow every line.
 - **Completions:** generate shell completions for commands, ratings, and tree **titles** (`retention completions zsh` or equivalent). Typing `retention queue <tab>` offers titles, not folder names. Completions stdout is the script only — no context line — so it can be sourced.
-- **Two surfaces.** TTY `session` (also TTY no-args) is the TUI: options home, then Session or Trees. TTY `trees` opens Trees. One-shot commands (`help`, `version`, `status`, `queue`, `show`, `mastery`, `graph`, `scheduler`, `grade`, `inbox`, `capture`, `gap`, `gaps`, `completions`, and every piped invocation) stay a CLI: print, maybe a line picker, return. Queue numbers on `queue` / `show` / `grade` / `gap` are still queue indices. Typing the argument still works and is the non-interactive path.
+- **Two surfaces.** TTY `session` (also TTY no-args) is the TUI: options home, then Session or Trees. Session and Trees pick a **track** then a tree when more than one live track exists. TTY `trees` opens that path. Title argument on `session` opens that tree's queue and skips track. One-shot commands (`help`, `version`, `status`, `queue`, `show`, `mastery`, `graph`, `scheduler`, `grade`, `inbox`, `capture`, `gap`, `gaps`, `completions`, and every piped invocation) stay a CLI: print, maybe a line picker, return. Queue numbers on `queue` / `show` / `grade` / `gap` are still queue indices. Typing the argument still works and is the non-interactive path.
 
 ## Client language (open)
 

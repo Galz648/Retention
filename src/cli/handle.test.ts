@@ -204,6 +204,7 @@ describe("CLI handle", () => {
   test("trees groups kinds, prints summary, omits counts and folder names", async () => {
     const result = await run(["trees"], mute(), [])
     const text = result.lines.join("\n")
+    expect(text).toContain("University — course work")
     expect(text).toContain("Knowledge trees")
     expect(text).toContain("Biology II")
     expect(text).toContain("Animal systems and ecology")
@@ -417,6 +418,7 @@ describe("CLI handle", () => {
     const result = await run(["session"], mute(), [])
     expect(result.error).toBeUndefined()
     expect(result.lines.join("\n")).toContain("Biology II")
+    expect(result.lines.join("\n")).toContain("University — course work")
     expect(result.lines.join("\n")).toContain("Knowledge trees")
   })
 

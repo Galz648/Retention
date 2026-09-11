@@ -2,5 +2,6 @@
   "title": "Cell Biology",
   "kind": "knowledge",
   "summary": "Cooper-scale cell biology map.",
-  "archived": false
+  "archived": false,
+  "track": "university"
 }

@@ -13,11 +13,12 @@ const listing = (
   summary: string,
   id: string,
   belongsTo?: string,
+  track: "university" | "curiosity" = "university",
 ): TreeListing => ({
   treeId: treeId(id),
   title,
   kind,
-  track: "university",
+  track,
   summary,
   archived: false,
   belongsTo: belongsTo === undefined ? undefined : treeId(belongsTo),
@@ -37,13 +38,15 @@ const dataLine = (text: string, title: string, summary: string): string => {
 }
 
 describe("formatTreesList", () => {
-  test("nests attached term decks under their knowledge tree", () => {
+  test("groups by track, then nests attached decks under their knowledge tree", () => {
     const text = formatTreesList([
       listing("Biology II", "knowledge", "Animal systems and ecology, from the course map.", "biology-ii"),
       listing("Biology II ecology terms", "terms", "Names and conventions from ecology.", "terms-biology-ii-ecology", "biology-ii"),
       listing("Biology II cell terms", "terms", "Names from cell biology.", "terms-biology-ii-cell", "biology-ii"),
-      listing("German frequency terms", "terms", "Core words, first slice.", "terms-german-frequency-core"),
+      listing("German frequency terms", "terms", "Core words, first slice.", "terms-german-frequency-core", undefined, "curiosity"),
     ])
+    expect(text).toContain("University — course work")
+    expect(text).toContain("Curiosity — personal research")
     expect(text).toContain("Knowledge trees")
     expect(text).toContain("Biology II")
     expect(text).toContain("Animal systems and ecology")
@@ -54,10 +57,15 @@ describe("formatTreesList", () => {
     expect(text).not.toContain("99")
     expect(text).not.toContain("nodes")
     expect(text).not.toContain("biology-ii")
+    const universityAt = text.indexOf("University — course work")
+    const curiosityAt = text.indexOf("Curiosity — personal research")
     const ecologyAt = text.indexOf("Biology II ecology terms")
     const germanHead = text.indexOf("Term decks — not attached")
-    expect(ecologyAt).toBeGreaterThan(text.indexOf("Biology II"))
-    expect(ecologyAt).toBeLessThan(germanHead)
+    expect(universityAt).toBeGreaterThanOrEqual(0)
+    expect(curiosityAt).toBeGreaterThan(universityAt)
+    expect(ecologyAt).toBeGreaterThan(universityAt)
+    expect(ecologyAt).toBeLessThan(curiosityAt)
+    expect(germanHead).toBeGreaterThan(curiosityAt)
     expect(text.indexOf("German frequency terms")).toBeGreaterThan(germanHead)
   })
 
@@ -82,7 +90,7 @@ describe("formatTreesList", () => {
     const text = formatTreesList(
       [
         listing("Biology II", "knowledge", "map", "biology-ii"),
-        listing("German frequency terms", "terms", "words", "terms-german-frequency-core"),
+        listing("German frequency terms", "terms", "words", "terms-german-frequency-core", undefined, "curiosity"),
       ],
       ink,
     )

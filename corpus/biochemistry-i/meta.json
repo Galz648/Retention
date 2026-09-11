@@ -2,5 +2,6 @@
   "title": "Biochemistry I",
   "kind": "knowledge",
   "summary": "Chemistry of life for the course map.",
-  "archived": false
+  "archived": false,
+  "track": "university"
 }

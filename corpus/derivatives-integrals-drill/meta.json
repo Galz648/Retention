@@ -2,5 +2,6 @@
   "title": "Derivatives and integrals drill",
   "kind": "knowledge",
   "summary": "Rebuild standard derivatives and integrals from scratch.",
-  "archived": false
+  "archived": false,
+  "track": "university"
 }

@@ -1,7 +1,7 @@
 import { Effect, Schema } from "effect"
 import { CorpusStore } from "../corpus/interface.ts"
 import { Outcome } from "../domain/cards.ts"
-import type { Corpus, TreeListing } from "../domain/corpus.ts"
+import type { Corpus, Track, TreeListing } from "../domain/corpus.ts"
 import { GapSeverity } from "../domain/events.ts"
 import type { CardId } from "../domain/ids.ts"
 import { Gap, GapError } from "../gap/interface.ts"
@@ -15,8 +15,8 @@ import { evaluateTree } from "./mastery.ts"
 import { dueLines, fullValues, zeroValues } from "./scheduler.ts"
 import { runSession, type SessionEntry } from "./session.ts"
 import { palette, type Palette } from "./style.ts"
-import { matchTitle, pickByNumber } from "./titles.ts"
-import { formatTreesList } from "./trees-view.ts"
+import { matchTitle, matchTrack, pickByNumber } from "./titles.ts"
+import { formatTreesList, onTrack, presentTracks, TRACK_HEADING } from "./trees-view.ts"
 import type { Key } from "./tui.ts"
 import { VERSION } from "./version.ts"
 
@@ -38,7 +38,7 @@ export type CliIo = {
 export const helpText = `[pure]    help            what you can do
 [pure]    version         which build this is
 [pure]    status          whether a log exists; which tree if you named one
-[pure]    trees           every tree, by kind, with a one-line what-it-is
+[pure]    trees           every tree, by track then kind, with a one-line what-it-is
 [pure]    session         options menu, then Session or the map; q quit
 [pure]    mastery         brightness per card in one tree
 [pure]    graph           eligible nodes if nothing is known, or full
@@ -126,6 +126,31 @@ const pickInteractive = (
     return yield* fail("Several trees match.")
   })
 
+const pickTrack = (
+  io: CliIo,
+  listings: ReadonlyArray<TreeListing>,
+): Effect.Effect<Track, SessionError> =>
+  Effect.gen(function* () {
+    const tracks = presentTracks(listings)
+    if (tracks.length === 0) {
+      return yield* fail("No trees.")
+    }
+    if (tracks.length === 1) {
+      const only = tracks[0]
+      if (only !== undefined) return only
+    }
+    for (const track of tracks) {
+      io.write(TRACK_HEADING[track])
+    }
+    const answer = yield* io.ask("Which track?")
+    if (answer === undefined) {
+      return yield* fail("Need an interactive terminal to pick a tree.")
+    }
+    const hit = matchTrack(answer)
+    if (hit !== undefined && tracks.includes(hit)) return hit
+    return yield* fail("No track matches.")
+  })
+
 const resolveTree = (
   io: CliIo,
   listings: ReadonlyArray<TreeListing>,
@@ -153,7 +178,14 @@ const resolveTree = (
     io.write(formatTreesList(listings))
     return fail("Name a tree by title.")
   }
-  return pickInteractive(io, listings)
+  return Effect.gen(function* () {
+    const track = yield* pickTrack(io, listings)
+    const scoped = onTrack(listings, track)
+    if (scoped.length === 0) {
+      return yield* fail("No trees on that track.")
+    }
+    return yield* pickInteractive(io, scoped)
+  })
 }
 
 const titleFromArgs = (
@@ -248,12 +280,12 @@ export const handle = (args: ReadonlyArray<string>, io: CliIo) =>
     if (command === "trees") {
       const listings = yield* loadListings()
       if (listings.length === 0) {
-        context(io, ink, "trees — every tree, by kind, with a one-line what-it-is")
+        context(io, ink, "trees — every tree, by track then kind, with a one-line what-it-is")
         io.write("no trees")
         return yield* Effect.void
       }
       if (!io.interactive) {
-        context(io, ink, "trees — every tree, by kind, with a one-line what-it-is")
+        context(io, ink, "trees — every tree, by track then kind, with a one-line what-it-is")
         io.write(formatTreesList(listings, ink))
         return yield* Effect.void
       }

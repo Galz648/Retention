@@ -19,9 +19,9 @@ retention gap 1 core-error "concentration gradient direction" "stated low->high"
 retention gaps
 ```
 
-Omit the title in an interactive terminal → prompt (grouped as in `trees`).
+Omit the title in an interactive terminal → track, then tree (title skips track). One live track skips the track step.
 
-TTY `retention` / `retention session` take the alternate screen until `q`. Home is the options menu; **Session** is due cards, inspect, grade with consent. Piped `trees` is the nested map and returns. Where you are in a map is the TUI path (`●`), not a `tree` dump.
+TTY `retention` / `retention session` take the alternate screen until `q`. Home is the options menu; **Session** is due cards, inspect, grade with consent. Piped `trees` lists every tree by track then kind and returns. Where you are in a map is the TUI path (`●`), not a `tree` dump.
 
 `mastery`, `graph`, and `scheduler` each talk to one engine. They do not compose the other two.
 

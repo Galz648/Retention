@@ -3,5 +3,6 @@
   "kind": "terms",
   "summary": "Names and conventions from animal physiology.",
   "archived": false,
-  "belongsTo": "biology-ii"
+  "belongsTo": "biology-ii",
+  "track": "university"
 }

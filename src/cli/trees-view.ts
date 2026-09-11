@@ -1,4 +1,4 @@
-import type { TreeListing } from "../domain/corpus.ts"
+import type { Track, TreeListing } from "../domain/corpus.ts"
 import type { Palette } from "./style.ts"
 
 const TITLE_CAP = 42
@@ -7,11 +7,33 @@ const BRANCH_MID = "  ├─ "
 const BRANCH_END = "  └─ "
 const INDENT = "  "
 
+export const TRACK_ORDER: ReadonlyArray<Track> = ["university", "curiosity"]
+
+export const TRACK_HEADING: Record<Track, string> = {
+  university: "University — course work",
+  curiosity: "Curiosity — personal research",
+}
+
+export const TRACK_MENU: Record<Track, string> = {
+  university: "University    course work",
+  curiosity: "Curiosity     personal research",
+}
+
 const live = (listings: ReadonlyArray<TreeListing>): ReadonlyArray<TreeListing> =>
   listings.filter((tree) => !tree.archived)
 
 const knownIds = (listings: ReadonlyArray<TreeListing>): Set<string> =>
   new Set(listings.map((tree) => tree.treeId))
+
+export const onTrack = (
+  listings: ReadonlyArray<TreeListing>,
+  track: Track,
+): ReadonlyArray<TreeListing> => listings.filter((tree) => tree.track === track)
+
+export const presentTracks = (
+  listings: ReadonlyArray<TreeListing>,
+): ReadonlyArray<Track> =>
+  TRACK_ORDER.filter((track) => live(listings).some((tree) => tree.track === track))
 
 export const attachedDecks = (
   listings: ReadonlyArray<TreeListing>,
@@ -107,15 +129,13 @@ const formatRow = (
   return `${prefix}${paintTitle(tree, ink)}${" ".repeat(pad)}${TITLE_GAP}${tree.summary}`
 }
 
-export const formatTreesList = (
+const formatKindGroups = (
   listings: ReadonlyArray<TreeListing>,
-  ink?: Palette,
-): string => {
+  leftCol: number,
+  ink: Palette | undefined,
+): Array<string> => {
   const knowledge = knowledgeTrees(listings)
   const loose = unattachedDecks(listings)
-  const archived = archivedTrees(listings)
-  const rows = visibleRows(listings)
-  const leftCol = leftColumn(rows, titleColumn(rows))
   const lines: Array<string> = []
   if (knowledge.length > 0) {
     lines.push(paintHeading("Knowledge trees — concepts and what depends on what", ink))
@@ -135,6 +155,26 @@ export const formatTreesList = (
       lines.push(formatRow(INDENT, tree, leftCol, ink))
     }
     lines.push("")
+  }
+  return lines
+}
+
+export const formatTreesList = (
+  listings: ReadonlyArray<TreeListing>,
+  ink?: Palette,
+): string => {
+  const archived = archivedTrees(listings)
+  const rows = visibleRows(listings)
+  const leftCol = leftColumn(rows, titleColumn(rows))
+  const lines: Array<string> = []
+  for (const track of TRACK_ORDER) {
+    const subset = onTrack(listings, track)
+    if (knowledgeTrees(subset).length === 0 && unattachedDecks(subset).length === 0) {
+      continue
+    }
+    lines.push(paintHeading(TRACK_HEADING[track], ink))
+    lines.push("")
+    lines.push(...formatKindGroups(subset, leftCol, ink))
   }
   if (archived.length > 0) {
     lines.push(paintHeading("Archived", ink))
