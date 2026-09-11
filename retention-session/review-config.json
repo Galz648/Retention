@@ -1,0 +1,11 @@
+{
+  "_comment": "Managed by the retention-session skill. Holds genuine preferences only, not anything meant to be tuned from data. Edit by telling the skill (\"set my review default to Biology II\", \"weight Biology II 3 to 1 against German\", \"group Biology II and Cell Biology as biology\", \"trace on\", \"easy opener off\", \"hide the receipt\") or by hand.",
+  "default_scope": "ask",
+  "groups": {},
+  "weights": {},
+  "trace": "off",
+  "receipt": true,
+  "question_style": {
+    "easy_opener": true
+  }
+}
