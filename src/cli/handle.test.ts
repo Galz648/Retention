@@ -6,7 +6,8 @@ import { RecallCard } from "../domain/cards.ts"
 import { Corpus, Edge, Node, type TreeListing } from "../domain/corpus.ts"
 import { CardId, NodeId, TreeId } from "../domain/ids.ts"
 import { Inbox } from "../inbox/interface.ts"
-import { InboxCaptured } from "../domain/events.ts"
+import { Gap } from "../gap/interface.ts"
+import { GapObserved, InboxCaptured } from "../domain/events.ts"
 import { Live as GraphLive } from "../engine/graph/live.ts"
 import { Live as MasteryLive } from "../engine/mastery/live.ts"
 import { Live as SchedulerLive } from "../engine/scheduler/live.ts"
@@ -89,10 +90,13 @@ const run = (
   graded: Array<string>,
   captured: Array<string> = [],
   pending: ReadonlyArray<string> = [],
+  observed: Array<string> = [],
+  pendingGaps: ReadonlyArray<GapObserved> = [],
 ): Promise<{
   lines: Array<string>
   graded: Array<string>
   captured: Array<string>
+  observed: Array<string>
   error?: string
 }> => {
   const Fake = Layer.succeed(
@@ -126,6 +130,18 @@ const run = (
         ),
     }),
   )
+  const FakeGap = Layer.succeed(
+    Gap,
+    Gap.of({
+      observe: (input) =>
+        Effect.sync(() => {
+          observed.push(
+            `${input.id}:${input.severity}:${input.subConcept}:${input.observation}`,
+          )
+        }),
+      pending: () => Effect.succeed(pendingGaps),
+    }),
+  )
   const lines: Array<string> = []
   const write = (line: string) => {
     lines.push(line)
@@ -134,6 +150,7 @@ const run = (
     handle(args, { ...io, write }).pipe(
       Effect.provide(Fake),
       Effect.provide(FakeInbox),
+      Effect.provide(FakeGap),
       Effect.provide(CorpusFixed),
       Effect.provide(ClockAt(0)),
       Effect.provide(GraphLive),
@@ -142,8 +159,14 @@ const run = (
       Effect.provide(Memory),
       Effect.provide(CodecLive),
       Effect.match({
-        onFailure: (error) => ({ lines, graded, captured, error: error.reason }),
-        onSuccess: () => ({ lines, graded, captured }),
+        onFailure: (error) => ({
+          lines,
+          graded,
+          captured,
+          observed,
+          error: error.reason,
+        }),
+        onSuccess: () => ({ lines, graded, captured, observed }),
       }),
     ),
   )
@@ -160,6 +183,8 @@ describe("CLI handle", () => {
     expect(help.lines.join("\n")).toContain("asks first")
     expect(help.lines.join("\n")).toContain("capture")
     expect(help.lines.join("\n")).toContain("inbox")
+    expect(help.lines.join("\n")).toContain("gap")
+    expect(help.lines.join("\n")).toContain("gaps")
     expect(help.lines.join("\n")).toContain("session")
     expect(help.lines.join("\n")).toContain("which build this is")
     expect(help.lines.join("\n")).toContain("mastery")
@@ -280,6 +305,100 @@ describe("CLI handle", () => {
     expect(text).toContain("1. diffusion is high to low")
     expect(text).not.toContain("data/log")
     expect(text).not.toContain("inbox.captured")
+  })
+
+  test("gap without an interactive terminal refuses and does not write", async () => {
+    const observed: Array<string> = []
+    const result = await run(
+      [
+        "gap",
+        "1",
+        "core-error",
+        "concentration gradient direction",
+        "stated low->high",
+        "Biology II",
+      ],
+      mute(),
+      [],
+      [],
+      [],
+      observed,
+    )
+    expect(result.error).toBe("Need an interactive terminal to confirm a write.")
+    expect(result.lines.join("\n")).toContain("This will create the event log.")
+    expect(observed).toEqual([])
+  })
+
+  test("gap no does not write; gap yes does", async () => {
+    const declined: Array<string> = []
+    const no = await run(
+      [
+        "gap",
+        "1",
+        "core-error",
+        "concentration gradient direction",
+        "stated low->high",
+        "Biology II",
+      ],
+      mute({ interactive: true, logExists: true, ask: () => Effect.succeed("n") }),
+      [],
+      [],
+      [],
+      declined,
+    )
+    expect(no.lines.join("\n")).toContain("aborted")
+    expect(declined).toEqual([])
+
+    const accepted: Array<string> = []
+    const yes = await run(
+      [
+        "gap",
+        "1",
+        "core-error",
+        "concentration gradient direction",
+        "stated low->high",
+        "Biology II",
+      ],
+      mute({
+        interactive: true,
+        logExists: true,
+        ask: () => Effect.succeed("yes"),
+      }),
+      [],
+      [],
+      [],
+      accepted,
+    )
+    expect(yes.lines.join("\n")).toContain("recorded")
+    expect(yes.lines.join("\n")).toContain("Diffusion")
+    expect(yes.lines.join("\n")).not.toContain("der-diffusion")
+    expect(yes.lines.join("\n")).not.toContain("This will create the event log.")
+    expect(accepted).toEqual([
+      `${cardId}:core-error:concentration gradient direction:stated low->high`,
+    ])
+  })
+
+  test("gaps lists titles and misses, not ids", async () => {
+    const pendingGaps = [
+      new GapObserved({
+        id: cardId,
+        at: DateTime.unsafeFromDate(new Date("2026-03-10T12:00:00.000Z")),
+        subConcept: "concentration gradient direction",
+        observation: "stated low->high; it is high->low",
+        severity: "core-error",
+      }),
+    ]
+    const result = await run(["gaps"], mute(), [], [], [], [], pendingGaps)
+    const text = result.lines.join("\n")
+    expect(text).toContain("gaps — observed misses, titles not ids")
+    expect(text).toContain("Biology II")
+    expect(text).toContain("Diffusion")
+    expect(text).toContain("concentration gradient direction")
+    expect(text).toContain("stated low->high; it is high->low")
+    expect(text).toContain("core-error")
+    expect(text).not.toContain("der-diffusion")
+    expect(text).not.toContain("gap.observed")
+    expect(text).not.toContain("biology-ii")
   })
 
   test("version prints the build", async () => {
@@ -462,6 +581,8 @@ describe("CLI handle", () => {
     expect(text.startsWith("#compdef retention")).toBe(true)
     expect(text).toContain("Biology II")
     expect(text).toContain("compdef")
+    expect(text).toContain("gap:")
+    expect(text).toContain("gaps:")
     expect(text).not.toContain("biology-ii")
     expect(text).not.toContain("completions — shell completion script")
   })

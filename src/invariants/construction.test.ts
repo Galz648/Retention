@@ -14,6 +14,7 @@ const knownTopLevel = new Set([
   "invariants",
   "events",
   "inbox",
+  "gap",
 ])
 
 const listTopLevel = async (): Promise<ReadonlyArray<string>> => {
@@ -68,9 +69,9 @@ describe("construction", () => {
     }
   })
 
-  test("INV-C-ENG-02: engine source does not import store, corpus, session, cli, or inbox", async () => {
+  test("INV-C-ENG-02: engine source does not import store, corpus, session, cli, inbox, or gap", async () => {
     const files = await sourceOf("src/engine/**/*.ts")
-    const seams = ["store", "corpus", "session", "cli", "inbox"] as const
+    const seams = ["store", "corpus", "session", "cli", "inbox", "gap"] as const
     for (const file of files) {
       if (file.path.endsWith(".test.ts")) continue
       for (const seam of seams) {
@@ -121,6 +122,27 @@ describe("construction", () => {
         /engine\/scheduler/.test(text),
       ].filter(Boolean)
       expect(tags.length).toBeLessThanOrEqual(1)
+    }
+  })
+
+  test("INV-C-GAP-01: gap does not import engine, session, cli, or THRESHOLD", async () => {
+    const files = await sourceOf("src/gap/**/*.ts")
+    for (const file of files) {
+      if (file.path.endsWith(".test.ts")) continue
+      expect(file.text).not.toMatch(/from ["'][^"']*engine\//)
+      expect(file.text).not.toMatch(/from ["'][^"']*session\//)
+      expect(file.text).not.toMatch(/from ["'][^"']*cli\//)
+      expect(file.text).not.toMatch(/THRESHOLD/)
+    }
+  })
+
+  test("session source does not import gap", async () => {
+    const files = await sourceOf("src/session/**/*.ts")
+    for (const file of files) {
+      if (file.path.endsWith(".test.ts") || file.path.endsWith("runtime.ts")) {
+        continue
+      }
+      expect(file.text).not.toMatch(/from ["'][^"']*gap\//)
     }
   })
 

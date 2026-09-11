@@ -1,6 +1,6 @@
 import { DateTime, Effect, Schema } from "effect"
 import { describe, expect, test } from "bun:test"
-import { CardId, CardReviewed, InboxCaptured, type Event } from "../events/interface.ts"
+import { CardId, CardReviewed, GapObserved, InboxCaptured, type Event } from "../events/interface.ts"
 import { Record } from "../store/interface.ts"
 import { Codec } from "./interface.ts"
 import { Live } from "./layers.ts"
@@ -51,6 +51,35 @@ describe("Codec.Live", () => {
     const event = new InboxCaptured({
       text: "diffusion is high to low",
       at,
+    })
+    const decoded = await withCodec(
+      Effect.gen(function* () {
+        const codec = yield* Codec
+        const encoded = yield* codec.encode(event)
+        return yield* codec.decode(encoded)
+      }),
+    )
+    expect(decoded).toEqual(event)
+    const encoded = await withCodec(
+      Effect.gen(function* () {
+        const codec = yield* Codec
+        return yield* codec.encode(event)
+      }),
+    )
+    expect(JSON.parse(encoded)).not.toHaveProperty("due")
+    expect(JSON.parse(encoded)).not.toHaveProperty("interval")
+    expect(JSON.parse(encoded)).not.toHaveProperty("brightness")
+  })
+
+  test("round-trips a gap.observed event; payload has no derived fields", async () => {
+    const event = new GapObserved({
+      id: cardId("der-diffusion"),
+      at,
+      subConcept: "concentration gradient direction",
+      observation: "stated low->high; it is high->low",
+      severity: "core-error",
+      suggests: { prereqNode: "concentration gradient" },
+      held: ["Brownian motion"],
     })
     const decoded = await withCodec(
       Effect.gen(function* () {

@@ -12,8 +12,10 @@ const commands: ReadonlyArray<{ readonly name: string; readonly hint: string }> 
   { name: "show", hint: "one due card including the answer / must-hits" },
   { name: "queue", hint: "due and unblocked cards, numbered" },
   { name: "inbox", hint: "captured notes waiting for curation" },
+  { name: "gaps", hint: "observed misses, titles not ids" },
   { name: "grade", hint: "append one review — asks first" },
   { name: "capture", hint: "append one inbox note — asks first" },
+  { name: "gap", hint: "append one gap observation — asks first" },
   { name: "completions", hint: "shell completion script" },
 ]
 
@@ -56,6 +58,11 @@ ${commandLines}
       _describe 'rating' ratings
       _describe 'title' titles
       ;;
+    gap)
+      _message 'queue number'
+      _values 'severity' core-error gap minor
+      _describe 'title' titles
+      ;;
     completions)
       _values 'shell' zsh bash
       ;;
@@ -86,6 +93,9 @@ export const bashCompletions = (
       ;;
     grade)
       COMPREPLY=( $(compgen -W "Again Hard Good Easy ${titleWords}" -- "$cur") )
+      ;;
+    gap)
+      COMPREPLY=( $(compgen -W "core-error gap minor ${titleWords}" -- "$cur") )
       ;;
     completions)
       COMPREPLY=( $(compgen -W "zsh bash" -- "$cur") )

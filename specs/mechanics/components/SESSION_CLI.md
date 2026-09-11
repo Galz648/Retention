@@ -1,6 +1,6 @@
 Session CLI (frontend) — impure as a component (it talks to Session and the filesystem). Individual **commands** are classified for the user as **pure** (read-only) or **impure** (create / append / move / delete). This is the Session component's surface: on a TTY, `session` is a fullscreen TUI until `q`. Home is an options menu. **Session** is the due queue, inspect, and grade with consent.
 
-Does: drive inspect, review, and capture from one installed command. TTY `session` occupies the terminal until `q`. Name trees, show cards, print the queue, record a grade after consent, append an inbox note after consent.
+Does: drive inspect, review, capture, and gap observations from one installed command. TTY `session` occupies the terminal until `q`. Name trees, show cards, print the queue, record a grade after consent, append an inbox note after consent, append a gap observation after consent.
 Does not: hold tree choice across process invocations, compute Brightness (that is `mastery` / Session.queue), decide due-ness, check eligibility, or create nodes. Does not require the user to set environment variables or open data files. Does not run the parked one-card review loop. Does not run curation.
 
 ## Product surface
@@ -39,8 +39,10 @@ Creating the log (or its directory) counts as a side effect. `queue` on a missin
 [pure]    show         one due card including the answer / must-hits
 [pure]    queue        due and unblocked cards, numbered
 [pure]    inbox        captured notes waiting for curation
+[pure]    gaps         observed misses, titles not ids
 [impure]  grade        append one review — asks first
 [impure]  capture      append one inbox note — asks first
+[impure]  gap          append one gap observation — asks first
 [pure]    completions  shell completion script (zsh or bash)
 ```
 
@@ -143,6 +145,22 @@ Before writing, print a consent line:
 
 Then `Proceed? [y/N]`. Same yes/no rules as `grade`. Capture is not bound to a tree.
 
+### `gaps`
+
+Pending gap observations, numbered. Tree title, node title, severity, sub-concept, then the observation. `gaps empty` if none. Does not write. No folder names, card ids, paths, or event tags.
+
+### `gap …` (impure)
+
+Identify the card like `grade` (queue number + tree title). Then severity (`core-error` | `gap` | `minor`), the missed sub-concept, and what was said or absent. If omitted in an interactive terminal, ask.
+
+Before writing, print a consent line:
+
+- the prompt, node title, sub-concept, and severity
+- that this **appends one gap observation** to the event log
+- if the log does not exist, that this **will create it**
+
+Then `Proceed? [y/N]`. Same yes/no rules as `grade`.
+
 ## Choosing a tree
 
 `[title]` is the tree's **title** (`Biology II`, `Biology II ecology terms`, …), or a unique prefix of that title.
@@ -155,10 +173,10 @@ If the prefix matches more than one title: pick among the matches, or error the 
 
 Useful first. Decoration second.
 
-- **Banner:** the existing Retention wordmark, **only** on `help`. Never on `session` / `trees` / `queue` / `show` / `grade` / `inbox` / `capture` / `mastery` / `graph` / `scheduler`. Version is on `help` and every TUI screen (`retention version` is the one-shot).
+- **Banner:** the existing Retention wordmark, **only** on `help`. Never on `session` / `trees` / `queue` / `show` / `grade` / `inbox` / `capture` / `gap` / `gaps` / `mastery` / `graph` / `scheduler`. Version is on `help` and every TUI screen (`retention version` is the one-shot).
 - **Color:** when stdout is a terminal. None when piped. Honor `NO_COLOR`. Knowledge titles cyan, term decks magenta, impure / “this will write” yellow, due queue green, empty queue dim, breadcrumbs dim. Do not rainbow every line.
 - **Completions:** generate shell completions for commands, ratings, and tree **titles** (`retention completions zsh` or equivalent). Typing `retention queue <tab>` offers titles, not folder names. Completions stdout is the script only — no context line — so it can be sourced.
-- **Two surfaces.** TTY `session` (also TTY no-args) is the TUI: options home, then Session or Trees. TTY `trees` opens Trees. One-shot commands (`help`, `version`, `status`, `queue`, `show`, `mastery`, `graph`, `scheduler`, `grade`, `inbox`, `capture`, `completions`, and every piped invocation) stay a CLI: print, maybe a line picker, return. Queue numbers on `queue` / `show` / `grade` are still queue indices. Typing the argument still works and is the non-interactive path.
+- **Two surfaces.** TTY `session` (also TTY no-args) is the TUI: options home, then Session or Trees. TTY `trees` opens Trees. One-shot commands (`help`, `version`, `status`, `queue`, `show`, `mastery`, `graph`, `scheduler`, `grade`, `inbox`, `capture`, `gap`, `gaps`, `completions`, and every piped invocation) stay a CLI: print, maybe a line picker, return. Queue numbers on `queue` / `show` / `grade` / `gap` are still queue indices. Typing the argument still works and is the non-interactive path.
 
 ## Client language (open)
 

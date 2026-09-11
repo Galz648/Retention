@@ -26,5 +26,27 @@ export class InboxCaptured extends Schema.TaggedClass<InboxCaptured>()(
   },
 ) {}
 
-export const Event = Schema.Union(CardReviewed, InboxCaptured)
+export const GapSeverity = Schema.Literal("core-error", "gap", "minor")
+export type GapSeverity = typeof GapSeverity.Type
+
+export const GapSuggests = Schema.Union(
+  Schema.Struct({ prereqNode: Schema.String }),
+  Schema.Struct({ subNodeUnder: Schema.String }),
+)
+export type GapSuggests = typeof GapSuggests.Type
+
+export class GapObserved extends Schema.TaggedClass<GapObserved>()(
+  "gap.observed",
+  {
+    id: CardId,
+    at: Schema.DateTimeUtc,
+    subConcept: Schema.String,
+    observation: Schema.String,
+    severity: GapSeverity,
+    suggests: Schema.optional(GapSuggests),
+    held: Schema.optional(Schema.Array(Schema.String)),
+  },
+) {}
+
+export const Event = Schema.Union(CardReviewed, InboxCaptured, GapObserved)
 export type Event = typeof Event.Type

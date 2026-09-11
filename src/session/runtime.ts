@@ -9,6 +9,8 @@ import { Mastery } from "../engine/mastery/interface.ts"
 import { Live as MasteryLive } from "../engine/mastery/live.ts"
 import { Scheduler } from "../engine/scheduler/interface.ts"
 import { Live as SchedulerLive } from "../engine/scheduler/live.ts"
+import { Gap } from "../gap/interface.ts"
+import { Live as GapLive } from "../gap/live.ts"
 import { Inbox } from "../inbox/interface.ts"
 import { Live as InboxLive } from "../inbox/live.ts"
 import { Store } from "../store/interface.ts"
@@ -20,7 +22,15 @@ export const Runtime = (input: {
   readonly logPath: string
   readonly corpusDir: string
 }): Layer.Layer<
-  Session | CorpusStore | Inbox | Store | Codec | Mastery | Graph | Scheduler
+  | Session
+  | CorpusStore
+  | Inbox
+  | Gap
+  | Store
+  | Codec
+  | Mastery
+  | Graph
+  | Scheduler
 > => {
   const corpus = CorpusLive(input.corpusDir)
   const store = StoreLive(input.logPath)
@@ -36,6 +46,7 @@ export const Runtime = (input: {
     graph,
     scheduler,
     InboxLive.pipe(Layer.provide(store), Layer.provide(codec)),
+    GapLive.pipe(Layer.provide(store), Layer.provide(codec)),
     SessionLive().pipe(
       Layer.provide(mastery),
       Layer.provide(graph),

@@ -73,3 +73,7 @@ _Avoid_: stability, due date, interval (those stay inside mastery)
 **Inbox**:
 Raw captured notes waiting for curation. Not cards. Not a queue.
 _Avoid_: flashcard dump, draft deck, tags
+
+**Gap signal**:
+Where a derivation broke: a missed sub-concept, what was said or absent, and how bad. Not a grade. Not a new node.
+_Avoid_: wrong-answer log, tree edit, session summary

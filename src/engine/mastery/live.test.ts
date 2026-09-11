@@ -6,6 +6,7 @@ import {
   CardId,
   CardReviewed,
   DerivationCard,
+  GapObserved,
   InboxCaptured,
   NodeId,
   RecallCard,
@@ -127,6 +128,22 @@ describe("Mastery.Live", () => {
     const cards = [recall("fresh")]
     const events = [
       new InboxCaptured({ text: "a thought", at: atMillis(NOW) }),
+    ]
+    const values = evaluateSync(events, cards, NOW)
+    expect(values.size).toBe(1)
+    expect(values.get(cardId("fresh"))).toBe(unreviewed)
+  })
+
+  test("INV-B-MST-01: gap.observed events do not change Brightness", () => {
+    const cards = [recall("fresh")]
+    const events = [
+      new GapObserved({
+        id: cardId("fresh"),
+        at: atMillis(NOW),
+        subConcept: "concentration gradient direction",
+        observation: "stated low->high",
+        severity: "core-error",
+      }),
     ]
     const values = evaluateSync(events, cards, NOW)
     expect(values.size).toBe(1)

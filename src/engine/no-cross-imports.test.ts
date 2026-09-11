@@ -26,7 +26,7 @@ describe("engine isolation", () => {
     }
   })
 
-  test("INV-C-ENG-02: engine never imports store, corpus I/O, session, cli, or inbox", async () => {
+  test("INV-C-ENG-02: engine never imports store, corpus I/O, session, cli, inbox, or gap", async () => {
     const glob = new Bun.Glob("src/engine/**/*.ts")
     for await (const path of glob.scan(".")) {
       if (path.endsWith(".test.ts")) continue
@@ -36,6 +36,7 @@ describe("engine isolation", () => {
       expect(text).not.toMatch(/from ["'][^"']*src\/session/)
       expect(text).not.toMatch(/from ["'][^"']*src\/cli/)
       expect(text).not.toMatch(/from ["'][^"']*src\/inbox/)
+      expect(text).not.toMatch(/from ["'][^"']*src\/gap/)
     }
   })
 

@@ -9,6 +9,7 @@ The **command-line program is the product surface** for this version. Inspect an
 - Engine (mastery, graph, scheduler)
 - Session
 - Inbox capture (`inbox.captured` in the event log; `retention capture` / `retention inbox`)
+- Gap signal (`gap.observed` in the event log; `retention gap` / `retention gaps`)
 - Terminal client as specified in [SESSION_CLI.md](./components/SESSION_CLI.md): TUI session, labeled pure/impure one-shot commands, consent before writes, tree chosen on the command line
 - Append-only event log
 - One or more hand-authored (or imported) trees in `corpus/`, each with a track (university or curiosity)

@@ -2,8 +2,11 @@ import { Effect, Schema } from "effect"
 import { CorpusStore } from "../corpus/interface.ts"
 import { Outcome } from "../domain/cards.ts"
 import type { Corpus, TreeListing } from "../domain/corpus.ts"
-import { Session, SessionError } from "../session/interface.ts"
+import { GapSeverity } from "../domain/events.ts"
+import type { CardId } from "../domain/ids.ts"
+import { Gap, GapError } from "../gap/interface.ts"
 import { Inbox, InboxError } from "../inbox/interface.ts"
+import { Session, SessionError } from "../session/interface.ts"
 import { banner } from "./banner.ts"
 import { formatQueueLine, formatShow, nodeTitle } from "./cards-view.ts"
 import { completionsScript } from "./completions.ts"
@@ -43,8 +46,10 @@ export const helpText = `[pure]    help            what you can do
 [pure]    show            one due card including the answer / must-hits
 [pure]    queue           due and unblocked cards, numbered
 [pure]    inbox           captured notes waiting for curation
+[pure]    gaps            observed misses, titles not ids
 [impure]  grade           append one review — asks first
 [impure]  capture         append one inbox note — asks first
+[impure]  gap             append one gap observation — asks first
 [pure]    completions     shell completion script (zsh or bash)`
 
 const fail = (reason: string): Effect.Effect<never, SessionError> =>
@@ -57,6 +62,16 @@ const parseOutcome = (value: string) =>
   Schema.decodeUnknown(Outcome)(value).pipe(
     Effect.mapError(
       () => new SessionError({ reason: "Rating must be Again, Hard, Good, or Easy." }),
+    ),
+  )
+
+const parseSeverity = (value: string) =>
+  Schema.decodeUnknown(GapSeverity)(value).pipe(
+    Effect.mapError(
+      () =>
+        new SessionError({
+          reason: "Severity must be core-error, gap, or minor.",
+        }),
     ),
   )
 
@@ -172,6 +187,32 @@ const loadCorpus = (
   Effect.gen(function* () {
     const corpora = yield* CorpusStore
     return yield* corpora.read(listing.treeId).pipe(Effect.mapError(tagged))
+  })
+
+const describeCard = (
+  listings: ReadonlyArray<TreeListing>,
+  id: CardId,
+): Effect.Effect<
+  { readonly title: string; readonly node: string; readonly prompt: string },
+  SessionError,
+  CorpusStore
+> =>
+  Effect.gen(function* () {
+    for (const listing of listings) {
+      const corpus = yield* loadCorpus(listing)
+      const found = corpus.cards.find((item) => item.id === id)
+      if (found === undefined) continue
+      return {
+        title: listing.title,
+        node: nodeTitle(corpus, found.nodeId),
+        prompt: found.prompt,
+      }
+    }
+    return {
+      title: "unknown tree",
+      node: "unknown node",
+      prompt: "a card that is no longer in a tree",
+    }
   })
 
 const yes = (raw: string): boolean => {
@@ -479,6 +520,116 @@ export const handle = (args: ReadonlyArray<string>, io: CliIo) =>
         ),
       )
       io.write("captured")
+      return yield* Effect.void
+    }
+    if (command === "gaps") {
+      context(io, ink, "gaps — observed misses, titles not ids")
+      const gap = yield* Gap
+      const pending = yield* gap.pending().pipe(
+        Effect.mapError(
+          (error: GapError) => new SessionError({ reason: error.reason }),
+        ),
+      )
+      if (pending.length === 0) {
+        io.write("gaps empty")
+        return yield* Effect.void
+      }
+      const listings = yield* loadListings()
+      for (const [index, entry] of pending.entries()) {
+        const place = yield* describeCard(listings, entry.id)
+        io.write(
+          `${index + 1}. ${place.title} — ${place.node} [${entry.severity}] ${entry.subConcept}`,
+        )
+        io.write(entry.observation)
+      }
+      return yield* Effect.void
+    }
+    if (command === "gap") {
+      let rawIndex = argv[1]
+      let severityRaw = argv[2]
+      let subConcept = argv[3]
+      let observation = argv[4]
+      const listing = yield* resolveTree(
+        io,
+        yield* loadListings(),
+        titleFromArgs(argv, 5),
+      )
+      const session = yield* Session
+      const corpus = yield* loadCorpus(listing)
+      const cards = yield* session.queue(listing.treeId)
+      if (rawIndex === undefined && io.interactive) {
+        cards.forEach((item, index) => {
+          io.write(`${index + 1}. [${item._tag}] ${nodeTitle(corpus, item.nodeId)}`)
+        })
+        const chosen = yield* io.ask("Which card number?")
+        if (chosen !== undefined) rawIndex = chosen.trim()
+      }
+      if (severityRaw === undefined && io.interactive) {
+        io.write("core-error  gap  minor")
+        const chosen = yield* io.ask("Severity?")
+        if (chosen !== undefined) severityRaw = chosen.trim()
+      }
+      if ((subConcept === undefined || subConcept.trim().length === 0) && io.interactive) {
+        const chosen = yield* io.ask("Which sub-concept was missed?")
+        if (chosen !== undefined) subConcept = chosen
+      }
+      if (
+        (observation === undefined || observation.trim().length === 0) &&
+        io.interactive
+      ) {
+        const chosen = yield* io.ask("What did they miss?")
+        if (chosen !== undefined) observation = chosen
+      }
+      const concept = subConcept?.trim() ?? ""
+      const seen = observation?.trim() ?? ""
+      if (rawIndex === undefined || severityRaw === undefined) {
+        writeHelp(io, ink)
+        return yield* fail("Need a queue number, severity, sub-concept, and observation.")
+      }
+      if (concept.length === 0 || seen.length === 0) {
+        writeHelp(io, ink)
+        return yield* fail("Need a sub-concept and an observation.")
+      }
+      const severity = yield* parseSeverity(severityRaw)
+      const index = yield* parseIndex(rawIndex, cards.length)
+      const found = cards[index - 1]
+      if (found === undefined) {
+        return yield* fail("That number is not in the queue.")
+      }
+      context(io, ink, `gap — append one gap observation for ${listing.title}`)
+      io.write(
+        ink.warn(
+          `Miss on "${found.prompt}" (${nodeTitle(corpus, found.nodeId)}): ${concept} [${severity}].`,
+        ),
+      )
+      io.write("This appends one gap observation to the event log.")
+      if (!io.logExists) {
+        io.write(ink.warn("This will create the event log."))
+      }
+      if (!io.interactive) {
+        return yield* fail("Need an interactive terminal to confirm a write.")
+      }
+      const answer = yield* io.ask("Proceed? [y/N]")
+      if (answer === undefined || !yes(answer)) {
+        io.write("aborted")
+        return yield* Effect.void
+      }
+      const gap = yield* Gap
+      yield* gap
+        .observe({
+          id: found.id,
+          subConcept: concept,
+          observation: seen,
+          severity,
+        })
+        .pipe(
+          Effect.mapError((error: GapError) =>
+            error.reason === "empty"
+              ? new SessionError({ reason: "Need a sub-concept and an observation." })
+              : new SessionError({ reason: error.reason }),
+          ),
+        )
+      io.write("recorded")
       return yield* Effect.void
     }
     if (command === "completions") {
