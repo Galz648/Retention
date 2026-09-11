@@ -1,14 +1,21 @@
 import { DateTime, Effect, Layer, Schema } from "effect"
 import { describe, expect, test } from "bun:test"
+import { Live as CodecLive } from "../codec/layers.ts"
 import { AlreadyArchived, CorpusNotFound, CorpusStore } from "../corpus/interface.ts"
 import { RecallCard } from "../domain/cards.ts"
 import { Corpus, Edge, Node, type TreeListing } from "../domain/corpus.ts"
 import { CardId, NodeId, TreeId } from "../domain/ids.ts"
 import { Inbox } from "../inbox/interface.ts"
 import { InboxCaptured } from "../domain/events.ts"
+import { Live as GraphLive } from "../engine/graph/live.ts"
+import { Live as MasteryLive } from "../engine/mastery/live.ts"
+import { Live as SchedulerLive } from "../engine/scheduler/live.ts"
 import { Session } from "../session/interface.ts"
+import { Memory } from "../store/memory.ts"
 import { ClockAt } from "../testing/clock.ts"
 import { handle, helpText, type CliIo } from "./handle.ts"
+import type { Key } from "./tui.ts"
+import { VERSION } from "./version.ts"
 
 const asCardId = (s: string): CardId => Schema.decodeUnknownSync(CardId)(s)
 const asNodeId = (s: string): NodeId => Schema.decodeUnknownSync(NodeId)(s)
@@ -30,8 +37,10 @@ const listing: TreeListing = {
   treeId,
   title: "Biology II",
   kind: "knowledge",
+  track: "university",
   summary: "Animal systems and ecology, from the course map.",
   archived: false,
+  belongsTo: undefined,
   nodeCount: 1,
   cardCount: 1,
   edgeCount: 0,
@@ -41,8 +50,10 @@ const corpus = new Corpus({
   treeId,
   title: listing.title,
   kind: listing.kind,
+  track: listing.track,
   summary: listing.summary,
   archived: false,
+  belongsTo: undefined,
   nodes: [new Node({ id: rootId, title: "Diffusion", cardIds: [cardId] })],
   edges: [] as ReadonlyArray<Edge>,
   cards: [card],
@@ -63,6 +74,7 @@ const CorpusFixed = Layer.succeed(
 const mute = (rest: Partial<CliIo> = {}): CliIo => ({
   write: () => {},
   ask: () => Effect.succeed(undefined),
+  readKey: () => Effect.succeed(undefined),
   select: () => Effect.succeed(undefined),
   interactive: false,
   logExists: false,
@@ -124,6 +136,11 @@ const run = (
       Effect.provide(FakeInbox),
       Effect.provide(CorpusFixed),
       Effect.provide(ClockAt(0)),
+      Effect.provide(GraphLive),
+      Effect.provide(SchedulerLive),
+      Effect.provide(MasteryLive),
+      Effect.provide(Memory),
+      Effect.provide(CodecLive),
       Effect.match({
         onFailure: (error) => ({ lines, graded, captured, error: error.reason }),
         onSuccess: () => ({ lines, graded, captured }),
@@ -137,12 +154,18 @@ describe("CLI handle", () => {
     const none = await run([], mute(), [])
     const help = await run(["help"], mute(), [])
     expect(none.lines.join("\n")).toContain(helpText)
-    expect(help.lines.join("\n")).toBe(helpText)
+    expect(help.lines.join("\n")).toBe(`retention ${VERSION}\n${helpText}`)
     expect(help.lines.join("\n")).toContain("what you can do")
     expect(help.lines.join("\n")).toContain("[impure]")
     expect(help.lines.join("\n")).toContain("asks first")
     expect(help.lines.join("\n")).toContain("capture")
     expect(help.lines.join("\n")).toContain("inbox")
+    expect(help.lines.join("\n")).toContain("session")
+    expect(help.lines.join("\n")).toContain("which build this is")
+    expect(help.lines.join("\n")).toContain("mastery")
+    expect(help.lines.join("\n")).toContain("graph")
+    expect(help.lines.join("\n")).toContain("scheduler")
+    expect(help.lines.join("\n")).not.toContain("one tree: nodes")
     expect(help.lines.join("\n")).not.toContain("\u001b")
   })
 
@@ -259,11 +282,178 @@ describe("CLI handle", () => {
     expect(text).not.toContain("inbox.captured")
   })
 
-  test("tree prints node titles and edges, not folder names", async () => {
+  test("version prints the build", async () => {
+    const result = await run(["version"], mute(), [])
+    expect(result.lines.join("\n")).toBe(`retention ${VERSION}`)
+    const flag = await run(["--version"], mute(), [])
+    expect(flag.lines.join("\n")).toBe(`retention ${VERSION}`)
+  })
+
+  test("removed tree command is unknown", async () => {
     const result = await run(["tree", "Biology II"], mute(), [])
+    expect(result.error).toBe("Unknown command.")
+  })
+
+  test("session without a TTY prints the nested list and returns", async () => {
+    const result = await run(["session"], mute(), [])
+    expect(result.error).toBeUndefined()
     expect(result.lines.join("\n")).toContain("Biology II")
+    expect(result.lines.join("\n")).toContain("Knowledge trees")
+  })
+
+  test("TTY session from the CLI: options then due queue", async () => {
+    const keys: Array<Key> = [
+      { _tag: "enter" },
+      { _tag: "enter" },
+      { _tag: "quit" },
+    ]
+    let index = 0
+    const result = await run(
+      ["session"],
+      mute({
+        interactive: true,
+        readKey: () => {
+          const next = keys[index]
+          index += 1
+          return Effect.succeed(next)
+        },
+      }),
+      [],
+    )
+    expect(result.error).toBeUndefined()
+    expect(result.lines.join("\n")).toContain("options")
+    expect(result.lines.join("\n")).toContain("Session")
+    expect(result.lines.join("\n")).toContain("session — Biology II")
+    expect(result.lines.join("\n")).toContain("Explain Diffusion from scratch.")
+  })
+
+  test("TTY trees from the CLI: you-are-here in the map", async () => {
+    const keys: Array<Key> = [
+      { _tag: "enter" },
+      { _tag: "enter" },
+      { _tag: "quit" },
+    ]
+    let index = 0
+    const result = await run(
+      ["trees"],
+      mute({
+        interactive: true,
+        readKey: () => {
+          const next = keys[index]
+          index += 1
+          return Effect.succeed(next)
+        },
+      }),
+      [],
+    )
+    expect(result.error).toBeUndefined()
+    expect(result.lines.join("\n")).toContain("trees — walk the map")
+    expect(result.lines.join("\n")).toContain("trees — Biology II")
+    expect(result.lines.join("\n")).toContain("●")
     expect(result.lines.join("\n")).toContain("Diffusion")
-    expect(result.lines.join("\n")).not.toContain("biology-ii")
+  })
+
+  test("TTY session from the CLI: inspect then abort grade", async () => {
+    const graded: Array<string> = []
+    const keys: Array<Key> = [
+      { _tag: "enter" },
+      { _tag: "enter" },
+      { _tag: "enter" },
+      { _tag: "enter" },
+      { _tag: "enter" },
+      { _tag: "quit" },
+    ]
+    let index = 0
+    const result = await run(
+      ["session"],
+      mute({
+        interactive: true,
+        readKey: () => {
+          const next = keys[index]
+          index += 1
+          return Effect.succeed(next)
+        },
+      }),
+      graded,
+    )
+    expect(result.error).toBeUndefined()
+    expect(result.lines.join("\n")).toContain("Net movement down a gradient.")
+    expect(result.lines.join("\n")).toContain("This appends one review")
+    expect(graded).toEqual([])
+  })
+
+  test("interactive session q returns", async () => {
+    const result = await run(
+      ["session"],
+      mute({
+        interactive: true,
+        readKey: () => Effect.succeed({ _tag: "quit" }),
+      }),
+      [],
+    )
+    expect(result.error).toBeUndefined()
+    expect(result.lines.join("\n")).toContain(`retention ${VERSION}`)
+    expect(result.lines.join("\n")).toContain("options")
+    expect(result.lines.join("\n")).toContain("Session")
+    expect(result.lines.join("\n")).toContain("Trees")
+    expect(result.lines.join("\n")).toContain("Status")
+  })
+
+  test("interactive no args enters session", async () => {
+    const result = await run(
+      [],
+      mute({
+        interactive: true,
+        readKey: () => Effect.succeed({ _tag: "quit" }),
+      }),
+      [],
+    )
+    expect(result.error).toBeUndefined()
+    expect(result.lines.join("\n")).toContain("options")
+    expect(result.lines.join("\n")).toContain("Session")
+  })
+
+  test("interactive session with a title opens that tree", async () => {
+    const result = await run(
+      ["session", "Biology II"],
+      mute({
+        interactive: true,
+        readKey: () => Effect.succeed({ _tag: "quit" }),
+      }),
+      [],
+    )
+    expect(result.error).toBeUndefined()
+    expect(result.lines.join("\n")).toContain("session — Biology II")
+  })
+
+  test("unknown command prints help once and fails with a short reason", async () => {
+    const result = await run(["nope"], mute(), [])
+    expect(result.error).toBe("Unknown command.")
+    expect(result.lines.join("\n")).toBe(`retention ${VERSION}\n${helpText}`)
+  })
+
+  test("mastery prints brightness with node title, not card id", async () => {
+    const result = await run(["mastery", "Biology II"], mute(), [])
+    expect(result.error).toBeUndefined()
+    expect(result.lines.join("\n")).toContain("Diffusion")
+    expect(result.lines.join("\n")).toContain("Explain Diffusion from scratch.")
+    expect(result.lines.join("\n")).not.toContain("der-diffusion")
+  })
+
+  test("graph zero probe lists roots eligible", async () => {
+    const result = await run(["graph", "Biology II"], mute(), [])
+    expect(result.error).toBeUndefined()
+    expect(result.lines.join("\n")).toContain("Eligible")
+    expect(result.lines.join("\n")).toContain("Diffusion")
+  })
+
+  test("scheduler zero probe lists due cards; full is none due", async () => {
+    const noneKnown = await run(["scheduler", "Biology II"], mute(), [])
+    expect(noneKnown.lines.join("\n")).toContain("Diffusion")
+    expect(noneKnown.lines.join("\n")).toContain("Explain Diffusion from scratch.")
+    expect(noneKnown.lines.join("\n")).not.toContain("der-diffusion")
+    const allKnown = await run(["scheduler", "full", "Biology II"], mute(), [])
+    expect(allKnown.lines.join("\n")).toContain("none due")
   })
 
   test("completions zsh lists human titles", async () => {
@@ -276,11 +466,26 @@ describe("CLI handle", () => {
     expect(text).not.toContain("completions — shell completion script")
   })
 
-  test("CLI sources do not import engine components", async () => {
+  test("session CLI modules do not import engine components", async () => {
+    const wiring = new Set(["src/cli/handle.ts"])
+    const isolated = new Set([
+      "src/cli/mastery.ts",
+      "src/cli/graph.ts",
+      "src/cli/scheduler.ts",
+    ])
     const glob = new Bun.Glob("src/cli/**/*.ts")
     for await (const path of glob.scan(".")) {
-      if (path.endsWith(".test.ts")) continue
+      if (path.endsWith(".test.ts") || wiring.has(path)) continue
       const text = await Bun.file(path).text()
+      if (isolated.has(path)) {
+        const others = ["mastery", "graph", "scheduler"].filter(
+          (name) => !path.endsWith(`${name}.ts`),
+        )
+        for (const other of others) {
+          expect(text).not.toMatch(new RegExp(`engine/${other}`))
+        }
+        continue
+      }
       expect(text).not.toMatch(/engine\/mastery/)
       expect(text).not.toMatch(/engine\/graph/)
       expect(text).not.toMatch(/engine\/scheduler/)

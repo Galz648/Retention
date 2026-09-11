@@ -2,5 +2,6 @@
   "title": "Biology II ecology terms",
   "kind": "terms",
   "summary": "Names and conventions from ecology.",
-  "archived": false
+  "archived": false,
+  "belongsTo": "biology-ii"
 }

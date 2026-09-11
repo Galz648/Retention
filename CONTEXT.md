@@ -31,7 +31,7 @@ A map of concepts and the dependencies between them. You rebuild explanations (d
 _Avoid_: course dump, seed tree (importer leftover)
 
 **Term deck**:
-A list of names and conventions to recall. Little or no dependency map. Biology ecology terms, German frequency, and so on.
+A list of names and conventions to recall. Little or no dependency map. Biology ecology terms, German frequency, and so on. May hang under a knowledge tree in the listing; it is still its own tree and queue.
 _Avoid_: Term Drill State, slug titles (`biology-ii-ecology`)
 
 **Title**:
@@ -60,7 +60,11 @@ _Avoid_: rubric item, keyword
 
 **Queue**:
 The cards that are due and unblocked right now, recall first.
-_Avoid_: due list, session (session is the runner)
+_Avoid_: due list, session (session is the TUI until `q`)
+
+**Session**:
+The TTY TUI. Alternate screen; you stay in the trees until `q`. Named for the Session component.
+_Avoid_: browse
 
 **Brightness**:
 Placeholder name for how well a card is known right now, from 0 to 1.

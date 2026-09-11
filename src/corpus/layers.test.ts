@@ -95,6 +95,8 @@ const expectedTiny = new Corpus({
   kind: "knowledge",
   summary: "Tokens, then the parse.",
   archived: false,
+  track: "university",
+  belongsTo: undefined,
   nodes: [
     new Node({
       id: nodeId("lex"),
@@ -257,6 +259,8 @@ describe("CorpusStore.Live", () => {
         kind: "knowledge",
         summary: "Tokens, then the parse.",
         archived: false,
+        track: "university",
+        belongsTo: undefined,
         nodeCount: 2,
         cardCount: 2,
         edgeCount: 1,
@@ -307,5 +311,9 @@ describe("authored trees", () => {
     expect(listings.some((tree) => tree.title === "Biology II ecology terms")).toBe(
       true,
     )
+    const ecology = listings.find((tree) => tree.title === "Biology II ecology terms")
+    expect(ecology?.belongsTo).toBe(treeId("biology-ii"))
+    const german = listings.find((tree) => tree.title === "German frequency terms")
+    expect(german?.belongsTo).toBeUndefined()
   })
 })

@@ -17,12 +17,17 @@ export class Edge extends Schema.Class<Edge>("Edge")({
 export const TreeKind = Schema.Literal("knowledge", "terms")
 export type TreeKind = typeof TreeKind.Type
 
+export const Track = Schema.Literal("university", "curiosity")
+export type Track = typeof Track.Type
+
 export class Corpus extends Schema.Class<Corpus>("Corpus")({
   treeId: TreeId,
   title: Schema.String,
   kind: TreeKind,
   summary: Schema.String,
   archived: Schema.Boolean,
+  track: Track,
+  belongsTo: Schema.optional(TreeId),
   nodes: Schema.Array(Node),
   edges: Schema.Array(Edge),
   cards: Schema.Array(Card),
@@ -32,8 +37,10 @@ export type TreeListing = {
   readonly treeId: TreeId
   readonly title: string
   readonly kind: TreeKind
+  readonly track: Track
   readonly summary: string
   readonly archived: boolean
+  readonly belongsTo: TreeId | undefined
   readonly nodeCount: number
   readonly cardCount: number
   readonly edgeCount: number

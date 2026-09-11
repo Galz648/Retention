@@ -1,6 +1,6 @@
 import { Effect, Layer, Schema } from "effect"
 import { Card } from "../domain/cards.ts"
-import { Corpus, Edge, Node, type TreeListing } from "../domain/corpus.ts"
+import { Corpus, Edge, Node, Track, type TreeListing } from "../domain/corpus.ts"
 import { TreeId } from "../domain/ids.ts"
 import {
   AlreadyArchived,
@@ -15,6 +15,8 @@ const Meta = Schema.Struct({
   archived: Schema.Boolean,
   kind: Schema.Literal("knowledge", "terms"),
   summary: Schema.String,
+  belongsTo: Schema.optional(TreeId),
+  track: Schema.optional(Track),
 })
 
 type BunRuntime = {
@@ -166,6 +168,8 @@ const readFrom = (
       kind: meta.kind,
       summary: meta.summary,
       archived: archived || meta.archived,
+      track: meta.track ?? "university",
+      belongsTo: meta.belongsTo,
       nodes,
       edges,
       cards,
@@ -194,6 +198,8 @@ const listingOf = (corpus: Corpus): TreeListing => ({
   kind: corpus.kind,
   summary: corpus.summary,
   archived: corpus.archived,
+  track: corpus.track,
+  belongsTo: corpus.belongsTo,
   nodeCount: corpus.nodes.length,
   cardCount: corpus.cards.length,
   edgeCount: corpus.edges.length,
@@ -268,7 +274,18 @@ const archiveTree = (
     const meta = yield* readMeta(metaPath(from), treeId)
     yield* writeText(
       metaPath(from),
-      `${JSON.stringify({ title: meta.title, kind: meta.kind, summary: meta.summary, archived: true }, null, 2)}\n`,
+      `${JSON.stringify(
+        {
+          title: meta.title,
+          kind: meta.kind,
+          summary: meta.summary,
+          archived: true,
+          ...(meta.belongsTo === undefined ? {} : { belongsTo: meta.belongsTo }),
+          ...(meta.track === undefined ? {} : { track: meta.track }),
+        },
+        null,
+        2,
+      )}\n`,
       treeId,
     )
     yield* run(["mkdir", "-p", `${root}/archived`], treeId)

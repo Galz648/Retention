@@ -9,7 +9,7 @@ The **command-line program is the product surface** for this version. Inspect an
 - Engine (mastery, graph, scheduler)
 - Session
 - Inbox capture (`inbox.captured` in the event log; `retention capture` / `retention inbox`)
-- Terminal CLI as specified in [SESSION_CLI.md](./components/SESSION_CLI.md): labeled pure/impure commands, consent before writes, tree chosen on the command line
+- Terminal client as specified in [SESSION_CLI.md](./components/SESSION_CLI.md): TUI session, labeled pure/impure one-shot commands, consent before writes, tree chosen on the command line
 - Append-only event log
 - One or more hand-authored (or imported) trees in `corpus/`, each with a track (university or curiosity)
 - Session / trees picker can filter by track; still one tree per sitting
@@ -17,7 +17,7 @@ The **command-line program is the product surface** for this version. Inspect an
 
 ### This version — do not build
 
-Forester, curation, calibrator, dormancy/retirement, any UI except this CLI, `--yes` / non-interactive writes, env-var configuration as the interface.
+Forester, curation, calibrator, dormancy/retirement, any UI except this terminal client (TUI session + one-shot CLI), `--yes` / non-interactive writes, env-var configuration as the interface.
 
 ### Milestones
 

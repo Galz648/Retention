@@ -7,17 +7,22 @@ describe("palette", () => {
     expect(ink.warn("hello")).toBe("hello")
     expect(ink.heading("x")).toBe("x")
     expect(ink.warn("hello")).not.toContain("\u001b")
+    expect(ink.knowledge("k")).toBe("k")
+    expect(ink.terms("t")).toBe("t")
   })
 
-  test("enabled palette wraps warn", () => {
+  test("enabled palette wraps warn and kind colors", () => {
     const ink = palette(true)
     expect(ink.warn("no")).toContain("\u001b")
     expect(ink.warn("no")).toContain("no")
+    expect(ink.knowledge("k")).toContain("\u001b[36m")
+    expect(ink.terms("t")).toContain("\u001b[35m")
+    expect(ink.due("d")).toContain("\u001b[32m")
   })
 
   test("NO_COLOR or non-tty disables color", () => {
-    expect(colorEnabled({ stdoutTty: true, noColor: true })).toBe(false)
-    expect(colorEnabled({ stdoutTty: false, noColor: false })).toBe(false)
-    expect(colorEnabled({ stdoutTty: true, noColor: false })).toBe(true)
+    expect(colorEnabled({ tty: true, noColor: true })).toBe(false)
+    expect(colorEnabled({ tty: false, noColor: false })).toBe(false)
+    expect(colorEnabled({ tty: true, noColor: false })).toBe(true)
   })
 })

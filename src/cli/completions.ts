@@ -2,9 +2,13 @@ import type { TreeListing } from "../domain/corpus.ts"
 
 const commands: ReadonlyArray<{ readonly name: string; readonly hint: string }> = [
   { name: "help", hint: "what you can do" },
+  { name: "version", hint: "which build this is" },
   { name: "status", hint: "whether a log exists; which tree if you named one" },
   { name: "trees", hint: "every tree, by kind, with a one-line what-it-is" },
-  { name: "tree", hint: "one tree: nodes and edges" },
+  { name: "session", hint: "options menu, then Session or the map; q quit" },
+  { name: "mastery", hint: "brightness per card in one tree" },
+  { name: "graph", hint: "eligible nodes if nothing is known, or full" },
+  { name: "scheduler", hint: "due cards from a brightness probe" },
   { name: "show", hint: "one due card including the answer / must-hits" },
   { name: "queue", hint: "due and unblocked cards, numbered" },
   { name: "inbox", hint: "captured notes waiting for curation" },
@@ -36,7 +40,11 @@ ${commandLines}
   ratings=('Again' 'Hard' 'Good' 'Easy')
 
   case $words[2] in
-    queue|tree|status)
+    queue|status|mastery|session)
+      _describe 'title' titles
+      ;;
+    graph|scheduler)
+      _values 'probe' full
       _describe 'title' titles
       ;;
     show)
@@ -70,8 +78,11 @@ export const bashCompletions = (
   local cur="\${COMP_WORDS[COMP_CWORD]}"
   local cmd="\${COMP_WORDS[1]}"
   case "\${cmd}" in
-    queue|tree|status)
+    queue|status|mastery|session)
       COMPREPLY=( $(compgen -W ${JSON.stringify(titleWords)} -- "$cur") )
+      ;;
+    graph|scheduler)
+      COMPREPLY=( $(compgen -W "full ${titleWords}" -- "$cur") )
       ;;
     grade)
       COMPREPLY=( $(compgen -W "Again Hard Good Easy ${titleWords}" -- "$cur") )

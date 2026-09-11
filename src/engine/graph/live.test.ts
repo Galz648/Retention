@@ -30,6 +30,8 @@ const corpusOf = (
     kind: "knowledge",
     summary: "Test fixture.",
     archived,
+    track: "university",
+    belongsTo: undefined,
     nodes,
     edges,
     cards: [],

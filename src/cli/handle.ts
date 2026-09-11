@@ -1,19 +1,26 @@
-import { type Clock, Effect, Schema } from "effect"
+import { Effect, Schema } from "effect"
 import { CorpusStore } from "../corpus/interface.ts"
-import { Outcome, type Card } from "../domain/cards.ts"
+import { Outcome } from "../domain/cards.ts"
 import type { Corpus, TreeListing } from "../domain/corpus.ts"
-import type { NodeId } from "../domain/ids.ts"
 import { Session, SessionError } from "../session/interface.ts"
 import { Inbox, InboxError } from "../inbox/interface.ts"
 import { banner } from "./banner.ts"
+import { formatQueueLine, formatShow, nodeTitle } from "./cards-view.ts"
 import { completionsScript } from "./completions.ts"
+import { eligibleLines, fullSnapshot, zeroSnapshot } from "./graph.ts"
+import { evaluateTree } from "./mastery.ts"
+import { dueLines, fullValues, zeroValues } from "./scheduler.ts"
+import { runSession, type SessionEntry } from "./session.ts"
 import { palette, type Palette } from "./style.ts"
 import { matchTitle, pickByNumber } from "./titles.ts"
 import { formatTreesList } from "./trees-view.ts"
+import type { Key } from "./tui.ts"
+import { VERSION } from "./version.ts"
 
 export type CliIo = {
   readonly write: (line: string) => void
   readonly ask: (question: string) => Effect.Effect<string | undefined>
+  readonly readKey: () => Effect.Effect<Key | undefined>
   readonly select: (
     question: string,
     labels: ReadonlyArray<string>,
@@ -22,12 +29,17 @@ export type CliIo = {
   readonly logExists: boolean
   readonly color: boolean
   readonly banner: boolean
+  readonly raw?: { readonly setRawMode?: (value: boolean) => void } | undefined
 }
 
 export const helpText = `[pure]    help            what you can do
+[pure]    version         which build this is
 [pure]    status          whether a log exists; which tree if you named one
 [pure]    trees           every tree, by kind, with a one-line what-it-is
-[pure]    tree            one tree: nodes and edges
+[pure]    session         options menu, then Session or the map; q quit
+[pure]    mastery         brightness per card in one tree
+[pure]    graph           eligible nodes if nothing is known, or full
+[pure]    scheduler       due cards from a brightness probe
 [pure]    show            one due card including the answer / must-hits
 [pure]    queue           due and unblocked cards, numbered
 [pure]    inbox           captured notes waiting for curation
@@ -40,26 +52,6 @@ const fail = (reason: string): Effect.Effect<never, SessionError> =>
 
 const tagged = (error: { readonly _tag: string }): SessionError =>
   new SessionError({ reason: error._tag })
-
-const nodeTitle = (corpus: Corpus, id: NodeId): string => {
-  const node = corpus.nodes.find((item) => item.id === id)
-  return node === undefined ? "unknown node" : node.title
-}
-
-const formatQueueLine = (
-  index: number,
-  card: Card,
-  corpus: Corpus,
-): string =>
-  `${index}. [${card._tag}] ${nodeTitle(corpus, card.nodeId)}\n${card.prompt}`
-
-const formatShow = (card: Card, corpus: Corpus): string => {
-  const head = `[${card._tag}] ${nodeTitle(corpus, card.nodeId)}\n${card.prompt}`
-  if (card._tag === "recall") {
-    return `${head}\n${card.answer}`
-  }
-  return `${head}\nmust-hits: ${card.mustHits.join("; ")}`
-}
 
 const parseOutcome = (value: string) =>
   Schema.decodeUnknown(Outcome)(value).pipe(
@@ -86,6 +78,7 @@ const writeHelp = (io: CliIo, ink: Palette): void => {
   if (io.banner) {
     io.write(ink.heading(banner))
   }
+  io.write(`retention ${VERSION}`)
   for (const line of helpText.split("\n")) {
     io.write(line.startsWith("[impure]") ? ink.warn(line) : line)
   }
@@ -152,9 +145,16 @@ const titleFromArgs = (
   args: ReadonlyArray<string>,
   from: number,
 ): string | undefined => {
-  const rest = args.slice(from).join(" ").trim()
+  const rest = args
+    .slice(from)
+    .filter((item) => item.toLowerCase() !== "full")
+    .join(" ")
+    .trim()
   return rest.length === 0 ? undefined : rest
 }
+
+const wantsFull = (args: ReadonlyArray<string>): boolean =>
+  args.some((item) => item.toLowerCase() === "full")
 
 const loadListings = (): Effect.Effect<
   ReadonlyArray<TreeListing>,
@@ -174,43 +174,22 @@ const loadCorpus = (
     return yield* corpora.read(listing.treeId).pipe(Effect.mapError(tagged))
   })
 
-const formatTree = (corpus: Corpus): string => {
-  const archived = corpus.archived ? "yes" : "no"
-  const nodes = corpus.nodes
-    .map((node) => {
-      const n = node.cardIds.length
-      return `  ${node.title} (${n} ${n === 1 ? "card" : "cards"})`
-    })
-    .join("\n")
-  const titles = new Map(corpus.nodes.map((node) => [node.id, node.title]))
-  const edges = corpus.edges.flatMap((edge) => {
-    const from = titles.get(edge.from)
-    const to = titles.get(edge.to)
-    if (from === undefined || to === undefined) return []
-    return [`  ${from} → ${to}`]
-  })
-  return `${corpus.title}\n${corpus.summary}\narchived: ${archived}\n\nNodes:\n${nodes}\n\nEdges:\n${edges.join("\n")}`
-}
-
 const yes = (raw: string): boolean => {
   const value = raw.trim().toLowerCase()
   return value === "y" || value === "yes"
 }
 
-export const handle = (
-  args: ReadonlyArray<string>,
-  io: CliIo,
-): Effect.Effect<
-  void,
-  SessionError,
-  Session | CorpusStore | Clock.Clock | Inbox
-> =>
+export const handle = (args: ReadonlyArray<string>, io: CliIo) =>
   Effect.gen(function* () {
     const ink = palette(io.color)
     const argv = args.slice()
-    const command = argv[0] ?? "help"
+    const command = argv[0] ?? (io.interactive ? "session" : "help")
     if (command === "help") {
       writeHelp(io, ink)
+      return yield* Effect.void
+    }
+    if (command === "version" || command === "--version" || command === "-V") {
+      io.write(`retention ${VERSION}`)
       return yield* Effect.void
     }
     if (command === "status") {
@@ -226,24 +205,118 @@ export const handle = (
       return yield* Effect.void
     }
     if (command === "trees") {
-      context(io, ink, "trees — every tree, by kind, with a one-line what-it-is")
       const listings = yield* loadListings()
       if (listings.length === 0) {
+        context(io, ink, "trees — every tree, by kind, with a one-line what-it-is")
         io.write("no trees")
         return yield* Effect.void
       }
-      io.write(formatTreesList(listings))
+      if (!io.interactive) {
+        context(io, ink, "trees — every tree, by kind, with a one-line what-it-is")
+        io.write(formatTreesList(listings, ink))
+        return yield* Effect.void
+      }
+      const session = yield* Session
+      yield* runSession(
+        io,
+        ink,
+        listings,
+        loadCorpus,
+        {
+          version: VERSION,
+          logExists: io.logExists,
+          queue: (treeId) => session.queue(treeId),
+          grade: (treeId, cardId, rating) => session.grade(treeId, cardId, rating),
+        },
+        { _tag: "trees" },
+      )
       return yield* Effect.void
     }
-    if (command === "tree") {
+    if (command === "session") {
+      const listings = yield* loadListings()
+      if (listings.length === 0) {
+        context(io, ink, "session — options menu, then Session or the map; q quit")
+        io.write("no trees")
+        return yield* Effect.void
+      }
+      if (!io.interactive) {
+        context(io, ink, "session — options menu, then Session or the map; q quit")
+        io.write(formatTreesList(listings, ink))
+        return yield* Effect.void
+      }
+      const query = titleFromArgs(argv, 1)
+      const start =
+        query === undefined
+          ? undefined
+          : yield* resolveTree(io, listings, query)
+      const session = yield* Session
+      const entry: SessionEntry =
+        start === undefined
+          ? { _tag: "home" }
+          : { _tag: "session", listing: start }
+      yield* runSession(
+        io,
+        ink,
+        listings,
+        loadCorpus,
+        {
+          version: VERSION,
+          logExists: io.logExists,
+          queue: (treeId) => session.queue(treeId),
+          grade: (treeId, cardId, rating) => session.grade(treeId, cardId, rating),
+        },
+        entry,
+      )
+      return yield* Effect.void
+    }
+    if (command === "mastery") {
       const listing = yield* resolveTree(
         io,
         yield* loadListings(),
         titleFromArgs(argv, 1),
       )
-      context(io, ink, `tree — nodes and edges for ${listing.title}`)
+      context(io, ink, `mastery — brightness per card in ${listing.title}`)
+      io.write(yield* evaluateTree(listing.treeId))
+      return yield* Effect.void
+    }
+    if (command === "graph") {
+      const listing = yield* resolveTree(
+        io,
+        yield* loadListings(),
+        titleFromArgs(argv, 1),
+      )
       const corpus = yield* loadCorpus(listing)
-      io.write(formatTree(corpus))
+      const full = wantsFull(argv)
+      context(
+        io,
+        ink,
+        full
+          ? `graph — eligible nodes for ${listing.title} if everything is known`
+          : `graph — eligible nodes for ${listing.title} if nothing is known`,
+      )
+      io.write(
+        yield* eligibleLines(corpus, full ? fullSnapshot(corpus) : zeroSnapshot(corpus)),
+      )
+      return yield* Effect.void
+    }
+    if (command === "scheduler") {
+      const listing = yield* resolveTree(
+        io,
+        yield* loadListings(),
+        titleFromArgs(argv, 1),
+      )
+      const corpus = yield* loadCorpus(listing)
+      const full = wantsFull(argv)
+      context(
+        io,
+        ink,
+        full
+          ? `scheduler — due cards for ${listing.title} if everything is known`
+          : `scheduler — due cards for ${listing.title} if nothing is known`,
+      )
+      io.write(
+        yield* dueLines(corpus, full ? fullValues(corpus.cards) : zeroValues(corpus.cards)),
+      )
       return yield* Effect.void
     }
     if (command === "queue") {
@@ -257,11 +330,11 @@ export const handle = (
       const corpus = yield* loadCorpus(listing)
       const cards = yield* session.queue(listing.treeId)
       if (cards.length === 0) {
-        io.write("queue empty")
+        io.write(ink.empty("queue empty"))
         return yield* Effect.void
       }
       cards.forEach((card, index) => {
-        io.write(formatQueueLine(index + 1, card, corpus))
+        io.write(ink.due(formatQueueLine(index + 1, card, corpus)))
       })
       return yield* Effect.void
     }
@@ -284,7 +357,7 @@ export const handle = (
       }
       if (rawIndex === undefined) {
         writeHelp(io, ink)
-        return yield* fail(helpText)
+        return yield* fail("Need a queue number.")
       }
       context(io, ink, `show — one due card for ${listing.title}`)
       const index = yield* parseIndex(rawIndex, cards.length)
@@ -323,7 +396,7 @@ export const handle = (
       }
       if (rawIndex === undefined || ratingRaw === undefined) {
         writeHelp(io, ink)
-        return yield* fail(helpText)
+        return yield* fail("Need a queue number and a rating.")
       }
       const rating = yield* parseOutcome(ratingRaw)
       const index = yield* parseIndex(rawIndex, cards.length)
@@ -422,5 +495,5 @@ export const handle = (
       return yield* Effect.void
     }
     writeHelp(io, ink)
-    return yield* fail(helpText)
+    return yield* fail("Unknown command.")
   })
